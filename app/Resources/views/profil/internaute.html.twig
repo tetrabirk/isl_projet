@@ -1,0 +1,54 @@
+{% extends "profil/profil_base.html.twig" %}
+
+{% block imgProfil %}{{ utilisateur.avatar.nom|tempDevImage }}{% endblock %}
+{% block txtModifImg %}Modifier mon avatar{% endblock %}
+
+{% block widgets %}
+
+    <div class="widget">
+        <div class="menu-advanced">
+            <div>Newsletter
+            {% if utilisateur.newsletter == false %}
+            <a class="btn-primary" href="#">S'abonner</a>
+        {% else %}
+            <a class="btn-danger" href="#"> Se Désabonner</a>
+            {% endif %}
+            </div>
+        </div>
+    </div><!-- /.widget -->
+{% endblock %}
+
+{% block menuOptions %}
+{% endblock %}
+
+{% block nomProfil %}
+    <h1>{{ utilisateur.prenom|capitalize~' '~utilisateur.nom|capitalize }}
+
+    </h1>
+{% endblock %}
+
+{% block champsInfosGlobale %}
+
+    <div class="form-group col-sm-6">
+        <label>Nom</label>
+        <input type="text" class="form-control" value="{{ utilisateur.prenom }}">
+    </div><!-- /.form-group -->
+
+    <div class="form-group col-sm-6">
+        <label>Nom</label>
+        <input type="text" class="form-control" value="{{ utilisateur.nom }}">
+    </div><!-- /.form-group -->
+
+    <div class="form-group col-sm-12">
+        <label>E-mail</label>
+        <input type="text" class="form-control" value="{{ utilisateur.email }}">
+    </div><!-- /.form-group -->
+
+{% endblock %}
+
+{% block champsContactInfos %}
+
+
+{% endblock %}
+
+

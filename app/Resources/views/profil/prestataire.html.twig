@@ -1,0 +1,70 @@
+{% extends "profil/profil_base.html.twig" %}
+
+{% block imgProfil %}{{ utilisateur.logo.nom|tempDevImage }}{% endblock %}
+{% block txtModifImg %}Modifier mon logo{% endblock %}
+
+{% block widgets %}
+    <div class="widget">
+
+        <div class="menu-advanced">
+            <div> galerie photo</div>
+        </div>
+    </div><!-- /.widget -->
+{% endblock %}
+
+{% block menuOptions %}
+    <li><a href="{{ path('stages') }}"><i class="fa fa-pencil"></i> Stages</a></li>
+    <li><a href="{{ path('promos') }}"><i class="fa fa-pencil"></i> Promotions</a></li>
+    {#TODO#}
+    <li><a href="#"><i class="fa fa-pencil"></i> Commentaires</a></li>
+{% endblock %}
+
+{% block nomProfil %}
+    <h1>{{ utilisateur.nom|capitalize }}
+        <span>
+                                        {# TODO#}
+            *ici des étoiles*
+            {#{% include 'lib/stars.html.twig' %}#}
+            {#{{ (utilisateur.cote*5)|round(1,'floor') }} / 5#}
+        </span><!-- /.card-row-rating -->
+
+    </h1>
+
+{% endblock %}
+
+{% block champsInfosGlobale %}
+
+    <div class="form-group col-sm-6">
+        <label>Nom</label>
+        <input type="text" class="form-control" value="{{ utilisateur.nom }}">
+    </div><!-- /.form-group -->
+
+    <div class="form-group col-sm-6">
+        <label>E-mail</label>
+        <input type="text" class="form-control" value="{{ utilisateur.email }}">
+    </div><!-- /.form-group -->
+
+{% endblock %}
+
+{% block champsContactInfos %}
+
+    <div class="form-group col-sm-6">
+        <label>Site Internet</label>
+        <input type="text" class="form-control" value="{{ utilisateur.siteInternet}}">
+    </div><!-- /.form-group -->
+    <div class="form-group col-sm-6">
+        <label>Email de contact</label>
+        <input type="text" class="form-control" value="{{ utilisateur.emailContact}}">
+    </div><!-- /.form-group -->
+    <div class="form-group col-sm-6">
+        <label>Téléphone</label>
+        <input type="text" class="form-control" value="{{ utilisateur.telephone}}">
+    </div><!-- /.form-group -->
+    <div class="form-group col-sm-6">
+        <label>Numéro de TVA</label>
+        <input type="text" class="form-control" value="{{ utilisateur.numTVA}}">
+    </div><!-- /.form-group -->
+
+{% endblock %}
+
+

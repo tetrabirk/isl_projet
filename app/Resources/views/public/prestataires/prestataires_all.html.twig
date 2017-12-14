@@ -1,0 +1,26 @@
+{% extends "index.html.twig" %}
+{% block title %}Prestataires{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="main-inner">
+            <div class="container">
+                <div class="content">
+                    <div class="document-title">
+                        <h1>Prestataires</h1>
+
+                    </div><!-- /.document-title -->
+
+                    {% include 'lib/search/filter/prestataires.html.twig' %}
+
+                    {% include 'lib/search/result_sort.html.twig' %}
+
+                    {% include 'lib/list/prestataires.html.twig' %}
+
+                </div><!-- /.content -->
+            </div><!-- /.container -->
+        </div><!-- /.main-inner -->
+    </div><!-- /.main -->
+
+{% endblock %}
+

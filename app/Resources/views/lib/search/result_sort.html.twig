@@ -1,0 +1,23 @@
+<h2 class="page-title">
+    {{ prestataires|length }} résultat(s) correspondant(s) à votre recherche
+
+    <form method="get" action="?" class="filter-sort">
+        <div class="form-group">
+            {#TODO#} <select title="Trier par">
+                {#TODO#}
+                <option name="price">Price</option>
+                {#TODO#}
+                <option name="rating">Rating</option>
+                {#TODO#}
+                <option name="title">Title</option>
+            </select>
+        </div><!-- /.form-group -->
+
+        <div class="form-group">
+            <select title="Ordre">
+                <option name="ASC">Asc</option>
+                <option name="DESC">Desc</option>
+            </select>
+        </div><!-- /.form-group -->
+    </form>
+</h2><!-- /.page-title -->

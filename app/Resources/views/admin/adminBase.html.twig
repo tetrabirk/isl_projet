@@ -1,0 +1,17 @@
+{% include 'admin/adminHeader.html.twig' %}
+
+    <div class="main">
+        <div class="outer-admin">
+            <div class="wrapper-admin">
+                {% include 'admin/adminSidebar.html.twig' %}
+
+                {% block content %}
+                    <h1> bizarre il n'y a rien ici... </h1>
+                {% endblock %}
+
+            </div><!-- /.wrapper-admin -->
+        </div><!-- /.outer-admin -->
+    </div><!-- /.main -->
+</div><!-- /.page-wrapper -->
+
+{% include 'admin/adminFooter.html.twig' %}

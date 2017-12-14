@@ -1,0 +1,20 @@
+{% for li in menu %}
+
+    <li >
+        <a href="{{ path( li.href ) }}">{{ li.nom }}
+            {% if li.submenu is defined %}
+                <i class="fa fa-chevron-down"></i>
+            {% endif %}
+        </a>
+        {% if li.submenu is defined %}
+            <ul class="sub-menu">
+                {% for li in li.submenu %}
+                    <li><a href="{{ path( li.href ) }}">{{ li.nom }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+
+{% endfor  %}
+
+{#test#}

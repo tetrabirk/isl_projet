@@ -1,0 +1,29 @@
+{% extends 'lib/search/filter/filter.html.twig' %}
+
+{% block champs %}
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <input type="text" placeholder="Mot-clé" class="form-control">
+        </div><!-- /.form-group -->
+    </div><!-- /.col-* -->
+
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <input type="text" placeholder="Localité ou Code Postal" class="form-control">
+        </div><!-- /.form-group -->
+    </div><!-- /.col-* -->
+
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <select class="form-control" title="Categorie">
+
+                {#TODO : voir si il n'y a pas une meilleur facon de faire ceci render controller p-e?#}
+
+                {% for categorie in categories %}
+                    <option value=" {{ categorie.slug }} ">{{ categorie.nom }}</option>
+                {% endfor %}
+
+            </select>
+        </div><!-- /.form-group -->
+    </div><!-- /.col-* -->
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "index.html.twig" %}
+
+{% block title %}{{ service.nom }}{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    <div class="main-inner">
+        <div class="container">
+            <div class="content">
+
+                <div class="document-title" data-background-image="{{ asset('img/') }}{{ service.image.nom|tempDevImage }}">
+                    <h1>{{ service.nom }}</h1>
+                </div><!-- /.document-title -->
+
+                <p>
+                    {{ service.description }}
+                </p>
+
+                {{ render(controller(
+                'AppBundle:Prestataire:prestataireByCateg',
+                {'service': service.slug }
+                )) }}
+
+
+
+            </div><!-- /.content -->
+        </div><!-- /.container -->
+    </div><!-- /.main-inner -->
+</div><!-- /.main -->
+
+{% endblock %}

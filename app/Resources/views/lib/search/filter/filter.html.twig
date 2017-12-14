@@ -1,0 +1,23 @@
+<form class="filter" method="post" action="?">
+    <div class="row">
+        {% block champs %}
+
+        {% endblock %}
+    </div><!-- /.row -->
+
+
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="filter-actions">
+                <a href="#"><i class="fa fa-close"></i> Réinitialiser</a>
+            </div><!-- /.filter-actions -->
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary">Affiner la recherche</button>
+        </div><!-- /.col-* -->
+    </div><!-- /.row -->
+</form>

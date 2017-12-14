@@ -1,0 +1,58 @@
+<div class="cards-row">
+    {% for prestataire in prestataires %}
+        <div class="card-row">
+            <div class="card-row-inner">
+                {#TODO#}
+                <div class="card-row-image"
+                     data-background-image="{{ asset('img/') }}{{ prestataire.logo.nom|tempDevImage }}">
+
+                </div><!-- /.card-row-image -->
+
+                <div class="card-row-body col-sm-6">
+                    <h2 class="card-row-title"><a
+                                href="{{ path('prestataire',{'slug': prestataire.slug}) }}">{{ prestataire.nom|capitalize }}</a>
+                    </h2>
+                    <div class="card-row-content">
+                        <p>
+
+                            {% for categorie in prestataire.categories %}
+                                <a href="{{ path('services',{'slug': categorie.slug}) }}">{{ categorie.nom|capitalize }}</a> ,
+                            {% endfor %}
+                        </p>
+                        <div class="card-row-rating">
+                            {% include 'lib/stars.html.twig' %}
+                        </div><!-- /.card-row-rating -->
+                    </div><!-- /.card-row-content -->
+                </div><!-- /.card-row-body -->
+
+                <div class="col-sm-6">
+                    <dl>
+                        <h6>Promotion(s) en cours</h6>
+                        <ul>
+                            {% for promo in prestataire.promotions %}
+
+                                {% if promo.debut < date() and promo.fin > date() %}
+                                    <li>{{ promo.nom }}</li>
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+
+                        <h6>Stage(s) proposé(s)</h6>
+                        <ul>
+                            {% for stage in prestataire.stages %}
+
+                                {% if stage.debut < date() and stage.fin > date() %}
+                                    <li>{{ stage.nom }}</li>
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </dl>
+                </div><!-- /.card-row-properties -->
+            </div><!-- /.card-row-inner -->
+        </div><!-- /.card-row -->
+    {% endfor %}
+</div><!-- /.cards-row -->
+
+{% include 'lib/list/pager.html.twig' %}

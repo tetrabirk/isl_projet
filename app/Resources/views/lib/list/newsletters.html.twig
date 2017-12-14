@@ -1,0 +1,25 @@
+<div class="posts posts-condensed">
+    {% for newsletter in newsletters %}
+
+        <div class="post">
+
+            <div class="post-image">
+                <a href="blog-detail.html">
+                    <img src="{{asset('img/tmp') }}/product-11.jpg" alt="A Clockwork Origin">
+                </a>
+            </div><!-- /.post-image -->
+
+            <div class="post-content">
+                <h2>{{ newsletter.titre }}</h2>
+                <p>{{ newsletter.publication|date('d-m-Y') }}</p>
+            </div><!-- /.post-content -->
+
+            <div class="post-more">
+                <a href="{{asset('pdf') }}/{{ newsletter.documentPDF }}">Ouvrir le PDF</a>
+            </div><!-- /.post-date -->
+        </div><!-- /.post -->
+    {% endfor %}
+
+</div><!-- /.posts -->
+
+{% include 'lib/list/pager.html.twig' %}

@@ -1,0 +1,11 @@
+
+{% if prestataire.cote is defined %}
+    {{
+        prestataire.cote|stars|replace({'F': '<i class="fa fa-star"></i>', 'H':'<i class="fa fa-star-half-o"></i>', 'E':'<i class="fa fa-star-o"></i>'})|raw
+    }}
+{% elseif utilisateur.cote is defined %}
+    {{
+        utilisateur.cote|stars|replace({'F': '<i class="fa fa-star"></i>', 'H':'<i class="fa fa-star-half-o"></i>', 'E':'<i class="fa fa-star-o"></i>'})|raw
+    }}
+{% endif %}
+
