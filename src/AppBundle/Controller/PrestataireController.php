@@ -24,7 +24,6 @@ class PrestataireController extends Controller
 {
 
 
-
 //TODO : entities : add image, slug
 //TODO : get : categories des prestataires, notes moyennes, promotions, stages
 
@@ -36,26 +35,30 @@ class PrestataireController extends Controller
     {
         /** @var CategorieDeServicesRepository $cr */
         $cr = $this->getDoctrine()->getRepository(CategorieDeServices::class);
-        $categories=$cr->findCategoriesDeServices();
-        $prestataires = $this->getPrestataires($slug);
+        $categories = $cr->findCategoriesDeServices();
 
-        if($slug !=null){
+        if ($slug != null) {
             $prestataire = $this->getOnePrestataire($slug);
 
-            return $this->render('public/prestataires/prestataire_single.html.twig',array(
-                'categories'=> $categories,
+            return $this->render('public/prestataires/prestataire_single.html.twig', array(
+                'categories' => $categories,
                 'prestataire' => $prestataire,
             ));
-        }else{
+        } else {
             $prestataires = $this->getPrestataires();
-            return $this->render('public/prestataires/prestataires_all.html.twig',array(
+            return $this->render('public/prestataires/prestataires_all.html.twig', array(
                 'prestataires' => $prestataires,
-                'categories'=> $categories,
+                'categories' => $categories,
             ));
-
         }
+    }
 
-
+    public function prestatairesByCategAction($categ)
+    {
+        $prestataires = $this->getPrestatairesByCateg($categ);
+        return $this->render('public/lib/list/prestataires.html.twig', array(
+            'prestataires' => $prestataires,
+        ));
     }
 
     public function getPrestataires()
@@ -63,11 +66,20 @@ class PrestataireController extends Controller
         /** @var PrestataireRepository $pr */
         $pr = $this->getDoctrine()->getRepository(Prestataire::class);
 
-        $prestataires=$pr->findAllWithEverithing();
-        dump($prestataires);
+        $prestataires = $pr->findAllWithEverything();
 
         return $prestataires;
 
+    }
+
+    public function getPrestatairesByCateg($categ)
+    {
+        /** @var PrestataireRepository $pr */
+        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
+
+        $prestataires = $pr->findBy(['categories' => $categ]);
+
+        return $prestataires;
     }
 
     public function getOnePrestataire($slug)
@@ -75,11 +87,8 @@ class PrestataireController extends Controller
         /** @var PrestataireRepository $pr */
         $pr = $this->getDoctrine()->getRepository(Prestataire::class);
 
-        $prestataires=$pr->findOneWithEverithingBySlug($slug);
-        dump($prestataires);
+        $prestataires = $pr->findOneWithEverythingBySlug($slug);
 
         return $prestataires;
     }
-
-
 }

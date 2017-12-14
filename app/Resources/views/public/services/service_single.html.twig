@@ -17,9 +17,11 @@
                     {{ service.description }}
                 </p>
 
+
+
                 {{ render(controller(
-                'AppBundle:Prestataire:prestataireByCateg',
-                {'service': service.slug }
+                'AppBundle:Prestataire:prestatairesByCateg',
+                {'categ': service }
                 )) }}
 
 

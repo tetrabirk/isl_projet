@@ -14,14 +14,14 @@ use Doctrine\ORM\EntityRepository;
 class PrestataireRepository extends EntityRepository
 {
 
-    public function findAllWithEverithing()
+    public function findAllWithEverything()
     {
         $qb = $this->createWithJoin();
 
         return $this->returnResult($qb);
     }
 
-    public function findOneWithEverithingBySlug($slug)
+    public function findOneWithEverythingBySlug($slug)
     {
         $qb = $this->createWithJoin();
 
@@ -31,10 +31,10 @@ class PrestataireRepository extends EntityRepository
         return $this->returnSingleResult($qb);
     }
 
-    public function findAllWithEverithingByCateg($categ){
+    public function findAllWithEverythingByCateg($categ){
         $qb = $this->createWithJoin();
 
-        $qb->add('where',$qb->expr()->in('p.categorie', ':categ'));
+        $qb->add('where',$qb->expr()->in('p.categories', ':categ'));
         $qb->setParameter('categ',$categ);
 
         return $this->returnResult($qb);
@@ -69,7 +69,7 @@ class PrestataireRepository extends EntityRepository
 
 
 
-    public function findWithEverithing($type,$key)
+    public function findWithEverything($type,$key)
     {
         //creation du QB
         $qb = $this->createQueryBuilder('p');
