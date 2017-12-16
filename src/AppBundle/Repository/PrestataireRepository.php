@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Prestataire;
 use Doctrine\ORM\EntityRepository;
 
@@ -31,16 +32,26 @@ class PrestataireRepository extends EntityRepository
         return $this->returnSingleResult($qb);
     }
 
-    public function findAllWithEverythingByCateg($categ){
+    public function findAllWithEverythingByCateg(CategorieDeServices $categ)
+    {
         $qb = $this->createWithJoin();
 
-        $qb->add('where',$qb->expr()->in('p.categories', ':categ'));
+        $qb->where('p.categories = :categ');
         $qb->setParameter('categ',$categ);
+        $qb->orderBy('p.nom','ASC');
 
         return $this->returnResult($qb);
 
     }
 
+    public function findNMostRecentBasic(int $n)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->orderBy('p.inscription','DESC');
+        $qb->setMaxResults(4);
+
+        return $this->returnResult($qb);
+    }
 
 
     protected function createWithJoin()

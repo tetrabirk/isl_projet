@@ -56,9 +56,17 @@ class PrestataireController extends Controller
     public function prestatairesByCategAction($categ)
     {
         $prestataires = $this->getPrestatairesByCateg($categ);
-        return $this->render('public/lib/list/prestataires.html.twig', array(
+        return $this->render('lib/list/prestataires.html.twig', array(
             'prestataires' => $prestataires,
         ));
+    }
+
+    public function nLastPrestatairesAction($n)
+    {
+        $prestataires = $this->getNLastPrestataires($n);
+        return $this->render('lib/list/prestatairesBasic.html.twig',array(
+            'prestataires' => $prestataires,
+    ));
     }
 
     public function getPrestataires()
@@ -88,6 +96,16 @@ class PrestataireController extends Controller
         $pr = $this->getDoctrine()->getRepository(Prestataire::class);
 
         $prestataires = $pr->findOneWithEverythingBySlug($slug);
+
+        return $prestataires;
+    }
+
+    public function getNLastPrestataires(int $n)
+    {
+        /** @var PrestataireRepository $pr */
+        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
+
+        $prestataires = $pr->findNMostRecentBasic($n);
 
         return $prestataires;
     }
