@@ -1,0 +1,25 @@
+{% if service is defined %}
+<div class="block background-white background-transparent-image fullwidth">
+    <div class="page-header">
+        <h1>Le service du mois</h1>
+        <p>Check out the best places &amp; events in the city. Each one is worth<br> of
+            visiting. Experience which you never forget.</p>
+    </div><!-- /.page-header -->
+
+    <div class="posts post-detail">
+        <div class="SEA-conteneur " style="
+        background-image: url('{{ asset('img/') }}{{ service.image.nom|tempDevImage }}' );">
+
+                <div class="SEA-contenu">
+                    <h2>{{ service.nom|capitalize }}</h2>
+                    <p>{{ service.description }}</p>
+                    <a href="{{ path('services',{'slug': service.slug}) }}">
+                        En savoir plus
+                    </a>
+                </div>
+
+        </div>
+    </div>
+
+</div>
+{% endif %}

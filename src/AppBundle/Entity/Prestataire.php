@@ -65,6 +65,7 @@ class Prestataire extends Utilisateur
      */
     private $categories;
 
+    //attention c'est bien une one to many unidirectionnelle malgré le ManyToMany dans la fonction. J'ai respecter la doc de doctrine
 
     /**
      * bcp de prestataires ont bcp de photos

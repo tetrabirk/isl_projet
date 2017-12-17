@@ -64,49 +64,41 @@ class PrestataireController extends Controller
     public function nLastPrestatairesAction($n)
     {
         $prestataires = $this->getNLastPrestataires($n);
-        return $this->render('lib/list/prestatairesBasic.html.twig',array(
+        return $this->render('lib/list/prestataires_basic.html.twig',array(
             'prestataires' => $prestataires,
     ));
     }
 
     public function getPrestataires()
     {
-        /** @var PrestataireRepository $pr */
-        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
-
-        $prestataires = $pr->findAllWithEverything();
-
+        $prestataires = $this->getRepo()->findAllWithEverything();
         return $prestataires;
 
     }
 
     public function getPrestatairesByCateg($categ)
     {
-        /** @var PrestataireRepository $pr */
-        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
-
-        $prestataires = $pr->findBy(['categories' => $categ]);
-
+        $prestataires = $this->getRepo()->findBy(['categories' => $categ]);
         return $prestataires;
     }
 
     public function getOnePrestataire($slug)
     {
-        /** @var PrestataireRepository $pr */
-        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
-
-        $prestataires = $pr->findOneWithEverythingBySlug($slug);
-
+        $prestataires =  $prestataires = $this->getRepo()->findOneWithEverythingBySlug($slug);
         return $prestataires;
     }
 
     public function getNLastPrestataires(int $n)
     {
-        /** @var PrestataireRepository $pr */
-        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
-
-        $prestataires = $pr->findNMostRecentBasic($n);
-
+        $prestataires = $this->getRepo()->findNMostRecentBasic($n);
         return $prestataires;
     }
+
+    public function getRepo()
+    {
+        /** @var PrestataireRepository $pr */
+        $pr = $this->getDoctrine()->getRepository(Prestataire::class);
+        return $pr;
+    }
+
 }

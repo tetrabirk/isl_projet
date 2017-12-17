@@ -1,0 +1,15 @@
+.SEA-conteneur {
+    padding: 50px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.SEA-contenu {
+
+    max-width: 50%;
+    background-color: white;
+    display: inline-block;
+    padding: 10px 50px 50px 50px;
+}
+

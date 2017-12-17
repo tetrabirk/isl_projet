@@ -15,13 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Repository\CategorieDeServicesRepository;
 
 
-
-
-
 class CategorieDeServicesController extends Controller
 {
 
-    //TODO creer un fichier où je mettrais tt les fonction "getqqlchose" pour éviter les répétitions
 
     public function getRepo()
     {
@@ -38,17 +34,26 @@ class CategorieDeServicesController extends Controller
 
         $categories = $this->getRepo()->findCategoriesDeServices($slug);
 
-        if ($slug != null){
-            return $this->render('public/services/service_single.html.twig',array(
+        if ($slug != null) {
+            return $this->render('public/services/service_single.html.twig', array(
                 'service' => $categories,
             ));
-        }else{
-            return $this->render('public/services/services_all.html.twig',array(
+        } else {
+            return $this->render('public/services/services_all.html.twig', array(
                 'services' => $categories,
             ));
         }
 
 
+    }
+
+    public function serviceEnAvantAction()
+    {
+        $categorie = $this->getRepo()->findOneBy(array('enAvant' => '1'));
+
+        return $this->render('lib/widget/service_en_avant.html.twig', array(
+            'service' => $categorie,
+        ));
     }
 
 }

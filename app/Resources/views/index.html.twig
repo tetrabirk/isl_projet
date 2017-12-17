@@ -15,6 +15,7 @@
     <link href="{{ asset('libraries/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('libraries/bootstrap-fileinput/fileinput.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/superlist.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/tetrabirk.css') }}" rel="stylesheet" type="text/css">
     {% endblock %}
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
@@ -94,7 +95,7 @@
                     <div class="mt-80">
                         <div class="hero-image">
                             <div class="hero-image-inner"
-                                 style="background-image: url("{{ asset('img/tmp/slider-large-3.jpg') }}");">
+                                 style="background-image: url('{{ asset('img/tmp/slider-large-3.jpg') }}' );">
                                 <div class="hero-image-content">
                                     <div class="container">
                                         <h1>Directory Template</h1>
@@ -152,6 +153,17 @@
 
                     <div class="container">
 
+                        <h1>Questions</h1>
+                        <ul>
+                            <li>services single "1054 unknown column" sans doute a voir avec serviceRepository</li>
+                            <li>7 appels à la DB pour la front, car pas de join, car sinon je ne sais pas utiliser setmaxresult
+                                <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/dql-doctrine-query-language.html#first-and-max-result-items-dql-query-only">p-e lié à ceci</a>
+                            </li>
+                            <li>est ce que je crée une table "admin" pour stocker un array collection "slider" etc?</li>
+                            <li>adresse en code postal - commune -localite ? ou CP-Localite comme sur le site de la poste?</li>
+
+                        </ul>
+
                         <div class="page-header">
                             <h1>Derniers prestataires inscrits</h1>
                             <p>List of most recent interesting places and events in our directory submitted <br>by our
@@ -163,20 +175,12 @@
                         {'n': 4 }
                         )) }}
 
+                        {{ render(controller(
+                        'AppBundle:CategorieDeServices:serviceEnAvant'
+                        )) }}
 
-                        <div class="block background-white background-transparent-image fullwidth">
-                            <div class="page-header">
-                                <h1>Le service du mois</h1>
-                                <p>Check out the best places &amp; events in the city. Each one is worth<br> of
-                                    visiting. Experience which you never forget.</p>
-                            </div><!-- /.page-header -->
 
-                            <div class="posts post-detail">
-                                <div>test</div>
-                                <img src="{{ asset('img/tmp/blog-1.jpg') }}" alt="A Clockwork Origin">
-                            </div>
 
-                        </div>
 
 
                     </div><!-- /.container -->

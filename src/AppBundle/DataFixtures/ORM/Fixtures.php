@@ -136,7 +136,13 @@ class Fixtures extends Fixture
         $categorie = new CategorieDeServices();
         $categorie->setNom($this->faker->words(2,true));
         $categorie->setDescription($this->faker->sentences(20,true));
-        $categorie->setEnAvant(false);
+
+        if($i == 0){
+            $categorie->setEnAvant(true);
+        }else{
+            $categorie->setEnAvant(false);
+        }
+
         $categorie->setValide(true);
 
 //        ajout d'une image
@@ -238,6 +244,7 @@ class Fixtures extends Fixture
     {
         $img = new Image();
         $img->setNom($type."_".$i.".jpg");
+        $img->setActive(1);
         $this->addReference($type.$i,$img);
 
     }
