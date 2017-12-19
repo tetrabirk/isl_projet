@@ -43,8 +43,6 @@ class CategorieDeServicesController extends Controller
                 'services' => $categories,
             ));
         }
-
-
     }
 
     public function serviceEnAvantAction()

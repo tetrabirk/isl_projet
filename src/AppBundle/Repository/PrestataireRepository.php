@@ -5,6 +5,7 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Prestataire;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * PrestataireRepository
@@ -34,10 +35,15 @@ class PrestataireRepository extends EntityRepository
 
     public function findAllWithEverythingByCateg(CategorieDeServices $categ)
     {
-        $qb = $this->createWithJoin();
+        $qb = $this->createQueryBuilder('p');
+        $qb->leftJoin('p.stages','stages')->addSelect('stages');
+        $qb->leftJoin('p.promotions','promotions')->addSelect('promotions');
+        $qb->leftJoin('p.photos','photos')->addSelect('photos');
+        $qb->leftJoin('p.logo','logo')->addSelect('logo');
+        $qb->leftJoin('p.internautesFavoris','fav')->addSelect('fav');
 
-        $qb->where('p.categories = :categ');
-        $qb->setParameter('categ',$categ);
+        $qb->join('p.categories','c','WITH',$qb->expr()->eq('c.id',$categ->getId()));
+
         $qb->orderBy('p.nom','ASC');
 
         return $this->returnResult($qb);
@@ -46,11 +52,12 @@ class PrestataireRepository extends EntityRepository
 
     public function findNMostRecentBasic(int $n)
     {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->createWithJoin();
+
         $qb->orderBy('p.inscription','DESC');
         $qb->setMaxResults(4);
-
-        return $this->returnResult($qb);
+        $pag = new Paginator($qb);
+        return $pag;
     }
 
 

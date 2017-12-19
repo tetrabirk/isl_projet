@@ -38,14 +38,14 @@ class PrestataireController extends Controller
         $categories = $cr->findCategoriesDeServices();
 
         if ($slug != null) {
-            $prestataire = $this->getOnePrestataire($slug);
+            $prestataire = $this->getRepo()->findOneWithEverythingBySlug($slug);
 
             return $this->render('public/prestataires/prestataire_single.html.twig', array(
                 'categories' => $categories,
                 'prestataire' => $prestataire,
             ));
         } else {
-            $prestataires = $this->getPrestataires();
+            $prestataires = $this->getRepo()->findAllWithEverything();
             return $this->render('public/prestataires/prestataires_all.html.twig', array(
                 'prestataires' => $prestataires,
                 'categories' => $categories,
@@ -55,7 +55,7 @@ class PrestataireController extends Controller
 
     public function prestatairesByCategAction($categ)
     {
-        $prestataires = $this->getPrestatairesByCateg($categ);
+        $prestataires = $this->getRepo()->findAllWithEverythingByCateg($categ);;
         return $this->render('lib/list/prestataires.html.twig', array(
             'prestataires' => $prestataires,
         ));
@@ -63,35 +63,10 @@ class PrestataireController extends Controller
 
     public function nLastPrestatairesAction($n)
     {
-        $prestataires = $this->getNLastPrestataires($n);
+        $prestataires = $this->getRepo()->findNMostRecentBasic($n);
         return $this->render('lib/list/prestataires_basic.html.twig',array(
             'prestataires' => $prestataires,
     ));
-    }
-
-    public function getPrestataires()
-    {
-        $prestataires = $this->getRepo()->findAllWithEverything();
-        return $prestataires;
-
-    }
-
-    public function getPrestatairesByCateg($categ)
-    {
-        $prestataires = $this->getRepo()->findBy(['categories' => $categ]);
-        return $prestataires;
-    }
-
-    public function getOnePrestataire($slug)
-    {
-        $prestataires =  $prestataires = $this->getRepo()->findOneWithEverythingBySlug($slug);
-        return $prestataires;
-    }
-
-    public function getNLastPrestataires(int $n)
-    {
-        $prestataires = $this->getRepo()->findNMostRecentBasic($n);
-        return $prestataires;
     }
 
     public function getRepo()

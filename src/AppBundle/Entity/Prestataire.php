@@ -68,7 +68,7 @@ class Prestataire extends Utilisateur
     //attention c'est bien une one to many unidirectionnelle malgré le ManyToMany dans la fonction. J'ai respecter la doc de doctrine
 
     /**
-     * bcp de prestataires ont bcp de photos
+     * 1 prestataires ont bcp de photos
      * @ORM\ManyToMany(targetEntity="Image",cascade={"persist"})
      * @ORM\JoinTable(name="photos_Prestataires",
      *     joinColumns={@ORM\JoinColumn(name="prestataire_id", referencedColumnName= "id")},
