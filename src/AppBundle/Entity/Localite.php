@@ -24,10 +24,17 @@ class Localite
     /**
      * @var string
      *
-     * @ORM\Column(name="localite", type="string", length=255, unique=true)
+     * @ORM\Column(name="localite", type="string", length=255)
      */
     private $localite;
 
+
+    /**
+     * Bcp de localite on un cp
+     * @ORM\ManyToOne(targetEntity="CodePostal", inversedBy="localite",cascade={"persist"})
+     * @ORM\JoinColumn(name="cp_localite",referencedColumnName="id")
+     */
+    private $codePostal;
 
     /**
      * Get id
@@ -62,4 +69,22 @@ class Localite
     {
         return $this->localite;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * @param mixed $codePostal
+     */
+    public function setCodePostal($codePostal)
+    {
+        $this->codePostal = $codePostal;
+    }
+
+
 }

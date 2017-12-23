@@ -54,13 +54,13 @@ class Utilisateur
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="CodePostal")
+     * @ORM\OneToOne(targetEntity="CodePostal", cascade={"persist"})
      * @ORM\JoinColumn(name="code_postal_id", referencedColumnName="id")
      */
     private $codePostal;
 
     /**
-     * @ORM\OneToOne(targetEntity="Localite")
+     * @ORM\OneToOne(targetEntity="Localite", cascade={"persist"})
      * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
      */
     private $localite;
@@ -81,28 +81,6 @@ class Utilisateur
         $this->localite = $localite;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCommune()
-    {
-        return $this->commune;
-    }
-
-    /**
-     * @param mixed $commune
-     */
-    public function setCommune($commune)
-    {
-        $this->commune = $commune;
-    }
-
-    /**
-     *
-     * @ORM\OneToOne(targetEntity="Commune")
-     * @ORM\JoinColumn(name="commune_id", referencedColumnName="id")
-     */
-    private $commune;
 
     /**
      * @var \DateTime

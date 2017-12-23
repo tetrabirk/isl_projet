@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +28,18 @@ class CodePostal
      * @ORM\Column(name="code_postal", type="string", length=10, unique=true)
      */
     private $codePostal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Localite",mappedBy="codePostal" ,cascade={"persist"})
+     */
+
+    private $localite;
+
+
+    public function __construct()
+    {
+        $this->localite = new ArrayCollection();
+    }
 
 
     /**
@@ -62,4 +75,22 @@ class CodePostal
     {
         return $this->codePostal;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLocalite()
+    {
+        return $this->localite;
+    }
+
+    /**
+     * @param mixed $localite
+     */
+    public function setLocalite($localite)
+    {
+        $this->localite = $localite;
+    }
+
+
 }

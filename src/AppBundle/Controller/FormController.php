@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Prestataire;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -60,4 +61,31 @@ class FormController extends Controller
         return new Response();
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("form2", name="form2")
+     */
+
+    public function rechercheFormAction(Request $request)
+    {
+        $defaultData = array('message'=>'blablabla');
+        $form = $this->createFormBuilder($defaultData)
+            ->add('motCles',TextType::class)
+            ->add('localite',TextType::class)
+            ->add('categorie',TextType::class)
+            ->getForm();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            dump($data);
+        }
+
+        return $this->render('lib/form/formtest2.html.twig',
+            [
+                'form'=>$form->createView()
+            ]
+        );
+    }
 }

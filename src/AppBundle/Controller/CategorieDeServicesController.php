@@ -47,7 +47,7 @@ class CategorieDeServicesController extends Controller
 
     public function serviceEnAvantAction()
     {
-        $categorie = $this->getRepo()->findOneBy(array('enAvant' => '1'));
+        $categorie = $this->getRepo()->findEnAvant();
 
         return $this->render('lib/widget/service_en_avant.html.twig', array(
             'service' => $categorie,

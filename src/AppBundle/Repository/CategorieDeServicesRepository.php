@@ -12,11 +12,53 @@ class CategorieDeServicesRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findCategoriesDeServices($slug=null)
     {
-        if($slug != null){
-            $data = $this->findOneBy(array('slug'=> $slug));
-        }else {
-            $data = $this->findAll();
+        $qb = $this->createWithJoin();
+
+        if($slug != null) {
+            $qb->where('c.slug =:slug');
+            $qb->setParameter('slug', $slug);
+
+            return $this->returnSingleResult($qb);
+
+        }else{
+            return $this->returnResult($qb);
         }
-        return $data;
+
+
+    }
+
+    public function findEnAvant()
+    {
+        $qb = $this->createWithJoin();
+
+        $qb->where('c.enAvant = 1');
+
+        return $this->returnSingleResult($qb);
+    }
+
+    protected function createWithJoin()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $this->addJoins($qb);
+        return $qb;
+    }
+
+    protected function addJoins($qb)
+    {
+        $qb->leftJoin('c.image','image')->addSelect('image');
+    }
+
+    protected function returnResult($qb)
+    {
+        $query= $qb->getQuery();
+        $result=$query->getResult();
+        return $result;
+    }
+
+    protected function returnSingleResult($qb)
+    {
+        $query= $qb->getQuery();
+        $result=$query->getSingleResult();
+        return $result;
     }
 }
