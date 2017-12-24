@@ -7347,7 +7347,9 @@ ul.dropdown-menu li a {
   /*width: 260px;*/
   }
   .header-search input {
-    height: 34px; }
+    /*height: 34px; */
+    height: 39px;
+  }
   .header-search .btn, .header-search .detail-gallery .owl-next, .detail-gallery .header-search .owl-next, .header-search .detail-gallery .owl-prev, .detail-gallery .header-search .owl-prev {
     border-radius: 0px;
     border: 2px solid #f7f8f9;

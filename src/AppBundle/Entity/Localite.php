@@ -31,7 +31,7 @@ class Localite
 
     /**
      * Bcp de localite on un cp
-     * @ORM\ManyToOne(targetEntity="CodePostal", inversedBy="localite",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="CodePostal", inversedBy="localite")
      * @ORM\JoinColumn(name="cp_localite",referencedColumnName="id")
      */
     private $codePostal;

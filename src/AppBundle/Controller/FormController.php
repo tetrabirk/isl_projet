@@ -77,8 +77,12 @@ class FormController extends Controller
         $form = $this->createFormBuilder($defaultData)
             ->setMethod('GET')
             ->setAction($this->generateUrl('form2'))
-            ->add('motCles',TextType::class)
-            ->add('localite',TextType::class)
+            ->add('motCles',TextType::class,array(
+                'required' => 'false'
+            ))
+            ->add('localite',TextType::class,array(
+                'required' => 'false'
+            ))
             ->add('categorie',EntityType::class,array(
                 'class'=> 'AppBundle:CategorieDeServices',
                 'choice_label'=> 'nom', 'multiple' => 'true',
