@@ -7344,7 +7344,8 @@ ul.dropdown-menu li a {
 .header-search {
   float: right;
   margin: 8px 0px 0px 0px;
-  width: 260px; }
+  /*width: 260px;*/
+  }
   .header-search input {
     height: 34px; }
   .header-search .btn, .header-search .detail-gallery .owl-next, .detail-gallery .header-search .owl-next, .header-search .detail-gallery .owl-prev, .detail-gallery .header-search .owl-prev {

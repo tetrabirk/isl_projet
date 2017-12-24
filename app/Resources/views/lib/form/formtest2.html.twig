@@ -3,8 +3,12 @@
 {% block header_top %}
 
 <div class="header-search">
-    <input type="text" class="form-control" placeholder="Test...">
-    <input type="text" class="form-control" placeholder="Test...">
+    {{ form_start(form,{'attr':{'class':'form-inline'}}) }}
+    {{ form_widget(form.motCles,{'attr':{'class': 'searchform', 'placeholder':'Mots-Clés'}}) }}
+    {{ form_widget(form.localite,{'attr':{'class': 'searchform', 'placeholder':'Localité'}}) }}
+    {{ form_widget(form.categorie,{'attr':{'class': 'searchform input-small', }}) }}
+    {{ form_widget(form.search,{'label':'Search'})}}
+    {{ form_end(form) }}
 
 </div><!-- /.header-search -->
 
@@ -18,10 +22,6 @@
     <div class="main-inner">
         <div class="container">
             <div class="content">
-                {{ form_start(form) }}
-                <input type="submit">
-                {{ form_end(form) }}
-
 
             </div><!-- /.content -->
         </div><!-- /.container -->

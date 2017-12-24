@@ -10,8 +10,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Prestataire;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,10 +75,21 @@ class FormController extends Controller
     {
         $defaultData = array('message'=>'blablabla');
         $form = $this->createFormBuilder($defaultData)
+            ->setMethod('GET')
+            ->setAction($this->generateUrl('form2'))
             ->add('motCles',TextType::class)
             ->add('localite',TextType::class)
-            ->add('categorie',TextType::class)
+            ->add('categorie',EntityType::class,array(
+                'class'=> 'AppBundle:CategorieDeServices',
+                'choice_label'=> 'nom', 'multiple' => 'true',
+                'placeholder' => 'Categorie',
+                'required'=>'false',
+            ))
+            ->add('search',SubmitType::class,array(
+                'attr'=> array('class'=>'search'),
+            ))
             ->getForm();
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
