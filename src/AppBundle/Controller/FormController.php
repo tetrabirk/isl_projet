@@ -78,7 +78,8 @@ class FormController extends Controller
             ->setMethod('GET')
             ->setAction($this->generateUrl('form2'))
             ->add('motCles',TextType::class,array(
-                'required' => 'false'
+                'required' => 'false',
+
             ))
             ->add('localite',TextType::class,array(
                 'required' => 'false'
@@ -99,6 +100,12 @@ class FormController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
             dump($data);
+
+            return $this->render('public/prestataires/prestataires_all.html.twig',
+                [
+                    'search' =>$data,
+                ]
+            );
         }
 
         return $this->render('lib/form/formtest2.html.twig',
