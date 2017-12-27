@@ -30,14 +30,14 @@
 25. Filter
 26. Invoice
 27. FAQ
-28. CategorieDeServicesController
+28. Categories
 29. Promotion
 30. Listing Detail
 31. Listing Detail Gallery
 32. Testimonials
 33. Reviews
 34. Comments
-35. AdminController
+35. Admin
 36. Colorbox
 
 */
@@ -284,8 +284,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
+  src: url("../libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("../libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../assets/libraries/bootstrap-sass/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
 .glyphicon {
   position: relative;
@@ -7100,7 +7100,7 @@ ul.dropdown-menu li a {
     .header-transparent .header-logo a {
       color: #fff; }
   .header-logo span {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 300;
     vertical-align: middle; }
     @media (min-width: 768px) and (max-width: 991px) {
@@ -7344,12 +7344,9 @@ ul.dropdown-menu li a {
 .header-search {
   float: right;
   margin: 8px 0px 0px 0px;
-  /*width: 260px;*/
-  }
+  width: 260px; }
   .header-search input {
-    /*height: 34px; */
-    height: 39px;
-  }
+    height: 34px; }
   .header-search .btn, .header-search .detail-gallery .owl-next, .detail-gallery .header-search .owl-next, .header-search .detail-gallery .owl-prev, .detail-gallery .header-search .owl-prev {
     border-radius: 0px;
     border: 2px solid #f7f8f9;
@@ -9363,7 +9360,7 @@ h2.widgettitle {
     margin: 0px 10px; }
 
 /*------------------------------------------------------------------
-[ 28. CategorieDeServicesController ]
+[ 28. Categories ]
 */
 .categories > ul {
   margin-bottom: 0px;
@@ -10362,7 +10359,7 @@ h2.widgettitle {
   margin-top: 12px; }
 
 /*------------------------------------------------------------------
-[ 35. AdminController ]
+[ 35. Admin ]
 */
 .outer-admin {
   display: table-cell;

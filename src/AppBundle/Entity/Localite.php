@@ -87,4 +87,11 @@ class Localite
     }
 
 
+    public function getNomAffichage()
+    {
+        $string = ($this->getCodePostal()->getCodePostal()).' - '.($this->getLocalite());
+        return $string;
+
+    }
+
 }

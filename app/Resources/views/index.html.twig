@@ -15,7 +15,10 @@
         <link href="{{ asset('libraries/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet"
               type="text/css">
         <link href="{{ asset('libraries/bootstrap-fileinput/fileinput.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
         <link href="{{ asset('css/superlist.css') }}" rel="stylesheet" type="text/css">
+
         <link href="{{ asset('css/tetrabirk.css') }}" rel="stylesheet" type="text/css">
     {% endblock %}
 
@@ -90,56 +93,7 @@
                         <div class="hero-image">
                             <div class="hero-image-inner"
                                  style="background-image: url('{{ asset('img/tmp/slider-large-3.jpg') }}' );">
-                                <div class="hero-image-content">
-                                    <div class="container">
-                                        <h1>Directory Template</h1>
 
-                                        <p>Create your own directory website by using Superlist template <br>
-                                            incorporating all features of modern directory website.</p>
-
-                                        <a href="listing-row.html" class="btn btn-primary btn-lg">View Listings</a>
-                                        <a href="listing-submit.html" class="btn btn-secondary btn-lg">Submit</a>
-                                    </div><!-- /.container -->
-                                </div><!-- /.hero-image-content -->
-
-                                <div class="hero-image-form-wrapper">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
-                                                <form method="get" action="?">
-                                                    <h2>Start Searching</h2>
-
-                                                    <div class="hero-image-keyword form-group">
-                                                        <input type="text" class="form-control" placeholder="Keyword">
-                                                    </div><!-- /.form-group -->
-
-                                                    <div class="hero-image-location form-group">
-                                                        <select class="form-control" title="Location">
-                                                            <option>Bronx</option>
-                                                            <option>Brooklyn</option>
-                                                            <option>Manhattan</option>
-                                                            <option>Staten Island</option>
-                                                            <option>Queens</option>
-                                                        </select>
-                                                    </div><!-- /.form-group -->
-
-                                                    <div class="hero-image-category form-group">
-                                                        <select class="form-control" title="Category">
-                                                            <option value="">Automotive</option>
-                                                            <option value="">Jobs</option>
-                                                            <option value="">Nightlife</option>
-                                                            <option value="">Services</option>
-                                                        </select>
-                                                    </div><!-- /.form-group -->
-
-
-                                                    <button type="submit" class="btn btn-primary btn-block">Search
-                                                    </button>
-                                                </form>
-                                            </div><!-- /.col-* -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.container -->
-                                </div><!-- /.hero-image-form-wrapper -->
                             </div><!-- /.hero-image-inner -->
                         </div><!-- /.hero-image -->
 
@@ -176,6 +130,10 @@
 
                             <li>
                                 require false dans le form builder ne fait rien
+                            </li>
+
+                            <li>
+                                bundle tetranz pas dans composer.json mais ce réisntalle a chaque fois
                             </li>
 
                         </ul>
@@ -323,6 +281,9 @@
     <script type="text/javascript" src="{{ asset('libraries/bootstrap-fileinput/fileinput.min.js') }}"></script>
 
     <script src="{{ asset('js/superlist.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="{{ asset('js/tetrabirk.js') }}" type="text/javascript"></script>
 {% endblock %}
 
 </body>

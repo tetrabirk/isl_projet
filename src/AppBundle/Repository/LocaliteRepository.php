@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class LocaliteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllWithCP()
+    {
+        $qb = $this->createQueryBuilder('l');
+        $qb->leftJoin('l.codePostal','cp')->addSelect('cp');
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+        return $result;
+    }
+
+
 }

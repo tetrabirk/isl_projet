@@ -1,11 +1,11 @@
-<div class="header-search">
-    <input type="text" class="form-control" placeholder="Rechercher...">
-</div><!-- /.header-search -->
+{{ render(controller(
+'AppBundle:Search:renderSearchBar'
+)) }}
 
 <ul class="header-nav-secondary nav nav-pills">
     {#TODO il faudra faire un if session active etc mais là c'est par simplicité pour la période de dev#}
     <li><a href="{{ path( 'profil' ) }}">Profil</a></li>
-
     <li><a href="{{ path( 'connexion' ) }}">Connexion</a></li>
     <li><a href="{{ path( 'inscription' ) }}">Inscription</a></li>
 </ul>
+

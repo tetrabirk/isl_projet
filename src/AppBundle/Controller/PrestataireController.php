@@ -12,6 +12,7 @@ use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Commentaire;
 use AppBundle\Repository\CommentaireRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityRepository;
@@ -33,24 +34,32 @@ class PrestataireController extends Controller
      */
     public function prestatairesAction($slug)
     {
-        /** @var CategorieDeServicesRepository $cr */
-        $cr = $this->getDoctrine()->getRepository(CategorieDeServices::class);
-        $categories = $cr->findCategoriesDeServices();
-
         if ($slug != null) {
             $prestataire = $this->getRepo()->findOneWithEverythingBySlug($slug);
 
             return $this->render('public/prestataires/prestataire_single.html.twig', array(
-                'categories' => $categories,
                 'prestataire' => $prestataire,
             ));
         } else {
             $prestataires = $this->getRepo()->findAllWithEverything();
             return $this->render('public/prestataires/prestataires_all.html.twig', array(
                 'prestataires' => $prestataires,
-                'categories' => $categories,
             ));
         }
+    }
+
+    /**
+     * @Route("/s/", name="search")
+     */
+    public function rechercheAction()
+    {
+        $request = Request::createFromGlobals();
+        $motcle = $request->query->get('form')['motCle'];
+        $localite = $request->query->get('form')['localite'];
+        $categorie = $request->query->get('form')['categorie'];
+        dump($motcle);
+        dump($localite);
+        dump($categorie);
     }
 
     public function prestatairesByCategAction($categ)

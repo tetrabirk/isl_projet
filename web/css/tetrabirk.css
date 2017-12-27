@@ -13,12 +13,37 @@
     padding: 10px 50px 50px 50px;
 }
 
-.searchform {
-    /*border-color: red;*/
+.header-search{
+    width: auto !important;
+}
+
+.header-search .btn,.ttrbrksearchform,.btn-group, .dropdown-menu{
+    font-size: 11px !important;
+}
+
+.ttrbrksearchform,.btn-group {
+    width: 150px !important;
+
+}
+.ttrbrksearchform {
+    padding: 3px 6px !important;
 
 }
 
-.btn-group{
-    width: 180px !important;
+.ttrbrkselect > .btn{
+    padding: 3px 25px 3px 6px!important;
+    margin-left: 0px !important;
+    height: 34px !important;
+    margin-top: 3px;
+
 }
+
+.ttrbrkselect > div > ul > .selected{
+    background-color: #009f8b !important;
+}
+
+.ttrbrkbuttonsearch {
+
+}
+
 

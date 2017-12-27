@@ -2,15 +2,15 @@
 
 {% block header_top %}
 
-<div class="header-search">
-    {{ form_start(form,{'attr':{'class':'form-inline'}}) }}
-    {{ form_widget(form.motCles,{'attr':{'class': 'searchform', 'placeholder':'Mots-Clés'}}) }}
-    {{ form_widget(form.localite,{'attr':{'class': 'searchform', 'placeholder':'Localité'}}) }}
-    {{ form_widget(form.categorie,{'attr':{'class': 'searchform input-small', }}) }}
-    {{ form_widget(form.search,{'label':'Search'})}}
-    {{ form_end(form) }}
+    <div class="header-search">
+        {{ form_start(form,{'attr':{'class':'form-inline'}}) }}
+        {{ form_widget(form.motCles,{'attr':{'class': 'searchform', 'placeholder':'Mots-Clés'}}) }}
+        {{ form_widget(form.localite,{'attr':{'class': 'searchform', 'placeholder':'Localité'}}) }}
+        {{ form_widget(form.categorie,{'attr':{'class': 'searchform input-small', }}) }}
+        {{ form_widget(form.search,{'label':'Search'}) }}
+        {{ form_end(form) }}
 
-</div><!-- /.header-search -->
+    </div><!-- /.header-search -->
 
 {% endblock %}
 
@@ -18,14 +18,40 @@
 
 
 
-<div class="main">
-    <div class="main-inner">
-        <div class="container">
-            <div class="content">
+    <div class="main">
+        <div class="main-inner">
+            <div class="container">
+                <div class="content">
 
-            </div><!-- /.content -->
-        </div><!-- /.container -->
-    </div><!-- /.main-inner -->
-</div><!-- /.main -->
+                </div><!-- /.content -->
+            </div><!-- /.container -->
+        </div><!-- /.main-inner -->
+    </div><!-- /.main -->
 
 {% endblock %}
+
+
+<div class="header-search">
+
+    <form name="form" method="get" action="/ISL_2017_2018/projet/isl_projet/web/app_dev.php/form2" class="form-inline">
+        <input type="text" id="form_motCles" name="form[motCles]" class="searchform form-control"
+               placeholder="Mots-Clés"/>
+        <input type="text" id="form_localite" name="form[localite]" class="searchform form-control"
+               placeholder="Localité"/>
+        <select id="form_categorie" name="form[categorie][]" class="searchform input-small form-control"
+                multiple="multiple">
+            <option value="41">natus voluptas</option>
+            <option value="42">necessitatibus rerum</option>
+            <option value="43">nulla et</option>
+            <option value="44">amet facere</option>
+            <option value="45">doloremque eaque</option>
+            <option value="46">nemo soluta</option>
+            <option value="47">in quisquam</option>
+            <option value="48">iste non</option>
+        </select>
+        <button type="submit" id="form_search" name="form[search]" class="search btn">Search</button>
+        <input type="hidden" id="form__token" name="form[_token]" value="biHE2DOoU-AeWMXnXrYQDSGFYGNu-SKn8OBGLKjwboY"/>
+    </form>
+
+
+</div><!-- /.header-search -->
