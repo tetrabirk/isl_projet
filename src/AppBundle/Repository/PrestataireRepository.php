@@ -85,8 +85,6 @@ class PrestataireRepository extends EntityRepository
 
 
 
-
-
     public function findWithEverything($type,$key)
     {
         //creation du QB
@@ -132,6 +130,8 @@ class PrestataireRepository extends EntityRepository
         $qb->leftJoin('p.logo','logo')->addSelect('logo');
         $qb->leftJoin('p.categories','categories')->addSelect('categories');
         $qb->leftJoin('p.internautesFavoris','fav')->addSelect('fav');
+        $qb->leftJoin('p.codePostal','cp')->addSelect('cp');
+        $qb->leftJoin('p.localite','localite')->addSelect('localite');
     }
 
 

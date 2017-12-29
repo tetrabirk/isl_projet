@@ -8,18 +8,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\CategorieDeServices;
-use AppBundle\Entity\Commentaire;
-use AppBundle\Repository\CommentaireRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ORM\EntityRepository;
 
 use AppBundle\Entity\Prestataire;
 use AppBundle\Repository\PrestataireRepository;
-use AppBundle\Repository\CategorieDeServicesRepository;
 
 class PrestataireController extends Controller
 {
@@ -48,23 +41,11 @@ class PrestataireController extends Controller
         }
     }
 
-    /**
-     * @Route("/s/", name="search")
-     */
-    public function rechercheAction()
-    {
-        $request = Request::createFromGlobals();
-        $motcle = $request->query->get('form')['motCle'];
-        $localite = $request->query->get('form')['localite'];
-        $categorie = $request->query->get('form')['categorie'];
-        dump($motcle);
-        dump($localite);
-        dump($categorie);
-    }
+
 
     public function prestatairesByCategAction($categ)
     {
-        $prestataires = $this->getRepo()->findAllWithEverythingByCateg($categ);;
+        $prestataires = $this->getRepo()->findAllWithEverythingByCateg($categ);
         return $this->render('lib/list/prestataires.html.twig', array(
             'prestataires' => $prestataires,
         ));
