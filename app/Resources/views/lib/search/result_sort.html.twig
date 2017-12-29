@@ -1,5 +1,10 @@
 <h2 class="page-title">
-    {{ prestataires|length }} résultat(s) correspondant(s) à votre recherche
+    {{ prestataires|length }}
+    {% if  prestataires|length <= 1 %}
+        résultat correspondant à votre recherche
+    {% else %}
+        résultats correspondants à votre recherche
+    {% endif %}
 
     <form method="get" action="?" class="filter-sort">
         <div class="form-group">

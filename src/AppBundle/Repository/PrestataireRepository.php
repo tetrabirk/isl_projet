@@ -18,189 +18,121 @@ class PrestataireRepository extends EntityRepository
 
     public function findAllWithEverything()
     {
-        $qb = $this->createWithJoin();
-
-        return $this->returnResult($qb);
+        return $this->searchAll(null,'','');
     }
 
     public function findOneWithEverythingBySlug($slug)
     {
-        $qb = $this->createWithJoin();
+        $qb = $this->createQueryBuilder('p');
+        $this->addAllJoins($qb);
 
         $qb->where('p.slug =:slug');
-        $qb->setParameter('slug',$slug);
+        $qb->setParameter('slug', $slug);
 
-        return $this->returnSingleResult($qb);
+        $qb->orderBy('p.nom', 'ASC');
+
+        $query = $this->returnQuery($qb);
+        return $this->returnSingleResult($query);
     }
 
     public function findAllWithEverythingByCateg(CategorieDeServices $categ)
     {
         $qb = $this->createQueryBuilder('p');
-        $qb->leftJoin('p.stages','stages')->addSelect('stages');
-        $qb->leftJoin('p.promotions','promotions')->addSelect('promotions');
-        $qb->leftJoin('p.photos','photos')->addSelect('photos');
-        $qb->leftJoin('p.logo','logo')->addSelect('logo');
-        $qb->leftJoin('p.internautesFavoris','fav')->addSelect('fav');
+        $this->addBasicJoins($qb);
+        $qb->leftJoin('p.codePostal', 'cp')->addSelect('cp');
+        $qb->leftJoin('p.localite', 'localite')->addSelect('localite');
 
-        $qb->join('p.categories','c','WITH',$qb->expr()->eq('c.id',$categ->getId()));
+        $qb->join('p.categories', 'c', 'WITH', $qb->expr()->eq('c.id', $categ->getId()));
+        $qb->orderBy('p.nom', 'ASC');
 
-        $qb->orderBy('p.nom','ASC');
-
-        return $this->returnResult($qb);
+        $query = $this->returnQuery($qb);
+        return $this->returnResult($query);
 
     }
 
     public function findNMostRecentBasic(int $n)
     {
-        $qb = $this->createWithJoin();
+        $qb = $this->createQueryBuilder('p');
+        $this->addAllJoins($qb);
 
-        $qb->orderBy('p.inscription','DESC');
+        $qb->orderBy('p.inscription', 'DESC');
         $qb->setMaxResults(4);
         $pag = new Paginator($qb);
         return $pag;
     }
 
-
-    protected function createWithJoin()
+    public function searchAll($categorie,$localite,$motcle)
     {
         $qb = $this->createQueryBuilder('p');
-        $this->addJoins($qb);
-        return $qb;
-    }
-
-    protected function returnResult($qb)
-    {
-        $query= $qb->getQuery();
-        $result=$query->getResult();
-        return $result;
-    }
-
-    protected function returnSingleResult($qb)
-    {
-        $query= $qb->getQuery();
-        $result=$query->getSingleResult();
-        return $result;
-    }
+        $this->addBasicJoins($qb);
 
 
-
-
-    public function findWithEverything($type,$key)
-    {
-        //creation du QB
-        $qb = $this->createQueryBuilder('p');
-
-        //ajout de jointures
-        $this->addJoins($qb);
-
-        if (isset($key)){
-            $this->addWhere($qb,$type,$key);
-        }
-
-        $query= $qb->getQuery();
-
-        if ($type == 'slug')// if true -> j'essaye d'afficher un seul prestataire
-        {
-            $result=$query->getSingleResult();
+        if (!is_null($categorie)){
+            $qb->join('p.categories','c','WITH',$qb->expr()->in('c.id',$categorie));
         }else{
-            $result=$query->getResult();
+            $qb->leftJoin('p.categories','categories')->addSelect('categories');
         }
 
-        return $result;
-    }
-
-
-
-    protected function addWhere($qb,$type,$key)
-    {
-        switch ($type)
-        {
-            case 'slug':
-                $qb->where('p.slug =:key');
-                $qb->setParameter('key',$key);
-                break;
+        if (!empty($localite)){
+            $qb->join('p.localite','l','WITH', $qb->expr()->eq('l.id',$localite));
+        }else{
+            $qb->leftJoin('p.localite','localite')->addSelect('localite');
         }
-    }
-
-    protected function addJoins($qb)
-    {
-        $qb->leftJoin('p.stages','stages')->addSelect('stages');
-        $qb->leftJoin('p.promotions','promotions')->addSelect('promotions');
-        $qb->leftJoin('p.photos','photos')->addSelect('photos');
-        $qb->leftJoin('p.logo','logo')->addSelect('logo');
-        $qb->leftJoin('p.categories','categories')->addSelect('categories');
-        $qb->leftJoin('p.internautesFavoris','fav')->addSelect('fav');
         $qb->leftJoin('p.codePostal','cp')->addSelect('cp');
-        $qb->leftJoin('p.localite','localite')->addSelect('localite');
+
+        if(!empty($motcle)){
+            $qb->add('where', $qb->expr()->like('p.nom','?1'));
+            $qb->setParameter(1,$motcle);
+
+        }
+
+        $qb->orderBy('p.nom', 'ASC');
+        $query = $this->returnQuery($qb);
+
+        return $query;
     }
 
 
 
 
+    //fonction pas très utile mais qui existe pour des raisons de lisibilité
 
-
-
-//
-//    public function getCote(Prestataire $prestataire)
-//    {
-//        $query = $this->getEntityManager()->createQuery("SELECT (AVG(c.cote)/5) cote FROM AppBundle:Commentaire c WHERE c.cibleCommentaire = ?1");
-//        $query->setParameter(1,$prestataire);
-//        $result = $query->getResult();
-//
-//        return $result;
-//    }
-
-    //test
-
-
-
-
-
-
-
-
-    //exemple en class
-
-    public function findAllWithStages()
+    protected function returnQuery($qb)
     {
-        $qb = $this->createQueryBuilder('p');
-        $qb->join('p.stages','stages');
-        $query= $qb->getQuery();
-        $result=$query->getResults();
+        $query = $qb->getQuery();
+        return $query;
+    }
+
+    protected function returnResult($query)
+    {
+        $result = $query->getResult();
         return $result;
     }
-//
-//    protected function addJoins($qb)
-//    {
-//        $qb->join('p.promos','promos');
-//        $qb->join('p.stages','stages');
-//        $qb->join('p.categories','cat');
-//    }
 
-    public function finAllWithJoins()
+    protected function returnSingleResult($query)
     {
-        $qb = $this->createQueryBuilder('p');
-        $this->addJoins($qb);
-        $query=$qb->getQuery();
-        $results=$query->getResult();
-        return $results;
+        $result = $query->getSingleResult();
+        return $result;
     }
 
-    public function findOneWithJoins($id,$date)
+
+    protected function addAllJoins($qb)
     {
-        $qb = $this->createQueryBuilder('p');
-        $this->addJoins($qb);
-        $qb->where('p.id =:id');
-        $qb->setParameter('id',$id);
+        $this->addBasicJoins($qb);
 
-        $qb->andWhere('p.date>:date');
+        $qb->leftJoin('p.categories', 'categories')->addSelect('categories');
+        $qb->leftJoin('p.codePostal', 'cp')->addSelect('cp');
+        $qb->leftJoin('p.localite', 'localite')->addSelect('localite');
+    }
 
-        $qb->innerJoin('p.stages','stages','WITH','stages.date >:date');
-        $qb->setParameter('date',$date);
-
-        $query=$qb->getQuery();
-        $results=$query->getResult();
-        return $results;
+    //ajoute les joins moins ceux concerner par les recherche etc
+    protected function addBasicJoins($qb)
+    {
+        $qb->leftJoin('p.stages', 'stages')->addSelect('stages');
+        $qb->leftJoin('p.promotions', 'promotions')->addSelect('promotions');
+        $qb->leftJoin('p.photos', 'photos')->addSelect('photos');
+        $qb->leftJoin('p.logo', 'logo')->addSelect('logo');
+        $qb->leftJoin('p.internautesFavoris', 'fav')->addSelect('fav');
     }
 
 

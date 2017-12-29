@@ -42,8 +42,9 @@
     background-color: #009f8b !important;
 }
 
-.ttrbrkbuttonsearch {
-
+.pagination > .active > span{
+    background-color: rgba(0, 159, 139, 0.7) !important;
+    border-color: rgba(0, 159, 139, 0.7) !important;
 }
 
 
