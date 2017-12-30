@@ -32,7 +32,7 @@ framework:
     assets: ~
     php_errors:
         log: true
-    translator: ~
+    translator: { fallbacks: ["fr"]}
 
 # Twig Configuration
 twig:
@@ -118,4 +118,91 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+
+# app/config/config.yml
+easy_admin:
+    site_name: 'Bien Être Admin'
+    formats:
+      date: 'd/m/Y'
+      time: 'H:i'
+      datetime: 'd/m/Y H:i:s'
+    design:
+        brand_color: '#009f8b'
+        color_scheme: 'light'
+        assets:
+            favicon: 'faviconadmin.png'
+    entities:
+        Utilisateur:
+            class: AppBundle\Entity\Utilisateur
+            help: "Ceci est un message d'aide globale"
+            label: 'Utilisateurs'
+            list:
+                title: 'Utilisateurs récents'
+                max_results: 30
+                fields:
+                    - id
+                    - { property: 'email', label: 'E-mail', type: 'email'}
+                    - { property: 'motDePasse', label: 'mot de passe'}
+                    - { property: 'adresseNum', label: '# Rue'}
+                    - { property: 'adresseRue', label: 'Rue'}
+                    - { property: 'codePostal', label: 'CP', type: 'association'}
+                    - { property: 'localite', label: 'Localite', type: 'association'}
+                    - { property: 'inscription', label: "Date d'inscription", type: 'datetime'}
+                    - { property: 'nbEssaisInfructueux', label: "nbre d'essais infructueux"}
+                    - { property: 'banni', label: 'bannis'}
+                    - { property: 'confInscription', label: 'confirmation', type: 'boolean'}
+            show:
+                help: "Ceci est un message d'aide spécifique"
+                max_results: 20
+            search:
+        Internaute:
+            class: AppBundle\Entity\Internaute
+        Prestataire:
+            class: AppBundle\Entity\Prestataire
+            label: 'Prestataires'
+            list:
+                title: 'Prestataires récents'
+                max_results: 30
+                fields:
+                    - id
+                    - { property: 'email', label: 'E-mail', type: 'email'}
+                    - { property: 'motDePasse', label: 'mot de passe'}
+                    - { property: 'adresseNum', label: '# Rue'}
+                    - { property: 'adresseRue', label: 'Rue'}
+                    - { property: 'codePostal', label: 'CP', type: 'association'}
+                    - { property: 'localite', label: 'Localite', type: 'association'}
+                    - { property: 'inscription', label: "Date d'inscription", type: 'datetime'}
+                    - { property: 'nbEssaisInfructueux', label: "nbre d'essais infructueux"}
+                    - { property: 'banni', label: 'bannis'}
+                    - { property: 'confInscription', label: 'confirmation', type: 'boolean'}
+            show:
+                max_results: 20
+            search:
+        CategorieDeServices:
+            class: AppBundle\Entity\CategorieDeServices
+        Image:
+            class: AppBundle\Entity\Image
+            list:
+                fields:
+                    - id
+                    - {property: 'nom', label: 'image', type: 'image', base_path: 'img/' }
+                    - active
+        Newsletter:
+            class: AppBundle\Entity\Newsletter
+            list:
+                fields:
+                    - id
+                    - { property: 'titre', label: 'titre'}
+                    - { property: 'publication', label: "Date de publication", type: 'datetime'}
+                    - { property: 'documentPDF', label: 'pdf', type: 'file', base_path: 'pdf/'}
+
+#        - AppBundle\Entity\Commentaire
+#        - AppBundle\Entity\Promotion
+#        - AppBundle\Entity\Stage
+#        - AppBundle\Entity\Abus
+#        - AppBundle\Entity\Bloc
+#        - AppBundle\Entity\CodePostal
+#        - AppBundle\Entity\Localite
+#        - AppBundle\Entity\Image
+#        - AppBundle\Entity\Newsletter
 
