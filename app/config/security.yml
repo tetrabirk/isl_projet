@@ -34,7 +34,9 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/admin, roles: ROLE_ADMIN }
+        # require ROLE_USER for /profil*
+        - { path: ^/profil, roles: ROLE_USER}
 
     encoders:
-        AppBundle\Entity\Admin: plaintext
+        AppBundle\Entity\Utilisateur: plaintext
 
