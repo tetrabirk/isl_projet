@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Abus;
+use AppBundle\Entity\Admin;
 use AppBundle\Entity\Bloc;
 use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\CodePostal;
@@ -1301,7 +1302,6 @@ class Fixtures extends Fixture
             $manager->persist($commentaire);
         }
 
-        $manager->flush();
 
 //        generation des abus
 
@@ -1317,9 +1317,27 @@ class Fixtures extends Fixture
             $manager->persist($newsletter);
         }
 
+//        generation de l'admin
+
+        $admin = $this->genAdmin();
+        $manager->persist($admin);
+
+
         $manager->flush();
     }
 
+    public function genAdmin()
+    {
+        $admin = new Admin();
+        $admin->setEmail('admin@admin.com');
+        $admin->setMotDePasse('password');
+        $admin->setInscription(new \DateTime());
+        $admin->setNbEssaisInfructueux(0);
+        $admin->setBanni(false);
+        $admin->setConfInscription(true);
+
+        return $admin;
+    }
     public function genCategorieDeServices($i)
     {
         $categorie = new CategorieDeServices();

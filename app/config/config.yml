@@ -143,6 +143,7 @@ easy_admin:
                     - id
                     - { property: 'email', label: 'E-mail', type: 'email'}
                     - { property: 'motDePasse', label: 'mot de passe'}
+                    - { property: 'typeUtilisateur', label: 'type'}
                     - { property: 'adresseNum', label: '# Rue'}
                     - { property: 'adresseRue', label: 'Rue'}
                     - { property: 'codePostal', label: 'CP', type: 'association'}
@@ -165,8 +166,14 @@ easy_admin:
                 max_results: 30
                 fields:
                     - id
+                    - { property: 'nom', label: 'nom'}
+                    - { property: 'slug', label: 'slug'}
                     - { property: 'email', label: 'E-mail', type: 'email'}
                     - { property: 'motDePasse', label: 'mot de passe'}
+                    - { property: 'siteInternet', label: 'site', type: 'url'}
+                    - { property: 'emailContact', label: 'E-mail Contact', type: 'email'}
+                    - { property: 'telephone', label: 'telephone', type: 'tel'}
+                    - { property: 'numTVA', label: '# TVA'}
                     - { property: 'adresseNum', label: '# Rue'}
                     - { property: 'adresseRue', label: 'Rue'}
                     - { property: 'codePostal', label: 'CP', type: 'association'}

@@ -6,7 +6,10 @@ security:
     providers:
         in_memory:
             memory: ~
-
+        bien_etre:
+            entity:
+                class: AppBundle:Admin
+                property: username
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -14,7 +17,10 @@ security:
             security: false
 
         main:
+            pattern: ^/
             anonymous: ~
+            http_basic: ~
+            provider: bien_etre
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -22,3 +28,11 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+    encoders:
+        AppBundle\Entity\Admin: plaintext
+

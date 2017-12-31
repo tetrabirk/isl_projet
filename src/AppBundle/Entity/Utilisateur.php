@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type_utilisateur", type="string")
- * @ORM\DiscriminatorMap({"utilisateur" = "Utilisateur", "internaute" = "Internaute", "prestataire" = "Prestataire"})
+ * @ORM\DiscriminatorMap({"utilisateur" = "Utilisateur", "internaute" = "Internaute", "prestataire" = "Prestataire", "admin" = "Admin"})
  */
 class Utilisateur
 {
