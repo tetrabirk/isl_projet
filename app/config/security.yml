@@ -8,8 +8,7 @@ security:
             memory: ~
         bien_etre:
             entity:
-                class: AppBundle:Admin
-                property: username
+                class: AppBundle:Utilisateur
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -21,6 +20,9 @@ security:
             anonymous: ~
             http_basic: ~
             provider: bien_etre
+            logout:
+                path: /logout
+                target: /
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

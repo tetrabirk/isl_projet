@@ -86,7 +86,7 @@
                                     {% endblock %}
 
 
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-9">
                                         <label>Rue</label>
                                         <input type="text" class="form-control" value="{{ utilisateur.adresseRue}}">
                                     </div><!-- /.form-group -->
@@ -98,17 +98,13 @@
 
                                     <div class="form-group col-sm-3">
                                         <label>Code Postal</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.codePostal }}">
+                                        <input type="text" class="form-control" value="{{ utilisateur.codePostal.codePostal }}">
                                     </div><!-- /.form-group -->
 
-                                    <div class="form-group col-sm-6">
-                                        <label>Commune</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.commune }}">
-                                    </div><!-- /.form-group -->
 
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-9">
                                         <label>Localite</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.localite }}">
+                                        <input type="text" class="form-control" value="{{ utilisateur.localite.localite }}">
                                     </div><!-- /.form-group -->
 
                                 </div><!-- /.row -->

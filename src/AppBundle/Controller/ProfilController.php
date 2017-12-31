@@ -21,7 +21,7 @@ use AppBundle\Controller\DefaultController as DC;
 class ProfilController extends Controller
 {
 
-    //////        INTERNAUTE: 62       PRESTATAIRE: 32
+    //////        INTERNAUTE: 264       PRESTATAIRE: 244
     public function getUtilisateur($id)
     {
         $repository = $this->getDoctrine()->getRepository(Utilisateur::class);
@@ -35,7 +35,7 @@ class ProfilController extends Controller
      */
     public function profilAction()
     {
-        $user = $this->getUtilisateur(98);
+        $user = $this->getUtilisateur(244);
         $userType= $user->getType();
         if ($userType =="Prestataire"){
             return $this->render('profil/prestataire.html.twig',array(
@@ -68,7 +68,7 @@ class ProfilController extends Controller
      */
     public function stagesAction()
     {
-        $user = $this->getUtilisateur(98);
+        $user = $this->getUtilisateur(244);
 
         return $this->render('profil/stages/stages.html.twig',array(
             'utilisateur' => $user,
@@ -89,7 +89,7 @@ class ProfilController extends Controller
      */
     public function stageMiseAJourAction()
     {
-        return $this->render('profil/stages/stage_mise_a_jour',array(
+        return $this->render('profil/stages/stage_mise_a_jour.html.twig',array(
         ));
     }
 
