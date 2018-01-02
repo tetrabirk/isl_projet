@@ -185,6 +185,15 @@ easy_admin:
             show:
                 max_results: 20
             search:
+
+            form:
+                title: 'Ajout Prestataire'
+                form_options: {validation_groups: ['Default']}
+            new:
+                form_options: {validation_groups:['Default','Prestataire']}
+            edit:
+              title: 'Modifier Prestataire'
+
         CategorieDeServices:
             class: AppBundle\Entity\CategorieDeServices
         Image:
