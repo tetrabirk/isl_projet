@@ -3,9 +3,12 @@
 )) }}
 
 <ul class="header-nav-secondary nav nav-pills">
-    {#TODO il faudra faire un if session active etc mais là c'est par simplicité pour la période de dev#}
-    <li><a href="{{ path( 'profil' ) }}">Profil</a></li>
-    <li><a href="{{ path( 'connexion' ) }}">Connexion</a></li>
-    <li><a href="{{ path( 'inscription' ) }}">Inscription</a></li>
+    {% if app.user %}
+        <li><a href="{{ path( 'profil' ) }}">Profil</a></li>
+        <li><a href="{{ path( 'deconnexion' ) }}">Déconnexion</a></li>
+    {% elseif not app.user %}
+        <li><a href="{{ path( 'connexion' ) }}">Connexion</a></li>
+        <li><a href="{{ path( 'inscription' ) }}">Inscription</a></li>
+    {% endif %}
 </ul>
 
