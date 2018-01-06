@@ -1,6 +1,6 @@
 {% extends "profil/profil_base.html.twig" %}
 
-{% block imgProfil %}{{ utilisateur.logo.nom|tempDevImage }}{% endblock %}
+{% block imgProfil %}{{ app.user.logo.nom|tempDevImage }}{% endblock %}
 {% block txtModifImg %}Modifier mon logo{% endblock %}
 
 {% block widgets %}
@@ -20,51 +20,24 @@
 {% endblock %}
 
 {% block nomProfil %}
-    <h1>{{ utilisateur.nom|capitalize }}
+    <h1>{{ app.user.nom|capitalize }}
         <span>
                                         {# TODO#}
             *ici des étoiles*
             {#{% include 'lib/stars.html.twig' %}#}
-            {#{{ (utilisateur.cote*5)|round(1,'floor') }} / 5#}
+            {#{{ (app.user.cote*5)|round(1,'floor') }} / 5#}
         </span><!-- /.card-row-rating -->
 
     </h1>
 
 {% endblock %}
 
-{% block champsInfosGlobale %}
+{% block form %}
 
-    <div class="form-group col-sm-6">
-        <label>Nom</label>
-        <input type="text" class="form-control" value="{{ utilisateur.nom }}">
-    </div><!-- /.form-group -->
-
-    <div class="form-group col-sm-6">
-        <label>E-mail</label>
-        <input type="text" class="form-control" value="{{ utilisateur.email }}">
-    </div><!-- /.form-group -->
+    {{ form_start(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}
 
-{% block champsContactInfos %}
-
-    <div class="form-group col-sm-6">
-        <label>Site Internet</label>
-        <input type="text" class="form-control" value="{{ utilisateur.siteInternet}}">
-    </div><!-- /.form-group -->
-    <div class="form-group col-sm-6">
-        <label>Email de contact</label>
-        <input type="text" class="form-control" value="{{ utilisateur.emailContact}}">
-    </div><!-- /.form-group -->
-    <div class="form-group col-sm-6">
-        <label>Téléphone</label>
-        <input type="text" class="form-control" value="{{ utilisateur.telephone}}">
-    </div><!-- /.form-group -->
-    <div class="form-group col-sm-6">
-        <label>Numéro de TVA</label>
-        <input type="text" class="form-control" value="{{ utilisateur.numTVA}}">
-    </div><!-- /.form-group -->
-
-{% endblock %}
 
 

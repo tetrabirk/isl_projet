@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Utilisateur;
+use AppBundle\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +41,11 @@ class SecurityController extends Controller
      */
     public function inscriptionAction()
     {
+        $utilisateur = new Utilisateur();
+        $form = $this->get('form.factory')->create(UtilisateurType::class);
+
         return $this->render('security/inscription.html.twig',array(
+            'form'=>$form->createView(),
         ));
     }
     /**

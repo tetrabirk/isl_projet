@@ -23,8 +23,8 @@
                             <div class="widget">
 
                                 <div class="menu-advanced">
-                                    <div>Membre depuis le {{ utilisateur.Inscription|date('d-m-Y') }}</div>
-                                    {% if utilisateur.confInscription == false %}
+                                    <div>Membre depuis le {{ app.user.Inscription|date('d-m-Y') }}</div>
+                                    {% if app.user.confInscription == false %}
                                         <div><a class="btn-danger" href="#">Confirmer l'Adresse Email</a></div>
                                     {% endif %}
                                 </div>
@@ -65,47 +65,9 @@
 
                                 <div class="row">
 
-                                    {% block champsInfosGlobale %}
+                                    {% block form %}
 
                                     {% endblock %}
-
-                                </div><!-- /.row -->
-                            </div>
-
-                            <div class="background-white p20 mb30">
-                                <h3 class="page-title">
-                                    Contact
-
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Enregistrer</a>
-                                </h3>
-
-                                <div class="row">
-
-                                    {% block champsContactInfos %}
-
-                                    {% endblock %}
-
-
-                                    <div class="form-group col-sm-9">
-                                        <label>Rue</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.adresseRue}}">
-                                    </div><!-- /.form-group -->
-
-                                    <div class="form-group col-sm-3">
-                                        <label>Numéro</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.adresseNum }}">
-                                    </div><!-- /.form-group -->
-
-                                    <div class="form-group col-sm-3">
-                                        <label>Code Postal</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.codePostal.codePostal }}">
-                                    </div><!-- /.form-group -->
-
-
-                                    <div class="form-group col-sm-9">
-                                        <label>Localite</label>
-                                        <input type="text" class="form-control" value="{{ utilisateur.localite.localite }}">
-                                    </div><!-- /.form-group -->
 
                                 </div><!-- /.row -->
                             </div>
