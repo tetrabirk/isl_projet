@@ -292,4 +292,8 @@ class Promotion
         $this->categories = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 }

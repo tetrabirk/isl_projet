@@ -107,7 +107,7 @@ class Prestataire extends Utilisateur
     public function addCategorie(CategorieDeServices $categ)
     {
         $categ->addPrestataires($this);
-        $this->categories[]= $categ;
+        $this->categories[] = $categ;
     }
 
     /**
@@ -147,7 +147,7 @@ class Prestataire extends Utilisateur
 
     public function addInternauteFavoris(Internaute $IntFav)
     {
-        $this->internautesFavoris[]=$IntFav;
+        $this->internautesFavoris[] = $IntFav;
     }
 
     /**
@@ -270,6 +270,7 @@ class Prestataire extends Utilisateur
     {
         return $this->numTVA;
     }
+
     /**
      * Constructor
      */
@@ -361,6 +362,7 @@ class Prestataire extends Utilisateur
     {
         return $this->slug;
     }
+
     /**
      * Add photos
      *
@@ -395,4 +397,14 @@ class Prestataire extends Utilisateur
         return $this->photos;
     }
 
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 }

@@ -230,4 +230,27 @@ class CategorieDeServices
         $this->image = $image;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPrestataires()
+    {
+        return $this->prestataires;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    
+
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
 }

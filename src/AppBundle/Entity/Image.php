@@ -81,6 +81,10 @@ class Image
         $this->nom = $nom;
     }
 
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 
 
 }

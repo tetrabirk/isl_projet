@@ -59,6 +59,7 @@ class PrestataireRepository extends EntityRepository
         $qb->setMaxResults(4);
         $pag = new Paginator($qb);
         return $pag;
+
     }
 
     public function searchAll($categorie,$localite,$motcle)
@@ -81,8 +82,9 @@ class PrestataireRepository extends EntityRepository
         $qb->leftJoin('p.codePostal','cp')->addSelect('cp');
 
         if(!empty($motcle)){
+            $mc = "%".$motcle."%";
             $qb->add('where', $qb->expr()->like('p.nom','?1'));
-            $qb->setParameter(1,$motcle);
+            $qb->setParameter(1,$mc);
 
         }
 

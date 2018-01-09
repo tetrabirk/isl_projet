@@ -302,4 +302,9 @@ class Stage
         $this->nom = $nom;
     }
 
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
 }

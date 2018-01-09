@@ -169,4 +169,10 @@ class Internaute extends Utilisateur
     {
         return $this->newsletter;
     }
+
+    public function __toString()
+    {
+        $nomComplet = $this->getPrenom().' '.$this->getNom();
+        return $nomComplet;
+    }
 }

@@ -27,9 +27,6 @@ class SearchController extends Controller
                 'empty_data' => null,
 
             ))
-//            ->add('localite',TextType::class,array(
-//                'required' => false
-//            ))
 
             ->add('localite',EntityType::class,array(
                 'class'=> 'AppBundle:Localite',

@@ -94,4 +94,9 @@ class Localite
 
     }
 
+    public function __toString()
+    {
+        return $this->getLocalite();
+    }
+
 }

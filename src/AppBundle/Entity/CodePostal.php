@@ -92,5 +92,9 @@ class CodePostal
         $this->localite = $localite;
     }
 
+    public function __toString()
+    {
+        return $this->getCodePostal();
+    }
 
 }
