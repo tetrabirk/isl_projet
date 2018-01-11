@@ -33,7 +33,7 @@ class UtilisateurType extends AbstractType
             ->add('email', EmailType::class, array(
                 'required' => true
             ))
-            ->add('motDePasse', RepeatedType::class, array(
+            ->add('motDePasseNonCripte', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passes doivent être identique',
                 'required' => true,

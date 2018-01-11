@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Utilisateur
@@ -38,6 +39,12 @@ class Utilisateur implements UserInterface, \Serializable
      * @ORM\Column(name="mot_de_passe", type="string", length=255)
      */
     private $motDePasse;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $motDePasseNonCripte;
 
     /**
      * @var string
@@ -313,6 +320,24 @@ class Utilisateur implements UserInterface, \Serializable
     {
         return $this->banni;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMotDePasseNonCripte()
+    {
+        return $this->motDePasseNonCripte;
+    }
+
+    /**
+     * @param mixed $motDePasseNonCripte
+     */
+    public function setMotDePasseNonCripte($motDePasseNonCripte)
+    {
+        $this->motDePasseNonCripte = $motDePasseNonCripte;
+    }
+
+
 
     /**
      * Set confInscription

@@ -7,6 +7,7 @@ use AppBundle\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends Controller
@@ -39,10 +40,35 @@ class SecurityController extends Controller
     /**
      * @Route("/inscription", name="inscription")
      */
-    public function inscriptionAction()
+    public function inscriptionAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $utilisateur = new Utilisateur();
         $form = $this->get('form.factory')->create(UtilisateurType::class);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $password = $passwordEncoder->encodePassword($utilisateur,$utilisateur->getMotDePasseNonCripte());
+            $utilisateur->setMotDePasse($password);
+
+
+            //TODO trouver un moyen de persister l'un ou l'autre
+            if($utilisateur['type'] == 'Prestataire'){
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($utilisateur);
+                $em->flush();
+            }else{
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($utilisateur);
+                $em->flush();
+            }
+
+
+            return $this->redirectToRoute('homepage');
+        }else{
+            dump($request);
+            dump($form->getErrors());
+
+        }
 
         return $this->render('security/inscription.html.twig',array(
             'form'=>$form->createView(),

@@ -27,13 +27,13 @@
                             {#</div><!-- /.form-group -->#}
                             {#</form>#}
 
-                            {{ form_start(form) }}
+                            {{ form_start(form,{'action': path('inscription'),'method': 'POST'}) }}
+                            {{ form_errors(form) }}
                             {{ form_label(form.type, "Je m'inscris en tant que :") }}
 
                             {{ form_widget(form.type, {'attr': {'class': 'radio'}}) }}
-                            {% dump(form) %}
                             {{ form_row(form.email) }}
-                            {{ form_row(form.motDePasse) }}
+                            {{ form_row(form.motDePasseNonCripte) }}
 
                             {{ form_end(form) }}
                         </div><!-- /.col-sm-4 -->
