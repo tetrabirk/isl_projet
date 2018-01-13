@@ -1,5 +1,6 @@
 {% extends "profil/profil_base.html.twig" %}
 
+
 {% block imgProfil %}{{ app.user.logo.nom|tempDevImage }}{% endblock %}
 {% block txtModifImg %}Modifier mon logo{% endblock %}
 
@@ -33,11 +34,112 @@
 {% endblock %}
 
 {% block form %}
-
     {{ form_start(form) }}
+    <h3 class="page-title">
+        Infos Globales
+
+        {{ form_widget(form.enregistrer, {'attr':{'class':'btn-primary btn-xs pull-right'}}) }}
+    </h3>
+    <div class="row">
+
+        <div class="form-group col-sm-6">
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom) }}
+        </div>
+        <div class="form-group col-sm-6">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="form-group col-sm-6">
+            {{ form_label(form.siteInternet) }}
+            {{ form_widget(form.siteInternet) }}
+        </div>
+        <div class="form-group col-sm-6">
+            {{ form_label(form.emailContact) }}
+            {{ form_widget(form.emailContact) }}
+        </div>
+        <div class="form-group col-sm-6">
+            {{ form_label(form.telephone) }}
+            {{ form_widget(form.telephone) }}
+        </div>
+        <div class="form-group col-sm-6">
+            {{ form_label(form.numTVA) }}
+            {{ form_widget(form.numTVA) }}
+        </div>
+
+
+        {#affichage adresse#}
+        <div class="form-group col-sm-9">
+            {{ form_label(form.adresseRue) }}
+            {{ form_widget(form.adresseRue) }}
+        </div>
+        <div class="form-group col-sm-3">
+            {{ form_label(form.adresseNum) }}
+            {{ form_widget(form.adresseNum) }}
+        </div>
+        <div class="form-group col-sm-3">
+            {{ form_label(form.localite.codePostal) }}
+            {{ form_widget(form.localite.codePostal) }}
+        </div>
+        <div class="form-group col-sm-9">
+            {{ form_label(form.localite.localite) }}
+            {{ form_widget(form.localite.localite) }}
+        </div>
+
+    </div>
+    <div class="row ttrbrkprest">
+        <h3 class="page-title">
+            {{ form.categories.vars.label }}
+            <a href="#" id="add_category" class="btn btn-primary btn-xs pull-right">Ajouter une catégorie</a>
+        </h3>
+    </div>
+    <div class="row">
+        <div id="appbundle_prestataire_categories"
+             data-prototype="<div class=&quot;formcategorie&quot;><div class=&quot;index-categ&quot;>
+    <label class=&quot;index-categ control-label&quot;>Categorie __name__label__</label>
+</div>
+<div class=&quot;form-group col-sm-4&quot;>
+    <label class=&quot;control-label required&quot; for=&quot;appbundle_prestataire_categories____name___nom&quot;>
+        Nom
+    </label>
+    <input type=&quot;text&quot; id=&quot;appbundle_prestataire_categories____name___nom&quot; name=&quot;appbundle_prestataire[categories][___name__][nom]&quot;
+           required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control&quot;/>
+</div>
+<div class=&quot;form-group col-sm-8&quot;>
+    <label class=&quot;control-label&quot; for=&quot;appbundle_prestataire_categories____name___description&quot;>
+        Description
+    </label>
+    <textarea id=&quot;appbundle_prestataire_categories____name___description&quot;
+              name=&quot;appbundle_prestataire[categories][___name__][description]&quot; rows=&quot;4&quot;
+              class=&quot;form-control&quot;>
+    </textarea>
+</div></div>">
+
+            {% for categ in form.categories %}
+                <div class="formcategorie">
+                    <div class="index-categ">
+                        <label class="index-categ control-label">Categorie {{ loop.index }}</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        {{ form_label(categ.nom) }}
+                        {{ form_widget(categ.nom) }}
+                    </div>
+                    <div class="form-group col-sm-8">
+                        {{ form_label(categ.description) }}
+                        {{ form_widget(categ.description, {'attr': {'rows':'4'}}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% dump(form.categories) %}
+    </div>
     {{ form_end(form) }}
 
 {% endblock %}
 
+{% block script %}
+    {{ parent() }}
+    <script src="{{ asset('js/tetrabirk.js') }}" type="text/javascript"></script>
 
+{% endblock %}
 

@@ -32,7 +32,7 @@
 
 .ttrbrkselect > .btn{
     padding: 3px 25px 3px 6px!important;
-    margin-left: 0px !important;
+    margin-left: 0 !important;
     height: 34px !important;
     margin-top: 3px;
 
@@ -47,4 +47,24 @@
     border-color: rgba(0, 159, 139, 0.7) !important;
 }
 
+.required{
+    color: #555555 !important;
+    font-weight: bold !important;
+}
 
+.row .ttrbrkprest{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.index-categ > label, .formcategorie > .btn{
+    margin-left: 15px;
+}
+
+.mt-50{
+    margin-top: -50px ;
+}
+
+.mt-5{
+    margin-top: -5px;
+}

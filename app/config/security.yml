@@ -42,5 +42,5 @@ security:
         - { path: ^/profil, roles: ROLE_USER}
 
     encoders:
-        AppBundle\Entity\Utilisateur: bcrypt
+        AppBundle\Entity\Utilisateur: plaintext
 

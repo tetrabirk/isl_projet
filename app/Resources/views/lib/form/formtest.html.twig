@@ -1,5 +1,3 @@
-
-
 {% extends "index.html.twig" %}
 
 
@@ -19,3 +17,101 @@
     </div><!-- /.main -->
 
 {% endblock %}
+
+
+<div class="form-group">
+    <label class="control-label required">
+        __name__label__
+    </label>
+    <div id="appbundle_prestataire_categories___name__">
+        <div class="form-group">
+            <label class="control-label required" for="appbundle_prestataire_categories___name___nom">
+                Nom
+            </label>
+            <input type="text"
+                   id="appbundle_prestataire_categories___name___nom"
+                   name="appbundle_prestataire[categories][__name__][nom]"
+                   required="required"
+                   maxlength="255"
+                   class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label"
+                   for="appbundle_prestataire_categories___name___description">
+                Description
+            </label>
+            <textarea
+                    id="appbundle_prestataire_categories___name___description"
+                    name="appbundle_prestataire[categories][__name__][description]" class="form-control">
+
+            </textarea>
+        </div>
+    </div>
+</div>
+
+<div class="index-categ">
+    <label class="index-categ control-label">Categorie 2</label>
+</div>
+<div class="form-group col-sm-4">
+    <label class="control-label required" for="appbundle_prestataire_categories_2_nom">
+        Nom
+    </label>
+    <input type="text" id="appbundle_prestataire_categories_2_nom" name="appbundle_prestataire[categories][2][nom]"
+           required="required" maxlength="255" class="form-control" value="bob bob"/>
+</div>
+<div class="form-group col-sm-8">
+    <label class="control-label" for="appbundle_prestataire_categories_2_description">
+        Description
+    </label>
+    <textarea id="appbundle_prestataire_categories_2_description"
+              name="appbundle_prestataire[categories][2][description]" rows="4"
+              class="form-control">
+        boboboboobobob
+    </textarea>
+</div>
+
+
+<div class=&quot;index-categ&quot;>
+    <label class=&quot;index-categ control-label&quot;>Categorie ___name__</label>
+</div>
+<div class=&quot;form-group col-sm-4&quot;>
+    <label class=&quot;control-label required&quot; for=&quot;appbundle_prestataire_categories____name___nom&quot;>
+        Nom
+    </label>
+    <input type=&quot;text&quot; id=&quot;appbundle_prestataire_categories____name___nom&quot;
+           name=&quot;appbundle_prestataire[categories][___name__][nom]&quot;
+           required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control&quot;/>
+</div>
+<div class=&quot;form-group col-sm-8&quot;>
+    <label class=&quot;control-label&quot; for=&quot;appbundle_prestataire_categories____name___description&quot;>
+        Description
+    </label>
+    <textarea id=&quot;appbundle_prestataire_categories____name___description&quot;
+              name=&quot;appbundle_prestataire[categories][___name__][description]&quot; rows=&quot;4&quot;
+              class=&quot;form-control&quot;>
+    </textarea>
+</div>
+
+
+<div id="appbundle_prestataire_categories"
+     data-prototype="<div class=&quot;index-categ&quot;>
+    <label class=&quot;index-categ control-label&quot;>Categorie ___name__</label>
+</div>
+<div class=&quot;form-group col-sm-4&quot;>
+    <label class=&quot;control-label required&quot; for=&quot;appbundle_prestataire_categories____name___nom&quot;>
+        Nom
+    </label>
+    <input type=&quot;text&quot; id=&quot;appbundle_prestataire_categories____name___nom&quot; name=&quot;appbundle_prestataire[categories][___name__][nom]&quot;
+           required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control&quot;/>
+</div>
+<div class=&quot;form-group col-sm-8&quot;>
+    <label class=&quot;control-label&quot; for=&quot;appbundle_prestataire_categories____name___description&quot;>
+        Description
+    </label>
+    <textarea id=&quot;appbundle_prestataire_categories____name___description&quot;
+              name=&quot;appbundle_prestataire[categories][___name__][description]&quot; rows=&quot;4&quot;
+              class=&quot;form-control&quot;>
+    </textarea>
+</div>">
+
+</div>

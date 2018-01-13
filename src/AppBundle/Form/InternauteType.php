@@ -5,6 +5,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class InternauteType extends AbstractType
 {
@@ -13,7 +16,19 @@ class InternauteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')->add('prenom')->add('newsletter')->add('avatar')->add('favoris');
+        $builder
+            ->add('email',EmailType::class)
+            ->add('adresseRue', TextType::class)
+            ->add('adresseNum', TextType::class, array(
+                'label' => 'Numéro',
+            ))
+            ->add('localite',LocaliteType::class, array(
+                'label' => false,
+            ))
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+            ->add('enregistrer', SubmitType::class)
+        ;
     }/**
      * {@inheritdoc}
      */

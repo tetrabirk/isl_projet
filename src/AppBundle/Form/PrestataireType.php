@@ -21,25 +21,38 @@ class PrestataireType extends AbstractType
         $builder
             ->add('email',EmailType::class)
             ->add('adresseRue', TextType::class)
-            ->add('adresseNum', TextType::class)
-            ->add('localite',LocaliteType::class)
+            ->add('adresseNum', TextType::class, array(
+                'label' => 'Numéro',
+            ))
+            ->add('localite',LocaliteType::class, array(
+                'label' => false,
+            ))
             ->add('nom', TextType::class)
             ->add('siteInternet', UrlType::class)
-            ->add('emailContact', EmailType::class)
-            ->add('telephone', TextType::class)
-            ->add('numTVA', TextType::class)
+            ->add('emailContact', EmailType::class, array(
+                'label' => 'Email de contact',
+            ))
+            ->add('telephone', TextType::class, array(
+                'label' => 'Téléphone',
+            ))
+            ->add('numTVA', TextType::class, array(
+                'label' => 'Numéro de TVA',
+            ))
             ->add('categories', CollectionType::class, array(
                 'entry_type' => CategorieDeServicesType::class,
                 'allow_add' => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'label' => 'Categories'
+
             ))
-            ->add('photos', CollectionType::class, array(
-                'entry_type' => ImageType::class,
-                'allow_add' => true,
-                'allow_delete' => true
-            ))
-            ->add('logo', ImageType::class)
-            ->add('enregistrer', SubmitType::class);
+//            ->add('photos', CollectionType::class, array(
+//                'entry_type' => ImageType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true
+//            ))
+//            ->add('logo', ImageType::class)
+            ->add('enregistrer', SubmitType::class)
+        ;
     }
 
     /**

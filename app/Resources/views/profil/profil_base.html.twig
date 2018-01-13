@@ -13,8 +13,9 @@
                             <div class="widget">
                                 <div class="user-photo">
                                     <a href="#">
-                                        <img src="{{asset('img/')}}{% block imgProfil %}{% endblock %}" alt="User Photo">
-                                        <span class="user-photo-action" >{% block txtModifImg %}{% endblock %}</span>
+                                        <img src="{{ asset('img/') }}{% block imgProfil %}{% endblock %}"
+                                             alt="User Photo">
+                                        <span class="user-photo-action">{% block txtModifImg %}{% endblock %}</span>
                                     </a>
                                 </div><!-- /.user-photo -->
                             </div><!-- /.widget -->
@@ -24,9 +25,6 @@
 
                                 <div class="menu-advanced">
                                     <div>Membre depuis le {{ app.user.Inscription|date('d-m-Y') }}</div>
-                                    {% if app.user.confInscription == false %}
-                                        <div><a class="btn-danger" href="#">Confirmer l'Adresse Email</a></div>
-                                    {% endif %}
                                 </div>
                             </div><!-- /.widget -->
                             {% block widgets %}
@@ -37,10 +35,14 @@
                                     {% block menuOptions %}
 
                                     {% endblock %}
-                                    <li class="active"><a href="{{ path('profil') }}"><i class="fa fa-user"></i> Modifier Profil</a></li>
-                                    <li><a href="{{ path('mot_de_passe') }}"><i class="fa fa-key"></i> Mot de passe</a></li>
-                                    <li><a href="{{ path('deconnexion') }}"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
-                                    <li><a href="{{ path('profil_suppression') }}"><i class="fa fa-trash-o"></i> Supprimer le profil</a></li>
+                                    <li class="active"><a href="{{ path('profil') }}"><i class="fa fa-user"></i>
+                                            Modifier Profil</a></li>
+                                    <li><a href="{{ path('mot_de_passe') }}"><i class="fa fa-key"></i> Mot de passe</a>
+                                    </li>
+                                    <li><a href="{{ path('deconnexion') }}"><i class="fa fa-sign-out"></i>
+                                            Déconnexion</a></li>
+                                    <li><a href="{{ path('profil_suppression') }}"><i class="fa fa-trash-o"></i>
+                                            Supprimer le profil</a></li>
                                 </ul>
                             </div><!-- /.widget -->
 
@@ -56,21 +58,11 @@
                                 {% endblock %}
                             </div><!-- /.page-title -->
                             {% block content_profil %}
-                            <div class="background-white p20 mb30">
-                                <h3 class="page-title">
-                                    Infos Globales
-
-                                    <a href="#" class="btn btn-primary btn-xs pull-right">Enregistrer</a>
-                                </h3>
-
-                                <div class="row">
-
+                                <div class="background-white p20 mb30">
                                     {% block form %}
 
                                     {% endblock %}
-
-                                </div><!-- /.row -->
-                            </div>
+                                </div>
                             {% endblock %}
 
                         </div><!-- /.content -->

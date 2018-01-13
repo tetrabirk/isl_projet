@@ -15,7 +15,9 @@ class LocaliteType extends AbstractType
     {
         $builder
             ->add('localite')
-            ->add('codePostal', CodePostalType::class);
+            ->add('codePostal', CodePostalType::class, array(
+                'label' => false,
+            ));
     }/**
      * {@inheritdoc}
      */

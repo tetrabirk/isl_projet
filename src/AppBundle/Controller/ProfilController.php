@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Utilisateur;
+use AppBundle\Form\InternauteType;
 use AppBundle\Form\PrestataireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,8 +45,17 @@ class ProfilController extends Controller
                 'form' => $form->createView(),
             ));
         }else{
+
+            $form = $this->get('form.factory')->create(InternauteType::class,$user);
+
+            if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+            }
+
             return $this->render('profil/internaute.html.twig',array(
-                'utilisateur' => $user,
+                'form' => $form->createView(),
             ));
         }
 

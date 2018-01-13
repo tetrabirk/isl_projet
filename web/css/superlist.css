@@ -3425,7 +3425,7 @@ fieldset[disabled] a.btn, fieldset[disabled] .detail-gallery a.owl-next, .detail
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px; }
+  border-radius: 3px !important; }
 
 .btn-block {
   display: block;
