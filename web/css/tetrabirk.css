@@ -3,7 +3,7 @@
     text-align: center;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
 }
 .SEA-contenu {
 
@@ -67,4 +67,9 @@
 
 .mt-5{
     margin-top: -5px;
+}
+
+.carousel-inner > .item > img, .carousel-inner >.item > a > img{
+    min-width: 100%;
+    max-height: 500px;
 }

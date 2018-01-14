@@ -15,7 +15,7 @@
         <link href="{{ asset('libraries/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet"
               type="text/css">
         <link href="{{ asset('libraries/bootstrap-fileinput/fileinput.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
 
         <link href="{{ asset('css/superlist.css') }}" rel="stylesheet" type="text/css">
 
@@ -62,7 +62,7 @@
 
                                 <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
                                     {{ render(controller(
-                                    'AppBundle:Menu:renderMenu'
+                                        'AppBundle:Menu:renderMenu'
                                     )) }}
                                 </ul>
 
@@ -88,49 +88,41 @@
     {% block content %}
         <div class="main">
             <div class="main-inner">
-                <div class="content">
-                    <div class="mt-80">
-                        <div class="hero-image">
-                            <div class="hero-image-inner"
-                                 style="background-image: url('{{ asset('img/tmp/slider-large-3.jpg') }}' );">
-
-                            </div><!-- /.hero-image-inner -->
-                        </div><!-- /.hero-image -->
-
-                    </div>
-
-                    <div class="container">
+                <div class="container">
+                    <div class="content">
+                        {{ render(controller(
+                            'AppBundle:CategorieDeServices:sliderImageCateg'
+                        )) }}
 
                         <h1>Questions</h1>
                         <ul>
-
-                            <li>
-                                gedmo timestampable
-                            </li>
                             <li>ma query des 4 derniers prestataire à l'air de faire 2 appels distinct à la DB </a>
                             </li>
 
                             <li>
-                                bundle tetranz pas dans composer.json mais ce réisntalle a chaque fois
+                                bundle tetranz pas dans composer.json mais ce réisntalle a chaque fois (sur mon ordi a la maison pas sur le portable)
                             </li>
                             <li>
                                 pas moyen de faire fonctionner select2 proprement
                             </li>
-
-                            <li>
-                                Easy Admin Bundle, One To Many etc ? array to string etc?
-                            </li>
-                            <li>
-                                translation?
-                                ->> desactive le et surcharge le twig de paginator
-                            </li>
                             <li>
                                 où est ce que je met ma méthode et mon action ? controler? type? twig? et commetn
                             </li>
-
+                            <li>
+                                est ce que c'est une bonne idée ceci ? https://packagist.org/packages/egeloen/google-map
+                            </li>
+                            <li>
+                                validator? (voir question slack)
+                            </li>
+                            <li>
+                                inscription ne marche pas (validation?)
+                            </li>
                         </ul>
 
                         <h1>notes</h1>
+                        <p>
+                            gedmo timestampable
+                        </p>
                         <p>
                             composant de validation (groupe) (pour chmaps not null lors de l'inscription(TVA))
                         </p>
@@ -146,24 +138,25 @@
 
                         <div class="page-header">
                             <h1>Derniers prestataires inscrits</h1>
-                            <p>List of most recent interesting places and events in our directory submitted <br>by our
+                            <p>List of most recent interesting places and events in our directory submitted <br>by
+                                our
                                 users. Check whats going on in the city now.</p>
 
 
                         </div><!-- /.page-header -->
 
                         {{ render(controller(
-                        'AppBundle:Prestataire:nLastPrestataires',
-                        {'n': 4 }
+                            'AppBundle:Prestataire:nLastPrestataires',
+                            {'n': 4 }
                         )) }}
 
                         {{ render(controller(
-                        'AppBundle:CategorieDeServices:serviceEnAvant'
+                            'AppBundle:CategorieDeServices:serviceEnAvant'
                         )) }}
 
 
-                    </div><!-- /.container -->
-                </div><!-- /.content -->
+                    </div><!-- /.content -->
+                </div>
             </div><!-- /.main-inner -->
         </div><!-- /.main -->
     {% endblock %}
@@ -254,13 +247,6 @@
     <script src="{{ asset('libraries/flot/jquery.flot.spline.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('libraries/bootstrap-select/bootstrap-select.min.js') }}" type="text/javascript"></script>
-
-    <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false"
-            type="text/javascript"></script>
-
-    <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/infobox.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/markerclusterer.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/jquery-google-map.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('libraries/owl.carousel/owl.carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('libraries/bootstrap-fileinput/fileinput.min.js') }}"></script>

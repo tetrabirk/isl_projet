@@ -27,12 +27,7 @@ class MenuController extends Controller
 
         }else{
             $menu = [
-                ['nom' => 'Prestataires', 'href' => 'prestataire', 'submenu' =>
-                    [
-                        ['nom' => 'test', 'href' => 'homepage'],
-                        ['nom' => 'tesities', 'href' => 'homepage']
-                    ]
-                ],
+                ['nom' => 'Prestataires', 'href' => 'prestataire'],
                 ['nom' => 'Services', 'href' => 'services'],
                 ['nom' => 'News', 'href' => 'news'],
                 ['nom' => 'Contact', 'href' => 'contact'],

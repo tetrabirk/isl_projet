@@ -37,14 +37,14 @@
                                     <div class="detail-contact">
                                         <div class="detail-contact-email">
                                             <i class="fa fa-envelope-o"></i> <a
-                                                    href="mailto:#">{{ prestataire.emailContact }}</a>
+                                                    href="mailto:{{ prestataire.emailContact }}">{{ prestataire.emailContact }}</a>
                                         </div>
                                         <div class="detail-contact-phone">
                                             <i class="fa fa-mobile-phone"></i> <a
-                                                    href="tel:#">{{ prestataire.telephone }}</a>
+                                                    href="tel:{{ prestataire.telephone }}">{{ prestataire.telephone }}</a>
                                         </div>
                                         <div class="detail-contact-website">
-                                            <i class="fa fa-globe"></i> <a href="#">{{ prestataire.siteInternet }}</a>
+                                            <i class="fa fa-globe"></i> <a href="{{ prestataire.siteInternet }}">{{ prestataire.siteInternet }}</a>
                                         </div>
                                         <div class="detail-contact-address">
                                             <i class="fa fa-map-o"></i>
@@ -529,5 +529,17 @@
             </div><!-- /.content -->
         </div><!-- /.main-inner -->
     </div><!-- /.main -->
+
+{% endblock %}
+
+{% block script %}
+
+    {{ parent() }}
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false"
+            type="text/javascript"></script>
+
+    <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/infobox.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/markerclusterer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/jquery-google-map.js') }}"></script>
 
 {% endblock %}

@@ -54,4 +54,12 @@ class CategorieDeServicesController extends Controller
         ));
     }
 
+    public function sliderImageCategAction()
+    {
+        $categories = $this->getRepo()->findCategoriesDeServices();
+
+        return $this->render('lib/slider_front.html.twig', array(
+            'categories' => $categories
+        ));
+    }
 }
