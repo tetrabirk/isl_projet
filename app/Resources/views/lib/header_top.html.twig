@@ -1,11 +1,16 @@
 {{ render(controller(
-'AppBundle:Search:renderSearchBar'
+    'AppBundle:Search:renderSearchBar'
 )) }}
 
 <ul class="header-nav-secondary nav nav-pills">
     {% if app.user %}
-        <li><a href="{{ path( 'profil' ) }}">Profil</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path( 'admin' ) }}">Admin</a></li>
+        {% else %}
+            <li><a href="{{ path( 'profil' ) }}">Profil</a></li>
+        {% endif %}
         <li><a href="{{ path( 'deconnexion' ) }}">Déconnexion</a></li>
+
     {% elseif not app.user %}
         <li><a href="{{ path( 'connexion' ) }}">Connexion</a></li>
         <li><a href="{{ path( 'inscription' ) }}">Inscription</a></li>

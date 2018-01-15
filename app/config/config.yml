@@ -142,7 +142,7 @@ easy_admin:
                     - id
                     - { property: 'email', label: 'E-mail', type: 'email'}
                     - { property: 'motDePasse', label: 'mot de passe'}
-                    - { property: 'typeUtilisateur', label: 'type'}
+                    - { property: 'type', label: 'type'}
                     - { property: 'adresseNum', label: '# Rue'}
                     - { property: 'adresseRue', label: 'Rue'}
                     - { property: 'codePostal', label: 'CP', type: 'association'}

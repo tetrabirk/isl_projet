@@ -419,4 +419,10 @@ class Utilisateur implements UserInterface, \Serializable
             ) = unserialize($serialized);
     }
 
+
+
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
 }
