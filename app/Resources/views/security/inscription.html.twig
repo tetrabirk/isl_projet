@@ -27,11 +27,8 @@
                             {#</div><!-- /.form-group -->#}
                             {#</form>#}
 
-                            {{ form_start(form,{'action': path('inscription'),'method': 'POST'}) }}
+                            {{ form_start(form)}}
                             {{ form_errors(form) }}
-                            {{ form_label(form.type, "Je m'inscris en tant que :") }}
-
-                            {{ form_widget(form.type, {'attr': {'class': 'radio'}}) }}
                             {{ form_row(form.email) }}
                             {{ form_row(form.motDePasseNonCripte) }}
 

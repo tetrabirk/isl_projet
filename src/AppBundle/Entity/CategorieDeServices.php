@@ -246,7 +246,7 @@ class CategorieDeServices
         return $this->promotions;
     }
 
-    
+
 
     public function __toString()
     {

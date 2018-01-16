@@ -43,4 +43,5 @@ security:
 
     encoders:
         AppBundle\Entity\Utilisateur: plaintext
+        AppBundle\Entity\UtilisateurTemporaire: plaintext
 

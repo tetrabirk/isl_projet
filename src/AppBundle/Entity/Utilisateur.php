@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type_utilisateur", type="string")
  * @ORM\DiscriminatorMap({"utilisateur" = "Utilisateur", "internaute" = "Internaute", "prestataire" = "Prestataire", "admin" = "Admin"})
  */
@@ -40,12 +40,6 @@ class Utilisateur implements UserInterface, \Serializable
      * @ORM\Column(name="mot_de_passe", type="string", length=255)
      */
     private $motDePasse;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $motDePasseNonCripte;
 
     /**
      * @var string
@@ -321,23 +315,6 @@ class Utilisateur implements UserInterface, \Serializable
     {
         return $this->banni;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getMotDePasseNonCripte()
-    {
-        return $this->motDePasseNonCripte;
-    }
-
-    /**
-     * @param mixed $motDePasseNonCripte
-     */
-    public function setMotDePasseNonCripte($motDePasseNonCripte)
-    {
-        $this->motDePasseNonCripte = $motDePasseNonCripte;
-    }
-
 
 
     /**
