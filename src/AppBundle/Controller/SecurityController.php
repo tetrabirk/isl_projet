@@ -59,9 +59,10 @@ class SecurityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($utilisateurT);
             $em->flush();
+            $this->addFlash('notifications',"Un Email de confirmation à bien été envoyé");
 
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('inscription');
         } else {
             dump($form->getErrors());
 

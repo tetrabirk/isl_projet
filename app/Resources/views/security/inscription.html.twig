@@ -27,7 +27,12 @@
                             {#</div><!-- /.form-group -->#}
                             {#</form>#}
 
-                            {{ form_start(form)}}
+                            {% for message in app.flashes('notifications') %}
+                                <div class="alert-success p30">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {{ form_start(form) }}
                             {{ form_errors(form) }}
                             {{ form_row(form.email) }}
                             {{ form_row(form.motDePasseNonCripte) }}
