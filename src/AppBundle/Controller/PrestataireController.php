@@ -47,9 +47,9 @@ class PrestataireController extends Controller
     /**
      * @Route("/s/", name="search")
      */
-    public function rechercheAction()
+    public function rechercheAction(Request $request)
     {
-        $request = Request::createFromGlobals();
+
         $motcle = $request->query->get('form')['motCle'] ?? null; // string
         $localite = $request->query->get('form')['localite'] ?? null; // id
         $categorie = ($request->query->get('form')['categorie']) ?? null ; //array d'id

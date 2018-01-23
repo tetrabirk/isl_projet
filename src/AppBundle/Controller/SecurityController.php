@@ -9,8 +9,8 @@ use AppBundle\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class SecurityController extends Controller
 {
@@ -41,26 +41,30 @@ class SecurityController extends Controller
     /**
      * @Route("/inscription", name="inscription")
      */
-    public function inscriptionAction(Request $request, EncoderFactory $encoderFactory)
+    public function inscriptionAction(Request $request, EncoderFactoryInterface $encoderFactory, \Swift_Mailer $mailer)
     {
         $utilisateurT = new UtilisateurTemporaire();
         $form = $this->createForm(UtilisateurTemporaireType::class, $utilisateurT,
-            array('method'=>'POST','action' =>($this->generateUrl('inscription'))));
+            array('method' => 'POST', 'action' => ($this->generateUrl('inscription'))));
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordEncoder  = $encoderFactory->getEncoder($utilisateurT);
+            $passwordEncoder = $encoderFactory->getEncoder($utilisateurT);
             $password = $passwordEncoder->encodePassword($utilisateurT->getMotDePasseNonCripte(), $utilisateurT->getSalt());
             $utilisateurT->setMotDePasse($password);
+
             $utilisateurT->setDate(new \DateTime());
-            $utilisateurT->setToken($utilisateurT->getEmail());
+
+            $token = hash('sha512', $utilisateurT->getEmail() . ($utilisateurT->getDate())->format('dmy'));
+            $utilisateurT->setToken($token);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($utilisateurT);
             $em->flush();
-            $this->addFlash('notifications',"Un Email de confirmation à bien été envoyé");
 
+            $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
+            $this->sendEmail($utilisateurT->getEmail(), $utilisateurT->getToken(), $mailer);
 
             return $this->redirectToRoute('inscription');
         } else {
@@ -74,11 +78,33 @@ class SecurityController extends Controller
     }
 
     /**
+     * @Route("/confirmation/{token}", name="confirmation")
+     */
+    public function confirmation($token)
+    {
+
+    }
+
+    /**
      * @Route("/mot_de_passe", name="mot_de_passe")
      */
     public function motDePasseAction()
     {
         return $this->render('security/mot_de_passe.html.twig', array());
+    }
+
+    public function sendEmail($email, $token, $mailer)
+    {
+        $message = (new \Swift_Message('hello Email'))
+            ->setFrom('send@example')
+            ->setTo($email)
+            ->setBody(
+                $this->renderView('email/inscription.html.twig', array(
+                    'token' => $token
+                )),'text/html'
+            );
+        $mailer->send($message);
+
     }
 
 }
