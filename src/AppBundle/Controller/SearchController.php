@@ -45,7 +45,8 @@ class SearchController extends Controller
 
             ->add('categorie',EntityType::class,array(
                 'class'=> 'AppBundle:CategorieDeServices',
-                'choice_label'=> 'nom', 'multiple' => 'true',
+                'choice_label'=> 'nom',
+                'multiple' => 'true',
                 'placeholder' => 'Categorie',
                 'required'=>false,
                 'empty_data' => null,

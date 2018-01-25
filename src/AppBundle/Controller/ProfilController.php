@@ -19,44 +19,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Controller\DefaultController as DC;
 
 
-
-
 class ProfilController extends Controller
 {
 
-   /**
-     * @Route("/profil/{id}", defaults ={"id"=null}, name="profil", requirements={"id": "\d+"})
+    /**
+     * @Route("/profil", name="profil")
      */
-    public function profilAction(Request $request)
+    public function profilAction($newUser = null, Request $request)
     {
-        $user = $this->getUser();
-        $userType= $user->getType();
-        if ($userType =="Prestataire"){
+        if(isset($newUser)){
+            $user = $newUser;
 
-            $form = $this->get('form.factory')->create(PrestataireType::class,$user);
-
-            if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-                    $em = $this->getDoctrine()->getManager();
-                    $em->flush();
-
-            }
-
-            return $this->render('profil/prestataire.html.twig',array(
-                'form' => $form->createView(),
-            ));
         }else{
-
-            $form = $this->get('form.factory')->create(InternauteType::class,$user);
-
-            if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
-
-            }
-
-            return $this->render('profil/internaute.html.twig',array(
-                'form' => $form->createView(),
-            ));
+            $user = $this->getUser();
+        }
+        $userType = $user->getType();
+        if ($userType == "Prestataire") {
+            return $this->loadProfilPrestataire($request, $user);
+        } else {
+            return $this->loadProfilInternaute($request,$user);
         }
 
     }
@@ -66,15 +47,35 @@ class ProfilController extends Controller
      */
     public function profilSuppressionAction()
     {
-        return $this->render('profil/profil_suppression.html.twig',array(
-        ));
+        return $this->render('profil/profil_suppression.html.twig', array());
     }
 
 
+    public function loadProfilPrestataire($request, $user)
+    {
+        $form = $this->get('form.factory')->create(PrestataireType::class, $user);
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
 
+        return $this->render('profil/prestataire.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 
+    public function loadProfilInternaute($request, $user)
+    {
+        $form = $this->get('form.factory')->create(InternauteType::class, $user);
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
 
-
+        return $this->render('profil/internaute.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }

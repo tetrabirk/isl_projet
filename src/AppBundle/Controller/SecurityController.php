@@ -2,8 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Internaute;
+use AppBundle\Entity\Prestataire;
 use AppBundle\Entity\Utilisateur;
 use AppBundle\Entity\UtilisateurTemporaire;
+use AppBundle\Form\InternauteType;
+use AppBundle\Form\PrestataireType;
 use AppBundle\Form\UtilisateurTemporaireType;
 use AppBundle\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -64,6 +68,8 @@ class SecurityController extends Controller
             $em->flush();
 
             $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
+
+            //TODO creer un service pour ceci
             $this->sendEmail($utilisateurT->getEmail(), $utilisateurT->getToken(), $mailer);
 
             return $this->redirectToRoute('inscription');
@@ -82,7 +88,33 @@ class SecurityController extends Controller
      */
     public function confirmation($token)
     {
+        $utilisateurT = $this->getDoctrine()
+            ->getRepository(UtilisateurTemporaire::class)
+            ->findOneBy(array('token' => $token));
 
+
+        if ($utilisateurT->getType() == 'Internaute') {
+            $utilisateur = new Internaute();
+            $utilisateur->setEmail($utilisateurT->getEmail());
+            $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
+            dump($utilisateur);
+
+            return $this->forward('AppBundle\Controller\ProfilController::profilAction', array(
+                'newUser' => $utilisateur,
+            ));
+        } else {
+            $utilisateur = new Prestataire();
+            $utilisateur->setEmail($utilisateurT->getEmail());
+            $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
+            dump($utilisateur);
+
+            return $this->forward('AppBundle\Controller\ProfilController::profilAction', array(
+                'newUser' => $utilisateur,
+            ));
+        }
+
+
+        //forward to profilController
     }
 
     /**
@@ -101,7 +133,7 @@ class SecurityController extends Controller
             ->setBody(
                 $this->renderView('email/inscription.html.twig', array(
                     'token' => $token
-                )),'text/html'
+                )), 'text/html'
             );
         $mailer->send($message);
 

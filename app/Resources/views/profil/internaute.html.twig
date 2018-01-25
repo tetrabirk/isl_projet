@@ -28,49 +28,8 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form) }}
-    <h3 class="page-title">
-        Infos Globales
 
-        {{ form_widget(form.enregistrer, {'attr':{'class':'btn-primary btn-xs pull-right'}}) }}
-    </h3>
-    <div class="row">
-
-        <div class="form-group col-sm-12">
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-        </div>
-        <div class="form-group col-sm-6">
-            {{ form_label(form.prenom) }}
-            {{ form_widget(form.prenom) }}
-        </div>
-        <div class="form-group col-sm-6">
-            {{ form_label(form.nom) }}
-            {{ form_widget(form.nom) }}
-        </div>
-
-
-
-        {#affichage adresse#}
-        <div class="form-group col-sm-9">
-            {{ form_label(form.adresseRue) }}
-            {{ form_widget(form.adresseRue) }}
-        </div>
-        <div class="form-group col-sm-3">
-            {{ form_label(form.adresseNum) }}
-            {{ form_widget(form.adresseNum) }}
-        </div>
-        <div class="form-group col-sm-3">
-            {{ form_label(form.localite.codePostal) }}
-            {{ form_widget(form.localite.codePostal) }}
-        </div>
-        <div class="form-group col-sm-9">
-            {{ form_label(form.localite.localite) }}
-            {{ form_widget(form.localite.localite) }}
-        </div>
-
-    </div>
-    {{ form_end(form) }}
+    {% include 'lib/form/form_internaute.html.twig' %}
 
 {% endblock %}
 

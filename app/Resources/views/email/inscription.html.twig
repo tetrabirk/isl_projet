@@ -89,13 +89,13 @@
                             <tr>
                                 <td align="center">
                                     <p>
-                                        <a href="{{ path('confirmation',{'token': token}) }}" class="button">clic sur ce lien pour confirmer ton inscription</a>
+                                        <a href="{{ absolute_url(path('confirmation',{'token': token})) }}" class="button">clic sur ce lien pour confirmer ton inscription</a>
                                     </p>
                                 </td>
                             </tr>
                         </table>
 
-                        <p>Le liens pour confirmer ton inscription ce trouve juste ci dessus, mais tu peux aussi cliquer sur ce lien ci : <a href="http://baconipsum.com">confirmer mon inscription</a>.</p>
+                        <p>Le liens pour confirmer ton inscription ce trouve juste ci dessus, mais tu peux aussi cliquer sur ce lien ci : <a href="{{ absolute_url(path('confirmation',{'token': token})) }}">confirmer mon inscription</a>.</p>
 
                         <p><em>- L'Admin</em></p>
 

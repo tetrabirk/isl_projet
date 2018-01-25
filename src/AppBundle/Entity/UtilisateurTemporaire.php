@@ -54,6 +54,14 @@ class UtilisateurTemporaire
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="token", type="string", length=255, unique=true)
      */
     private $token;
@@ -187,5 +195,23 @@ class UtilisateurTemporaire
         // see section on salt below
         return null;
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type)
+    {
+        $this->type = $type;
+    }
+
+
 
 }

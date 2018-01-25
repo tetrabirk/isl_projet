@@ -14,26 +14,15 @@
                                 <h1>Inscription</h1>
                             </div><!-- /.page-title -->
 
-                            {#<form method="post" action="?">#}
-
-                            {#<div class="form-group">#}
-                            {#<label for="typeUtilisateur">Je m'inscris en tant que :</label>#}
-                            {#<div class="radio">#}
-                            {#<input id="internaute" type="radio" name="typeUtilisateur" value="internaute" checked><label for="internaute">Internaute</label>#}
-                            {#</div>#}
-                            {#<div class="radio">#}
-                            {#<input id="prestataire" type="radio" name="typeUtilisateur" value="prestataire"><label for="prestataire">Prestataire</label>#}
-                            {#</div>#}
-                            {#</div><!-- /.form-group -->#}
-                            {#</form>#}
-
                             {% for message in app.flashes('notifications') %}
-                                <div class="alert-success p30">
+                                <div class="alert-success p30 col">
                                     {{ message }}
                                 </div>
                             {% endfor %}
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
+                            {{ form_label(form.type) }}
+                            {{ form_widget(form.type) }}
                             {{ form_row(form.email) }}
                             {{ form_row(form.motDePasseNonCripte) }}
 

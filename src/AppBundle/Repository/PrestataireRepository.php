@@ -94,9 +94,6 @@ class PrestataireRepository extends EntityRepository
         return $query;
     }
 
-
-
-
     //fonction pas très utile mais qui existe pour des raisons de lisibilité
 
     protected function returnQuery($qb)
