@@ -9,6 +9,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\CategorieDeServices;
+use AppBundle\Entity\Image;
+use AppBundle\Entity\Internaute;
+use AppBundle\Entity\Prestataire;
 use AppBundle\Entity\Utilisateur;
 use AppBundle\Form\InternauteType;
 use AppBundle\Form\PrestataireType;
@@ -29,14 +32,27 @@ class ProfilController extends Controller
     {
         if(isset($newUser)){
             $user = $newUser;
-
+            dump($user);
         }else{
             $user = $this->getUser();
         }
         $userType = $user->getType();
+
+        $image = new Image();
+        $image->setNom('default.jpg');
+        $image->setActive(true);
+
         if ($userType == "Prestataire") {
+            /**
+             * @var Prestataire $user
+             */
+            $user->setLogo($image);
             return $this->loadProfilPrestataire($request, $user);
         } else {
+            /**
+             * @var Internaute $user
+             */
+            $user->setAvatar($image);
             return $this->loadProfilInternaute($request,$user);
         }
 
@@ -62,6 +78,7 @@ class ProfilController extends Controller
 
         return $this->render('profil/prestataire.html.twig', array(
             'form' => $form->createView(),
+            'newUser' => $user,
         ));
     }
 
@@ -76,6 +93,7 @@ class ProfilController extends Controller
 
         return $this->render('profil/internaute.html.twig', array(
             'form' => $form->createView(),
+            'newUser' => $user,
         ));
     }
 }

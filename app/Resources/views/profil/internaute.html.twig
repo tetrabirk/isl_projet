@@ -1,6 +1,6 @@
 {% extends "profil/profil_base.html.twig" %}
 
-{% block imgProfil %}{{ app.user.avatar.nom|tempDevImage }}{% endblock %}
+{% block imgProfil %}{{ utilisateur.avatar.nom|tempDevImage }}{% endblock %}
 {% block txtModifImg %}Modifier mon avatar{% endblock %}
 
 {% block widgets %}
@@ -8,7 +8,7 @@
     <div class="widget">
         <div class="menu-advanced">
             <div>Newsletter
-            {% if app.user.newsletter == false %}
+            {% if utilisateur.newsletter == false %}
             <a class="btn-primary btn-xs pull-right mt-5" href="#">S'abonner</a>
         {% else %}
             <a class="btn-danger btn-xs pull-right mt-5" href="#"> Se Désabonner</a>
@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block nomProfil %}
-    <h1>{{ app.user.prenom|capitalize~' '~app.user.nom|capitalize }}
+    <h1>{{ utilisateur.prenom|capitalize~' '~utilisateur.nom|capitalize }}
 
     </h1>
 {% endblock %}

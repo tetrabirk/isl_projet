@@ -1,5 +1,11 @@
 {% extends "index.html.twig" %}
 
+{% if app.user %}
+    {% set utilisateur = app.user %}
+{% else %}
+    {% set utilisateur = newUser %}
+{% endif %}
+
 
 
 {% block content %}
@@ -24,7 +30,7 @@
                             <div class="widget">
 
                                 <div class="menu-advanced">
-                                    <div>Membre depuis le {{ app.user.Inscription|date('d-m-Y') }}</div>
+                                    <div>Membre depuis le {{ utilisateur.Inscription|date('d-m-Y') }}</div>
                                 </div>
                             </div><!-- /.widget -->
                             {% block widgets %}

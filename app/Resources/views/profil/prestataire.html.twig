@@ -1,7 +1,7 @@
 {% extends "profil/profil_base.html.twig" %}
 
 
-{% block imgProfil %}{{ app.user.logo.nom|tempDevImage }}{% endblock %}
+{% block imgProfil %}{{ utilisateur.logo.nom|tempDevImage }}{% endblock %}
 {% block txtModifImg %}Modifier mon logo{% endblock %}
 
 {% block widgets %}
@@ -21,12 +21,12 @@
 {% endblock %}
 
 {% block nomProfil %}
-    <h1>{{ app.user.nom|capitalize }}
+    <h1>{{ utilisateur.nom|capitalize }}
         <span>
                                         {# TODO#}
             *ici des étoiles*
             {#{% include 'lib/stars.html.twig' %}#}
-            {#{{ (app.user.cote*5)|round(1,'floor') }} / 5#}
+            {#{{ (utilisateur.cote*5)|round(1,'floor') }} / 5#}
         </span><!-- /.card-row-rating -->
 
     </h1>

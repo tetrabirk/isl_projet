@@ -25,7 +25,8 @@ class UtilisateurTemporaireType extends AbstractType
                     'Prestataire' => 'Prestataire',
                 ),
                 'placeholder' => '...',
-                'label' => "Type d'Utilisateur"
+                'label' => "Type d'Utilisateur",
+                'required' => true
             ))
 
             ->add('email', EmailType::class, array(
