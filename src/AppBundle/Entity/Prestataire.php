@@ -285,8 +285,6 @@ class Prestataire extends Utilisateur
         $this->setBanni(false);
         $this->setConfInscription(false);
 
-//        $this->setLogo(new Image());
-
     }
 
     /**
