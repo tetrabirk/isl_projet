@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,10 @@ class LocaliteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('localite')
+            ->add('localite', EntityType::class,array(
+                'class' => 'AppBundle:Localite',
+                'choice_label' => 'localite',
+            ))
             ->add('codePostal', CodePostalType::class, array(
                 'label' => false,
             ));

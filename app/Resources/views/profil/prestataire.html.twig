@@ -1,13 +1,6 @@
 {% extends "profil/profil_base.html.twig" %}
 
-
-{% block imgProfil %}
-    {% if utilisateur.logo is defined %}
-        {{ utilisateur.logo.nom|tempDevImage }}
-    {% else %}
-        default_0.jpg
-    {% endif %}
-{% endblock %}
+{% block imgProfil %}{{ utilisateur.logo|defaultImage|tempDevImage }}{% endblock %}
 {% block txtModifImg %}Modifier mon logo{% endblock %}
 
 {% block widgets %}

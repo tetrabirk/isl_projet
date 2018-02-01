@@ -49,13 +49,16 @@ class PrestataireController extends Controller
      */
     public function rechercheAction(Request $request)
     {
+        dump($request->query);
 
-        $motcle = $request->query->get('form')['motCle'] ?? null; // string
-        $localite = $request->query->get('form')['localite'] ?? null; // id
-        $categorie = ($request->query->get('form')['categorie']) ?? null ; //array d'id
+        $motcle = $request->query->get('motCle') ?? null; // string
+        $localite = $request->query->get('localite') ?? null; // id
+        $categorie = $request->query->get('categorie') ?? null ; //array d'id
 
         $query = $this->getRepo()->searchAll($categorie,$localite,$motcle);
+
         $prestataires = $this->getPrestatairesWithPagination($query, $request);
+
 
         return $this->render('public/prestataires/prestataires_all.html.twig', array(
             'prestataires' => $prestataires,

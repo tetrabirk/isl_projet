@@ -21,7 +21,7 @@
     font-size: 11px !important;
 }
 
-.ttrbrksearchform,.btn-group {
+.ttrbrksearchform ~ .btn-group {
     width: 150px !important;
 
 }

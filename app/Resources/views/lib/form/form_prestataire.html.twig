@@ -47,7 +47,7 @@
     </div>
     <div class="form-group col-sm-9">
         {{ form_label(form.localite.localite) }}
-        {{ form_widget(form.localite.localite) }}
+        {{ form_widget(form.localite.localite, {'attr':{'class':'col-sm-9'}}) }}
     </div>
 
 </div>
@@ -79,21 +79,22 @@
     </textarea>
 </div></div>">
 
-        {% for categ in form.categories %}
-            <div class="formcategorie">
-                <div class="index-categ">
-                    <label class="index-categ control-label">Categorie {{ loop.index }}</label>
-                </div>
-                <div class="form-group col-sm-4">
-                    {{ form_label(categ.nom) }}
-                    {{ form_widget(categ.nom) }}
-                </div>
-                <div class="form-group col-sm-8">
-                    {{ form_label(categ.description) }}
-                    {{ form_widget(categ.description, {'attr': {'rows':'4'}}) }}
-                </div>
-            </div>
-        {% endfor %}
+
+        {#{% for categ in form.categories %}#}
+            {#<div class="formcategorie">#}
+                {#<div class="index-categ">#}
+                    {#<label class="index-categ control-label">Categorie {{ loop.index }}</label>#}
+                {#</div>#}
+                {#<div class="form-group col-sm-4">#}
+                    {#{{ form_label(categ.nom) }}#}
+                    {#{{ form_widget(categ.nom) }}#}
+                {#</div>#}
+                {#<div class="form-group col-sm-8">#}
+                    {#{{ form_label(categ.description) }}#}
+                    {#{{ form_widget(categ.description, {'attr': {'rows':'4'}}) }}#}
+                {#</div>#}
+            {#</div>#}
+        {#{% endfor %}#}
     </div>
 </div>
 {{ form_end(form) }}

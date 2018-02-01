@@ -2,6 +2,8 @@
 
 namespace AppBundle\Utils;
 
+use AppBundle\Entity\Image;
+
 class TwigAppExtension extends \Twig_Extension
 {
     public function getFilters()
@@ -9,6 +11,7 @@ class TwigAppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('stars',array($this,'noteToString')),
             new \Twig_SimpleFilter('tempDevImage',array($this,'imageNameConverter')),
+            new \Twig_SimpleFilter('defaultImage',array($this,'defaultImage'))
         );
     }
 
@@ -50,5 +53,13 @@ class TwigAppExtension extends \Twig_Extension
             $exploded[1] += -10;
         }
         return $exploded[0].'_'.$exploded[1].'.jpg';
+    }
+    public function defaultImage(Image $image){
+        $default = 'default_0.jpg';
+        if(is_null($image->getNom())){
+            return $default;
+        }else{
+            return $image->getNom();
+        }
     }
 }

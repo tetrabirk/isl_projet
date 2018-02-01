@@ -33,14 +33,6 @@ class Image
      */
     private $active;
 
-//    /**
-//     * constructor.
-//     */
-//    public function __construct()
-//    {
-//        $this->setNom('default.jpg');
-//        $this->setActive(true);
-//    }
 
     /**
      * @return mixed

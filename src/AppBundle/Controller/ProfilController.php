@@ -39,7 +39,6 @@ class ProfilController extends Controller
         $userType = $user->getType();
 
         $image = new Image();
-        $image->setNom('default.jpg');
         $image->setActive(true);
 
         if ($userType == "Prestataire") {
@@ -72,8 +71,7 @@ class ProfilController extends Controller
         $form = $this->get('form.factory')->create(PrestataireType::class, $user);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->flushUtilisateur($user);
         }
 
         return $this->render('profil/prestataire.html.twig', array(
@@ -87,8 +85,8 @@ class ProfilController extends Controller
         $form = $this->get('form.factory')->create(InternauteType::class, $user);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->flushUtilisateur($user);
+
         }
 
         return $this->render('profil/internaute.html.twig', array(
@@ -96,4 +94,15 @@ class ProfilController extends Controller
             'newUser' => $user,
         ));
     }
+
+    private function flushUtilisateur(Utilisateur $utilisateur){
+        $em = $this->getDoctrine()->getManager();
+
+        if (is_null($utilisateur->getId())){
+            $em->persist($utilisateur);
+            dump('hahaha');
+        }
+        $em->flush();
+    }
+
 }
