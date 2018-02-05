@@ -1,10 +1,12 @@
 $(document).ready(function () {
 
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('div#appbundle_prestataire_categories');
+    var $container = $('div#appbundle_prestataire_categories_container');
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = $container.find('.index-categ').length;
+    //comme il le trouve une fois de trop je met un -1 à la fin
+    var index = ($container.find('.index-categ').length)-1;
+
 
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -15,8 +17,12 @@ $(document).ready(function () {
     });
 
     // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
-    if (index == 0) {
+    //vu que j'ai ajouter un -1 à la ligne 8 j'ai du remplacer le index == 0 (et contrebalancer avec un index++)
+    if (index === -1) {
+        index++;
         addCategory($container);
+        removeLabelFormRest();
+
 
     } else {
         // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
@@ -27,14 +33,14 @@ $(document).ready(function () {
 
     // La fonction qui ajoute un formulaire CategoryType
     function addCategory($container) {
-        console.log('test?')
+        console.log(index);
 
         // Dans le contenu de l'attribut « data-prototype », on remplace :
         // - le texte "__name__label__" qu'il contient par le label du champ
         // - le texte "__name__" qu'il contient par le numéro du champ
         var template = $container.attr('data-prototype')
-            .replace(/__name__label__/g, (index - 1))
-            .replace(/__name__/g, index)
+            .replace(/__name__label__/g,(index+1))
+            .replace(/__name__/g,index)
         ;
 
         // On crée un objet jquery qui contient ce template
@@ -65,5 +71,10 @@ $(document).ready(function () {
             e.preventDefault(); // évite qu'un # apparaisse dans l'URL
             return false;
         });
+    }
+
+    function removeLabelFormRest(){
+        $("#appbundle_prestataire_categories_container::after").remove();
+        console.log('bim');
     }
 });
