@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Internaute;
 use AppBundle\Entity\Prestataire;
 use AppBundle\Entity\Utilisateur;
@@ -18,6 +19,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends Controller
 {
+
+    //TODO déconnecter tout utilsateur avant inscription, (connexion), confirmation
     /**
      * @Route("/connexion", name="connexion")
      */
@@ -97,24 +100,19 @@ class SecurityController extends Controller
             $utilisateur = new Internaute();
             $utilisateur->setEmail($utilisateurT->getEmail());
             $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
-            dump($utilisateur);
 
-            return $this->forward('AppBundle\Controller\ProfilController::profilAction', array(
+            return $this->forward('AppBundle\Controller\ProfilController::traitementNewUser', array(
                 'newUser' => $utilisateur,
             ));
         } else {
             $utilisateur = new Prestataire();
             $utilisateur->setEmail($utilisateurT->getEmail());
             $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
-            dump($utilisateur);
 
-            return $this->forward('AppBundle\Controller\ProfilController::profilAction', array(
-                'newUser' => $utilisateur,
-            ));
+            return $this->traitementNewUser($utilisateur);
         }
 
 
-        //forward to profilController
     }
 
     /**
@@ -137,6 +135,32 @@ class SecurityController extends Controller
             );
         $mailer->send($message);
 
+    }
+
+    public function traitementNewUser($utilisateur){
+        $user = $utilisateur;
+        $image = new Image();
+        $image->setActive(true);
+
+        /**
+         * @var Utilisateur $user
+         */
+        if ($user->getType() == "Prestataire") {
+            /**
+             * @var Prestataire $user
+             */
+            $user->setLogo($image);
+        } else {
+            /**
+             * @var Internaute $user
+             */
+            $user->setAvatar($image);
+        }
+
+        //forward to profilController
+        return $this->forward('AppBundle\Controller\ProfilController::ProfilAction', array(
+            'newUser' => $user,
+        ));
     }
 
 }

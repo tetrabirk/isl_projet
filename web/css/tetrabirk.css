@@ -38,7 +38,7 @@
 
 }
 
-.ttrbrkselect > div > ul > .selected{
+.dropdown-menu .inner > .selected{
     background-color: #009f8b !important;
 }
 

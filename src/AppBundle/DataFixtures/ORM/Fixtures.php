@@ -15,6 +15,7 @@ use AppBundle\Entity\Newsletter;
 use AppBundle\Entity\Prestataire;
 use AppBundle\Entity\Promotion;
 use AppBundle\Entity\Stage;
+use AppBundle\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -1252,6 +1253,11 @@ class Fixtures extends Fixture
 
         }
 
+        //generation des CP & Localite
+
+        $this->genCPandLocalite($manager);
+
+
 //        generation des prestataires
 
         for ($i = 0; $i < self::$nbrePrestataire; $i++) {
@@ -1383,11 +1389,7 @@ class Fixtures extends Fixture
 
 //        ajout cp et localite
 
-        $cp = $this->genCP($i);
-        $prestataire->setCodePostal($this->getReference('cp'.$i));
-
-        $localite = $this->genLocalite($i);
-        $prestataire->setLocalite($this->getReference('localite'.$i));
+        $this->addCPandLocalite($prestataire);
 
 //        ajout de categories
 
@@ -1433,11 +1435,7 @@ class Fixtures extends Fixture
 
 //        ajout cp et localite
 
-        $cp = $this->genCP($i);
-        $internaute->setCodePostal($this->getReference('cp'.$i));
-
-        $localite = $this->genLocalite($i);
-        $internaute->setLocalite($this->getReference('localite'.$i));
+        $this->addCPandLocalite($internaute);
 
 
 //        ajout d'un avatar
@@ -1555,26 +1553,44 @@ class Fixtures extends Fixture
         return $promotion;
     }
 
-    public function genCP($i)
+    public function genCPandLocalite($manager)
     {
-        $cp = new CodePostal();
-        $cp->setCodePostal(array_rand(self::$cpLocalite,1));
+        $i = 0;
+        $j = 0;
+        foreach(self::$cpLocalite as $codep => $local){
 
-        $this->setReference('cp'.$i,$cp);
+            $cp = new CodePostal();
+            $cp->setCodePostal($codep);
+            foreach($local as $l){
+                $localite = new Localite();
+                $localite->setCodePostal($cp);
+                $localite->setLocalite($l);
+                $this->addReference('localite' .$i.$j, $localite);
+                $manager->persist($localite);
+                $j++;
+            }
+            $this->addReference('cp' .$i, $cp);
+            $manager->persist($cp);
 
-        return $cp;
+            $j=0;
+            $i++;
+        }
 
     }
 
-    public function genLocalite($i)
+    public function addCPandLocalite(Utilisateur $user)
     {
-        $localite = new Localite();
-        $localite->setCodePostal($this->getReference('cp'.$i));
-        $cp = $localite->getCodePostal()->getCodePostal();
-        $rand =array_rand(self::$cpLocalite[$cp]);
-        $localite->setLocalite(self::$cpLocalite[$cp][$rand],1);
+        $randCP = rand(0, (count(self::$cpLocalite))-1);
+        $user->setCodePostal($this->getReference('cp'.$randCP));
+        $codepostal = $user->getCodePostal();
+        /**
+         * @var CodePostal $codepostal
+         */
+        $codepostalvalue = $codepostal->getCodePostal();
+        $randLocal = rand(0,(count(self::$cpLocalite[$codepostalvalue]))-1);
+        $user->setLocalite($this->getReference('localite'.$randCP.$randLocal));
 
-        $this->setReference('localite'.$i,$localite);
+
     }
 
     public function uniqueEmail($i, $type)

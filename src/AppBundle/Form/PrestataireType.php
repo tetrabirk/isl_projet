@@ -2,8 +2,8 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,37 +20,54 @@ class PrestataireType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class)
-            ->add('adresseRue', TextType::class)
+            ->add('adresseRue', TextType::class, array(
+                'required'=>false,
+            ))
             ->add('adresseNum', TextType::class, array(
                 'label' => 'Numéro',
+                'required'=>false,
             ))
-            ->add('localite',LocaliteType::class, array(
-                'label' => false,
+//            ->add('localite',LocaliteType::class, array(
+//                'label' => false,
+//                'required'=>false,
+//            ))
+            ->add('nom', TextType::class, array(
             ))
-            ->add('nom', TextType::class)
-            ->add('siteInternet', UrlType::class)
+            ->add('siteInternet', UrlType::class,array(
+                'required'=>false,
+            ))
             ->add('emailContact', EmailType::class, array(
                 'label' => 'Email de contact',
+                'required'=>false,
             ))
             ->add('telephone', TextType::class, array(
                 'label' => 'Téléphone',
+                'required'=>false,
             ))
             ->add('numTVA', TextType::class, array(
                 'label' => 'Numéro de TVA',
             ))
-            ->add('categories', CollectionType::class, array(
-                'entry_type' => CategorieDeServicesType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'label' => 'Categories'
+
+            ->add('categories',EntityType::class,array(
+                'class'=> 'AppBundle:CategorieDeServices',
+                'choice_label'=> 'nom',
+                'multiple' => 'true',
+                'placeholder' => 'Categorie',
+                'required'=>false,
+                'empty_data' => null,
+                'label' => 'Categories',
 
             ))
-//            ->add('photos', CollectionType::class, array(
-//                'entry_type' => ImageType::class,
+
+//            ->add('categories', CollectionType::class, array(
+//                'entry_type' => CategorieDeServicesType::class,
 //                'allow_add' => true,
-//                'allow_delete' => true
+//                'allow_delete' => true,
+//                'label' => 'Categories'
+//
 //            ))
-//            ->add('logo', ImageType::class)
+
+
             ->add('enregistrer', SubmitType::class)
         ;
     }

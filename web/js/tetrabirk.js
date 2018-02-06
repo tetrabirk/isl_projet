@@ -4,8 +4,7 @@ $(document).ready(function () {
     var $container = $('div#appbundle_prestataire_categories_container');
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    //comme il le trouve une fois de trop je met un -1 à la fin
-    var index = ($container.find('.index-categ').length)-1;
+    var index = ($container.find('.index-categ').length);
 
 
 
@@ -16,20 +15,19 @@ $(document).ready(function () {
         return false;
     });
 
-    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
-    //vu que j'ai ajouter un -1 à la ligne 8 j'ai du remplacer le index == 0 (et contrebalancer avec un index++)
-    if (index === -1) {
-        index++;
-        addCategory($container);
-        removeLabelFormRest();
-
-
-    } else {
-        // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-        $container.children('div').each(function () {
-            addDeleteLink($(this));
-        });
-    }
+    // // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+    // //vu que j'ai ajouter un -1 à la ligne 8 j'ai du remplacer le index == 0 (et contrebalancer avec un index++)
+    // if (index === 0) {
+    //     addCategory($container);
+    //     removeLabelFormRest();
+    //
+    //
+    // } else {
+    //     // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+    //     $container.children('div').each(function () {
+    //         addDeleteLink($(this));
+    //     });
+    // }
 
     // La fonction qui ajoute un formulaire CategoryType
     function addCategory($container) {
@@ -73,8 +71,4 @@ $(document).ready(function () {
         });
     }
 
-    function removeLabelFormRest(){
-        $("#appbundle_prestataire_categories_container::after").remove();
-        console.log('bim');
-    }
 });

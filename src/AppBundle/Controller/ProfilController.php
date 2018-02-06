@@ -32,26 +32,14 @@ class ProfilController extends Controller
     {
         if(isset($newUser)){
             $user = $newUser;
-            dump($user);
         }else{
             $user = $this->getUser();
         }
         $userType = $user->getType();
 
-        $image = new Image();
-        $image->setActive(true);
-
         if ($userType == "Prestataire") {
-            /**
-             * @var Prestataire $user
-             */
-            $user->setLogo($image);
             return $this->loadProfilPrestataire($request, $user);
         } else {
-            /**
-             * @var Internaute $user
-             */
-            $user->setAvatar($image);
             return $this->loadProfilInternaute($request,$user);
         }
 
@@ -99,10 +87,20 @@ class ProfilController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (is_null($utilisateur->getId())){
+            //ceci est temporaire
+
+            $imagetemp = new Image();
+            $imagetemp->setNom('default_0.jpg');
+            $imagetemp->setActive(true);
+            $utilisateur->setLogo($imagetemp);
+
+            //^^^^^temporaiiiiiiire
+            $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
-            dump('hahaha');
+            dump('flush user');
         }
         $em->flush();
     }
+
 
 }
