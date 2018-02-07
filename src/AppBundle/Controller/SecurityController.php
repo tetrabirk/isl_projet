@@ -57,23 +57,19 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordEncoder = $encoderFactory->getEncoder($utilisateurT);
-            $password = $passwordEncoder->encodePassword($utilisateurT->getMotDePasseNonCripte(), $utilisateurT->getSalt());
-            $utilisateurT->setMotDePasse($password);
 
-            $utilisateurT->setDate(new \DateTime());
+            $this->persistUserTemp($utilisateurT,$encoderFactory);
 
-            $token = hash('sha512', $utilisateurT->getEmail() . ($utilisateurT->getDate())->format('dmy'));
-            $utilisateurT->setToken($token);
+            $email = $utilisateurT->getEmail();
+            $token = $utilisateurT->getToken();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($utilisateurT);
-            $em->flush();
+            $this->sendEmail($email,$token,$mailer);
+
+            //TODO error handler :  si le mail ne s'envoie pas -> supprimer l'user temporaire et dire qu'il y a eu une erreur et de recommencer
+            //TODO                  si l'utisateur existe déjà -> message d'erreur  ->si c'est un tempuser -> demander si il veut renvoyer le mail
+            //TODO                                                                  ->sinon -> proposer de réessayer avec une autre adresse
 
             $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
-
-            //TODO creer un service pour ceci
-            $this->sendEmail($utilisateurT->getEmail(), $utilisateurT->getToken(), $mailer);
 
             return $this->redirectToRoute('inscription');
         } else {
@@ -112,6 +108,8 @@ class SecurityController extends Controller
             return $this->traitementNewUser($utilisateur);
         }
 
+        //TODO if success -> sucess message and delete tempUser
+        //TODO if failure -> error message and "try again later"
 
     }
 
@@ -129,7 +127,7 @@ class SecurityController extends Controller
             ->setFrom('send@example')
             ->setTo($email)
             ->setBody(
-                $this->renderView('email/inscription.html.twig', array(
+                $this->renderView('email/confirmation.html.twig', array(
                     'token' => $token
                 )), 'text/html'
             );
@@ -137,7 +135,25 @@ class SecurityController extends Controller
 
     }
 
-    public function traitementNewUser($utilisateur){
+    public function persistUserTemp(UtilisateurTemporaire $utilisateurT, $encoderFactory)
+    {
+        $passwordEncoder = $encoderFactory->getEncoder($utilisateurT);
+        $password = $passwordEncoder->encodePassword($utilisateurT->getMotDePasseNonCripte(), $utilisateurT->getSalt());
+        $utilisateurT->setMotDePasse($password);
+
+        $utilisateurT->setDate(new \DateTime());
+
+        $token = hash('sha512', $utilisateurT->getEmail() . ($utilisateurT->getDate())->format('dmy'));
+        $utilisateurT->setToken($token);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($utilisateurT);
+        $em->flush();
+    }
+
+
+    public function traitementNewUser($utilisateur)
+    {
         $user = $utilisateur;
         $image = new Image();
         $image->setActive(true);

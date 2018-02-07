@@ -87,14 +87,19 @@ class ProfilController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (is_null($utilisateur->getId())){
-            //ceci est temporaire
 
+            //ceci est temporaire
             $imagetemp = new Image();
             $imagetemp->setNom('default_0.jpg');
             $imagetemp->setActive(true);
-            $utilisateur->setLogo($imagetemp);
 
+            if ($utilisateur->getType() == "Prestataire"){
+                $utilisateur->setLogo($imagetemp);
+            }else{
+                $utilisateur->setAvatar($imagetemp);
+            }
             //^^^^^temporaiiiiiiire
+
             $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
             dump('flush user');
