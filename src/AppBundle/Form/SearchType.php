@@ -32,6 +32,7 @@ class SearchType extends AbstractType
             ->add('motCle',TextType::class,array(
                 'required' => false,
                 'empty_data' => null,
+                'attr' => ['placeholder'=>'Mots-Clés'],
             ))
 
             ->add('localite',EntityType::class,array(
@@ -43,9 +44,10 @@ class SearchType extends AbstractType
                 'choice_label'=> function(Localite $localite){
                     return $localite->getNomAffichage();
                 },
-                'placeholder' => 'Localite',
+                'placeholder' => 'Localité',
                 'required'=>false,
                 'empty_data' => null,
+                'attr' => ['data-select' => 'true'],
 
             ))
 
@@ -56,6 +58,7 @@ class SearchType extends AbstractType
                 'placeholder' => 'Categorie',
                 'required'=>false,
                 'empty_data' => null,
+                'attr' => ['data-select' => 'true'],
 
             ))
             ->add('search',SubmitType::class,array(

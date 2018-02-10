@@ -94,19 +94,15 @@ class SecurityController extends Controller
 
         if ($utilisateurT->getType() == 'Internaute') {
             $utilisateur = new Internaute();
-            $utilisateur->setEmail($utilisateurT->getEmail());
-            $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
 
-            return $this->forward('AppBundle\Controller\ProfilController::traitementNewUser', array(
-                'newUser' => $utilisateur,
-            ));
         } else {
             $utilisateur = new Prestataire();
-            $utilisateur->setEmail($utilisateurT->getEmail());
-            $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
-
-            return $this->traitementNewUser($utilisateur);
         }
+
+        $utilisateur->setEmail($utilisateurT->getEmail());
+        $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
+
+        return $this->traitementNewUser($utilisateur);
 
         //TODO if success -> sucess message and delete tempUser
         //TODO if failure -> error message and "try again later"

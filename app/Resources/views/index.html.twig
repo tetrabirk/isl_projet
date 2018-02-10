@@ -15,11 +15,15 @@
         <link href="{{ asset('libraries/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet"
               type="text/css">
         <link href="{{ asset('libraries/bootstrap-fileinput/fileinput.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+        {#<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>#}
+        <link href="{{ asset('css/select2.css') }}" rel="stylesheet" type="text/css">
+
 
         <link href="{{ asset('css/superlist.css') }}" rel="stylesheet" type="text/css">
 
         <link href="{{ asset('css/tetrabirk.css') }}" rel="stylesheet" type="text/css">
+
+
     {% endblock %}
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
@@ -93,7 +97,7 @@
                         {{ render(controller(
                             'AppBundle:CategorieDeServices:sliderImageCateg'
                         )) }}
-                        
+
                         <div class="page-header">
                             <h1>Derniers prestataires inscrits</h1>
                             <p>List of most recent interesting places and events in our directory submitted <br>by
@@ -211,6 +215,8 @@
 
     <script src="{{ asset('js/superlist.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="{{ asset('js/tetrabirk.js') }}" type="text/javascript"></script>
 
 {% endblock %}
 

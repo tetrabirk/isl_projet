@@ -710,7 +710,6 @@ class Fixtures extends Fixture
         6099 => array(0 => 'Charleroi X',),
         6110 => array(0 => 'MONTIGNY-LE-TILLEUL',),
         6111 => array(0 => 'Landelies',),
-        '0612' => array(0 => 'Saint-Nicolas',),
         6120 => array(0 => 'Cour-Sur-Heure', 1 => 'HAM-SUR-HEURE', 2 => 'Jamioulx', 3 => 'Marbaix', 4 => 'Nalinnes',),
         6140 => array(0 => 'FONTAINE-L\'EVÊQUE',),
         6141 => array(0 => 'Forchies-La-Marche',),

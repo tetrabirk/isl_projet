@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+
+    /**
+     * gestion des categorie dans les formulaires
+     */
+
+
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
     var $container = $('div#appbundle_prestataire_categories_container');
 
@@ -71,4 +77,13 @@ $(document).ready(function () {
         });
     }
 
+    $('select[data-select="true"]').select2();
+
+
+    [class^='select2'] {
+        border-radius: 0px !important;
+    }
+
 });
+
+
