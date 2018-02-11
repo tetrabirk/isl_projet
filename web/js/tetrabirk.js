@@ -80,9 +80,7 @@ $(document).ready(function () {
     $('select[data-select="true"]').select2();
 
 
-    [class^='select2'] {
-        border-radius: 0px !important;
-    }
+
 
 });
 
