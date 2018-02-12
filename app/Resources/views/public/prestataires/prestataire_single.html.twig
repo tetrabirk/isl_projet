@@ -37,19 +37,19 @@
                                     <div class="detail-contact">
                                         <div class="detail-contact-email">
                                             <i class="fa fa-envelope-o"></i> <a
-                                                    href="mailto:{{ prestataire.emailContact }}">{{ prestataire.emailContact }}</a>
+                                                    href="mailto:{{ prestataire.emailContact|default('') }}">{{ prestataire.emailContact|default('') }}</a>
                                         </div>
                                         <div class="detail-contact-phone">
                                             <i class="fa fa-mobile-phone"></i> <a
-                                                    href="tel:{{ prestataire.telephone }}">{{ prestataire.telephone }}</a>
+                                                    href="tel:{{ prestataire.telephone|default('') }}">{{ prestataire.telephone|default('') }}</a>
                                         </div>
                                         <div class="detail-contact-website">
-                                            <i class="fa fa-globe"></i> <a href="{{ prestataire.siteInternet }}">{{ prestataire.siteInternet }}</a>
+                                            <i class="fa fa-globe"></i> <a href="{{ prestataire.siteInternet|default('') }}">{{ prestataire.siteInternet|default('') }}</a>
                                         </div>
                                         <div class="detail-contact-address">
                                             <i class="fa fa-map-o"></i>
-                                            {{ prestataire.adresseRue~', '~prestataire.adresseNum }}<br>
-                                            {{ prestataire.codePostal.codePostal~' '~prestataire.localite.localite }}
+                                            {{ prestataire.adresseRue|default('')~', '~prestataire.adresseNum|default('') }}<br>
+                                            {{ prestataire.codePostal.codePostal|default('')~' '~prestataire.localite.localite|default('') }}
                                         </div>
                                     </div><!-- /.detail-contact -->
                                 </div><!-- /.detail-vcard -->

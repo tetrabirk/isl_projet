@@ -56,6 +56,7 @@ class PrestataireType extends AbstractType
                 'required'=>false,
                 'empty_data' => null,
                 'label' => 'Categories',
+                'attr' => ['data-select' => 'true'],
 
             ))
 

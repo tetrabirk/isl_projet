@@ -1,5 +1,7 @@
 -autocomplete des select (select2, mais c'est moche, jquery autocomplete mais je ne vois pas du tout comment approcher le prblm)
 
+-encript passwords
+
 -ajout suppression d'image (pop up en js avec une interface de modif image)
 
 -les formulaires n'arrive pas a comprendre code postal et localite
@@ -27,3 +29,5 @@
 -gestion news (mail -> pdf etc)
 
 -admin, envoyé newsletter, gestion des nouvelle categories, selection du service du mois, gestion des abus
+
+-contrainte password
