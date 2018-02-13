@@ -55,12 +55,6 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $adresseRue;
 
-    /**
-     *
-     * @ORM\OneToOne(targetEntity="CodePostal", cascade={"persist"})
-     * @ORM\JoinColumn(name="code_postal_id", referencedColumnName="id")
-     */
-    private $codePostal;
 
     /**
      * @ORM\OneToOne(targetEntity="Localite", cascade={"persist"})
@@ -218,30 +212,6 @@ class Utilisateur implements UserInterface, \Serializable
     public function getAdresseRue()
     {
         return $this->adresseRue;
-    }
-
-    /**
-     * Set codePostal
-     *
-     * @param string $codePostal
-     *
-     * @return Utilisateur
-     */
-    public function setCodePostal($codePostal)
-    {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-    /**
-     * Get codePostal
-     *
-     * @return string
-     */
-    public function getCodePostal()
-    {
-        return $this->codePostal;
     }
 
     /**

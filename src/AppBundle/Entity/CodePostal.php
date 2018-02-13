@@ -30,7 +30,7 @@ class CodePostal
     private $codePostal;
 
     /**
-     * @ORM\OneToMany(targetEntity="Localite",mappedBy="codePostal" ,cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Localite",mappedBy="codePostal" )
      */
 
     private $localite;
@@ -94,6 +94,9 @@ class CodePostal
 
     public function __toString()
     {
+        if(is_null($this->getCodePostal())) {
+            return 'NULL';
+        }
         return $this->getCodePostal();
     }
 

@@ -2,7 +2,7 @@
 
 -encript passwords
 
--ajout suppression d'image (pop up en js avec une interface de modif image)
+-ajout suppression d'image (pop up en js avec une interface de modif image OU ajouter des champs "images" au formulaire de base)
 
 -les formulaires n'arrive pas a comprendre code postal et localite
 

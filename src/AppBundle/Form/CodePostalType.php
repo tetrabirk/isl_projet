@@ -18,6 +18,8 @@ class CodePostalType extends AbstractType
             ->add('codePostal', EntityType::class,array(
                 'class'=> 'AppBundle:CodePostal',
                 'choice_label' => 'codePostal',
+                'attr' => ['data-select' => 'true'],
+
             ));
     }/**
      * {@inheritdoc}

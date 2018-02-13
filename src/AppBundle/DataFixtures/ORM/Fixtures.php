@@ -1576,12 +1576,11 @@ class Fixtures extends Fixture
         }
 
     }
-
+//ce code est un peu caca parce que j'ai modifier mon entité très tard dans le projet, mais ça marche et il ne fait que 5 lignes donc ça peut pas être siiii terrible ;)
     public function addCPandLocalite(Utilisateur $user)
     {
         $randCP = rand(0, (count(self::$cpLocalite))-1);
-        $user->setCodePostal($this->getReference('cp'.$randCP));
-        $codepostal = $user->getCodePostal();
+        $codepostal = $this->getReference('cp'.$randCP);
         /**
          * @var CodePostal $codepostal
          */

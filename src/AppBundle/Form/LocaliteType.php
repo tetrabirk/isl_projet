@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Localite;
+use AppBundle\Repository\LocaliteRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,12 +17,32 @@ class LocaliteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
+//            ->add('localite',EntityType::class,array(
+//                'class'=> 'AppBundle:Localite',
+//                'query_builder' => function (LocaliteRepository $qb){
+//                    return $qb->createQueryBuilder('l')
+//                        ->leftJoin('l.codePostal','cp')->addSelect('cp')->orderBy('cp.codePostal');
+//                },
+//                'choice_label'=> function(Localite $localite){
+//                    return $localite->getNomAffichage();
+//                },
+//                'placeholder' => 'Code postal - Localité',
+//                'required'=>false,
+//                'empty_data' => null,
+//                'attr' => ['data-select' => 'true'],
+//                'label' => 'Code postal et Localité'
+//
+//            ))
+
             ->add('localite', EntityType::class,array(
                 'class' => 'AppBundle:Localite',
                 'choice_label' => 'localite',
-            ))
-            ->add('codePostal', CodePostalType::class, array(
-                'label' => false,
+                'attr' => ['data-select' => 'true'],
+
+//            ))
+//            ->add('codePostal', CodePostalType::class, array(
+//                'label' => false,
             ));
     }/**
      * {@inheritdoc}

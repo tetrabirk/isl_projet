@@ -39,7 +39,6 @@ class PrestataireRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         $this->addBasicJoins($qb);
-        $qb->leftJoin('p.codePostal', 'cp')->addSelect('cp');
         $qb->leftJoin('p.localite', 'localite')->addSelect('localite');
 
         $qb->join('p.categories', 'c', 'WITH', $qb->expr()->eq('c.id', $categ->getId()));
@@ -79,7 +78,6 @@ class PrestataireRepository extends EntityRepository
         }else{
             $qb->leftJoin('p.localite','localite')->addSelect('localite');
         }
-        $qb->leftJoin('p.codePostal','cp')->addSelect('cp');
 
         if(!empty($motcle)){
             $mc = "%".$motcle."%";
@@ -120,7 +118,6 @@ class PrestataireRepository extends EntityRepository
         $this->addBasicJoins($qb);
 
         $qb->leftJoin('p.categories', 'categories')->addSelect('categories');
-        $qb->leftJoin('p.codePostal', 'cp')->addSelect('cp');
         $qb->leftJoin('p.localite', 'localite')->addSelect('localite');
     }
 

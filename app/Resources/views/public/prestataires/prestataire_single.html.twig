@@ -49,7 +49,7 @@
                                         <div class="detail-contact-address">
                                             <i class="fa fa-map-o"></i>
                                             {{ prestataire.adresseRue|default('')~', '~prestataire.adresseNum|default('') }}<br>
-                                            {{ prestataire.codePostal.codePostal|default('')~' '~prestataire.localite.localite|default('') }}
+                                            {{ prestataire.localite.codePostal.codePostal|default('')~' '~prestataire.localite.localite|default('') }}
                                         </div>
                                     </div><!-- /.detail-contact -->
                                 </div><!-- /.detail-vcard -->

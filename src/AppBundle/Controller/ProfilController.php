@@ -59,6 +59,7 @@ class ProfilController extends Controller
         $form = $this->get('form.factory')->create(PrestataireType::class, $user);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            dump($user);
             $this->flushUtilisateur($user);
         }
 
