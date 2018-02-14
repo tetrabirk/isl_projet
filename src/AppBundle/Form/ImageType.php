@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,10 +16,14 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('active', CheckboxType::class,array(
-                'label' => 'active?',
-            ));
+            ->add('file',FileType::class,array(
+                'label' => false,
+            ))
+//            ->add('nom')
+//            ->add('active', CheckboxType::class,array(
+//                'label' => 'active?',
+//            ))
+        ;
     }
 
     /**

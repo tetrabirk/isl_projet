@@ -45,14 +45,18 @@
         {#{{ form_label(form.localite.codePostal) }}#}
         {#{{ form_widget(form.localite.codePostal) }}#}
     {#</div>#}
-    <div class="form-group col-sm-12">
-        {{ form_label(form.localite.localite) }}
-        {{ form_widget(form.localite.localite, {'attr':{'class':'col-sm-9'}}) }}
-    </div>
+    {#<div class="form-group col-sm-12">#}
+        {#{{ form_label(form.localite.localite) }}#}
+        {#{{ form_widget(form.localite.localite, {'attr':{'class':'col-sm-9'}}) }}#}
+    {#</div>#}
     <div class="form-group col-sm-12">
         {{ form_label(form.categories) }}
         {{ form_widget(form.categories) }}
 
+    </div>
+    <div class="form-group col-sm-12">
+        {{ form_label(form.logo) }}
+        {{ form_widget(form.logo) }}
     </div>
 
 </div>

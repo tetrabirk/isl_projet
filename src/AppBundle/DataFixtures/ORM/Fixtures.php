@@ -1457,7 +1457,8 @@ class Fixtures extends Fixture
     public function genImage($type, $i)
     {
         $img = new Image();
-        $img->setNom($type . "_" . $i . ".jpg");
+        $img->setAlt('tempdev');
+        $img->setUrl($type . "_" . $i . ".jpg");
         $img->setActive(1);
         $this->addReference($type . $i, $img);
 

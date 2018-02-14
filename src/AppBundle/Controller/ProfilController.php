@@ -56,10 +56,12 @@ class ProfilController extends Controller
 
     public function loadProfilPrestataire($request, $user)
     {
+        /**
+         * @var Prestataire $user
+         */
         $form = $this->get('form.factory')->create(PrestataireType::class, $user);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            dump($user);
             $this->flushUtilisateur($user);
         }
 
@@ -71,6 +73,9 @@ class ProfilController extends Controller
 
     public function loadProfilInternaute($request, $user)
     {
+        /**
+         * @var Internaute $user
+         */
         $form = $this->get('form.factory')->create(InternauteType::class, $user);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -89,23 +94,16 @@ class ProfilController extends Controller
 
         if (is_null($utilisateur->getId())){
 
-            //ceci est temporaire
-            $imagetemp = new Image();
-            $imagetemp->setNom('default_0.jpg');
-            $imagetemp->setActive(true);
-
-            if ($utilisateur->getType() == "Prestataire"){
-                $utilisateur->setLogo($imagetemp);
-            }else{
-                $utilisateur->setAvatar($imagetemp);
-            }
-            //^^^^^temporaiiiiiiire
-
             $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
-            dump('flush user');
+            dump($utilisateur);
+            dump('persist user');
         }
         $em->flush();
+        dump($utilisateur);
+
+        dump('flush user');
+
     }
 
 

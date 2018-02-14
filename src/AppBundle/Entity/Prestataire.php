@@ -80,7 +80,7 @@ class Prestataire extends Utilisateur
 
     /**
      * un prestataire à un logo
-     * @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Image",cascade={"persist", "remove"})
      */
     private $logo;
 

@@ -55,7 +55,7 @@ class SecurityController extends Controller
             array('method' => 'POST', 'action' => ($this->generateUrl('inscription'))));
 
         $form->handleRequest($request);
-
+//        dump('test');
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->persistUserTemp($utilisateurT,$encoderFactory);
@@ -73,7 +73,7 @@ class SecurityController extends Controller
 
             return $this->redirectToRoute('inscription');
         } else {
-            dump($form->getErrors());
+//            dump($form->getErrors());
 
         }
 

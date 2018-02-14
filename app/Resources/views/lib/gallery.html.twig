@@ -4,8 +4,8 @@
 
         {% set first = prestataire.photos|first %}
         <div class="detail-gallery-preview">
-            <a href="{{ asset('img/') }}{{ first.nom|tempDevImage }}">
-                <img src="{{ asset('img/') }}{{ first.nom|tempDevImage }}">
+            <a href="{{asset( first|showImage)}}">
+                <img src="{{asset( first|showImage)}}">
             </a>
         </div>
 
@@ -13,8 +13,8 @@
         <ul class="detail-gallery-index">
             {% for photo in prestataire.photos %}
             <li class="detail-gallery-list-item active mb30">
-                <a data-target="{{ asset('img/') }}{{ photo.nom|tempDevImage }}">
-                    <img src="{{ asset('img/') }}{{ photo.nom|tempDevImage }}" alt="...">
+                <a data-target="{{asset( photo|showImage)}}">
+                    <img src="{{asset( photo|showImage)}}" alt="...">
                 </a>
             </li>
             {% endfor %}

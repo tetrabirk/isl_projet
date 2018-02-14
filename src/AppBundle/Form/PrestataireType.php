@@ -19,47 +19,44 @@ class PrestataireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',EmailType::class)
+            ->add('email', EmailType::class)
             ->add('adresseRue', TextType::class, array(
-                'required'=>false,
+                'required' => false,
             ))
             ->add('adresseNum', TextType::class, array(
                 'label' => 'Numéro',
-                'required'=>false,
+                'required' => false,
             ))
 //            ->add('localite',LocaliteType::class, array(
 //                'label' => false,
 //                'required'=>false,
 //            ))
-            ->add('nom', TextType::class, array(
-            ))
-            ->add('siteInternet', UrlType::class,array(
-                'required'=>false,
+            ->add('nom', TextType::class, array())
+            ->add('siteInternet', UrlType::class, array(
+                'required' => false,
             ))
             ->add('emailContact', EmailType::class, array(
                 'label' => 'Email de contact',
-                'required'=>false,
+                'required' => false,
             ))
             ->add('telephone', TextType::class, array(
                 'label' => 'Téléphone',
-                'required'=>false,
+                'required' => false,
             ))
             ->add('numTVA', TextType::class, array(
                 'label' => 'Numéro de TVA',
             ))
-
-            ->add('categories',EntityType::class,array(
-                'class'=> 'AppBundle:CategorieDeServices',
-                'choice_label'=> 'nom',
+            ->add('categories', EntityType::class, array(
+                'class' => 'AppBundle:CategorieDeServices',
+                'choice_label' => 'nom',
                 'multiple' => 'true',
                 'placeholder' => 'Categorie',
-                'required'=>false,
+                'required' => false,
                 'empty_data' => null,
                 'label' => 'Categories',
                 'attr' => ['data-select' => 'true'],
 
             ))
-
 //            ->add('categories', CollectionType::class, array(
 //                'entry_type' => CategorieDeServicesType::class,
 //                'allow_add' => true,
@@ -67,10 +64,12 @@ class PrestataireType extends AbstractType
 //                'label' => 'Categories'
 //
 //            ))
+            ->add('logo',ImageType::class,array(
+                'label' => 'logo',
+                'required'=>false,
+            ))
 
-
-            ->add('enregistrer', SubmitType::class)
-        ;
+            ->add('enregistrer', SubmitType::class);
     }
 
     /**

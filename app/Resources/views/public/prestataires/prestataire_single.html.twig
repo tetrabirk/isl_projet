@@ -14,7 +14,7 @@
 
                             <div class="background-white p20">
                                 <div class="user-photo">
-                                    <img src="{{ asset('img/') }}{{ prestataire.logo.nom|tempDevImage }}"
+                                    <img src="{{ asset(prestataire.logo|showImage) }}"
                                          alt="User Photo">
                                 </div>
                                 <div class="page-title">

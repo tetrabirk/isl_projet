@@ -12,9 +12,8 @@
                         {% endif %}
                         <a href="{{ path('services',{'slug': categ.slug}) }}">
                             <div class="item-bg"
-                                 style="background-image: url('{{ asset('img/') }}{{ categ.image.nom|tempDevImage }}')"></div>
-
-                            <img src="{{ asset('img/') }}{{ categ.image.nom|tempDevImage }}" alt="">
+                                 style="background-image: url('{{ asset(categ.image|showImage)}}')"></div>
+                            <img src="{{ asset(categ.image|showImage) }}" alt="">
 
 
                             <div class="carousel-caption">
@@ -44,3 +43,5 @@
         </div><!-- /.hero-slider -->
 
     </div>
+
+</div>

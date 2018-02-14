@@ -8,7 +8,7 @@
 
     <div class="posts post-detail">
         <div class="SEA-conteneur " style="
-        background-image: url('{{ asset('img/') }}{{ service.image.nom|tempDevImage }}' );">
+        background-image: url('{{asset(service.image|showImage)}}' );">
 
                 <div class="SEA-contenu">
                     <h2>{{ service.nom|capitalize }}</h2>

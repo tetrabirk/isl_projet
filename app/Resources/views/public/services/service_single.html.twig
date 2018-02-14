@@ -9,7 +9,7 @@
         <div class="container">
             <div class="content">
 
-                <div class="document-title" data-background-image="{{ asset('img/') }}{{ service.image.nom|tempDevImage }}">
+                <div class="document-title" data-background-image="{{ asset(service.image|showImage) }}">
                     <h1>{{ service.nom }}</h1>
                 </div><!-- /.document-title -->
 

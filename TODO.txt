@@ -1,33 +1,45 @@
--autocomplete des select (select2, mais c'est moche, jquery autocomplete mais je ne vois pas du tout comment approcher le prblm)
 
+UPLOAD IMAGE FINISSENT DANS LE MAUVAIS FICHIER, creer un service? -> voir https://symfony.com/doc/current/controller/upload_file.html
+
+-inscription->suppression de l'user temporaire
+
+-contrainte password
 -encript passwords
 
--ajout suppression d'image (pop up en js avec une interface de modif image OU ajouter des champs "images" au formulaire de base)
 
--les formulaires n'arrive pas a comprendre code postal et localite
+-ajout suppression d'image (ajouter des champs "images" au formulaire de base)
+
+-probleme avec mes codes postaux
+
+-admin, envoyé newsletter, gestion des nouvelle categories, selection du service du mois, gestion des abus
 
 -footer à modifier
 
 -CRUD stage
-
 -CRUD promotion
 
 -COMMENTAIRES!
-
 -abus
 
--frontpage avec blocs
+-vérifier à l'inscription si un user existe deja
+
+-modifier les queries pour que seul les categ validée soit afficher
+-lors de la proposition de categorie l'ajouter au prestataire
 
 -favoris
 
 -moyenne des note
 
--inscription->suppression de l'user temporaire
+
 
 -catch des erreurs  + affichage de msg d'erreur et succes
 
 -gestion news (mail -> pdf etc)
 
--admin, envoyé newsletter, gestion des nouvelle categories, selection du service du mois, gestion des abus
 
--contrainte password
+-virer mon bout de code pour l'affichage temporaire de logos etc
+
+-frontpage avec blocs
+
+-select2 css différent pour la searchbar et formulaire
+

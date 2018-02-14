@@ -10,8 +10,7 @@ class TwigAppExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('stars',array($this,'noteToString')),
-            new \Twig_SimpleFilter('tempDevImage',array($this,'imageNameConverter')),
-            new \Twig_SimpleFilter('defaultImage',array($this,'defaultImage'))
+            new \Twig_SimpleFilter('showImage',array($this,'affichageImage')),
         );
     }
 
@@ -44,7 +43,24 @@ class TwigAppExtension extends \Twig_Extension
         return $str;
     }
 
+    public function affichageImage(Image $image){
+        $default = 'img/default_0.jpg';
+        if(is_null($image->getUrl())){
+            return $default;
 
+            ///cette partie ci n'est que la pour la période de dev
+        }elseif($image->getAlt()=='tempdev'){
+            $name = $this->imageNameConverter($image->getUrl());
+            return 'img/'.$name;
+
+            ///^^^^^^dev
+
+        }else{
+            return $image->getWebPath();
+        }
+    }
+
+///cette partie ci n'est que la pour la période de dev
     public function imageNameConverter($string){
         $moinsjpg = substr($string,0,-4);
         $exploded = explode('_',$moinsjpg);
@@ -54,12 +70,5 @@ class TwigAppExtension extends \Twig_Extension
         }
         return $exploded[0].'_'.$exploded[1].'.jpg';
     }
-    public function defaultImage(Image $image){
-        $default = 'default_0.jpg';
-        if(is_null($image->getNom())){
-            return $default;
-        }else{
-            return $image->getNom();
-        }
-    }
+///^^^^^^dev
 }

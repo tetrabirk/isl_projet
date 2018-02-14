@@ -38,7 +38,7 @@ class Internaute extends Utilisateur
 
     /**
      * un internaute à un avatar
-     * @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Image",cascade={"persist", "remove"})
      */
     private $avatar;
 

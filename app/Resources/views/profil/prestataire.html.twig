@@ -1,6 +1,6 @@
 {% extends "profil/profil_base.html.twig" %}
 
-{% block imgProfil %}{{ utilisateur.logo|defaultImage|tempDevImage }}{% endblock %}
+{% block imgProfil %}{{ asset(utilisateur.logo|showImage)}}{% endblock %}
 {% block txtModifImg %}Modifier mon logo{% endblock %}
 
 {% block widgets %}
