@@ -89,6 +89,8 @@ class ProfilController extends Controller
         ));
     }
 
+
+
     private function flushUtilisateur(Utilisateur $utilisateur){
         $em = $this->getDoctrine()->getManager();
 
@@ -96,13 +98,8 @@ class ProfilController extends Controller
 
             $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
-            dump($utilisateur);
-            dump('persist user');
         }
         $em->flush();
-        dump($utilisateur);
-
-        dump('flush user');
 
     }
 

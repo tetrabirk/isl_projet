@@ -70,6 +70,9 @@ class Internaute extends Utilisateur
     public function __construct()
     {
        $this->favoris = new ArrayCollection();
+        $this->setNbEssaisInfructueux(0);
+        $this->setBanni(false);
+        $this->setConfInscription(false);
     }
 
     public function addFavoris(Prestataire $favoris)

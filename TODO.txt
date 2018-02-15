@@ -1,11 +1,17 @@
-
-UPLOAD IMAGE FINISSENT DANS LE MAUVAIS FICHIER, creer un service? -> voir https://symfony.com/doc/current/controller/upload_file.html
-
 -inscription->suppression de l'user temporaire
+
+-form, galerie d'image
+
+-checkbox de merde ne veux pas s'afficher (newsletter)
+
+-add constraints (Assert) à 'tt' mes entitée
+
+-confirmation->retour à l'acceuil ou ->inscription avant de passé à la suite
 
 -contrainte password
 -encript passwords
 
+-entité pdf(upload etc)(promotion et newsletter)
 
 -ajout suppression d'image (ajouter des champs "images" au formulaire de base)
 
