@@ -9,7 +9,6 @@
 -confirmation->retour à l'acceuil ou ->inscription avant de passé à la suite
 
 -contrainte password
--encript passwords
 
 -entité pdf(upload etc)(promotion et newsletter)
 

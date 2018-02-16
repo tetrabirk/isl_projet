@@ -37,6 +37,8 @@ class Fixtures extends Fixture
     static $maxPromotionsParPrestataire = 5;
     static $maxCategoriesParPromotion = 2;
 
+    static $encryptedPassword = '$2a$12$og1AI.Y/3oCN.GdQtZl7muTw6Ffn9bFjTY0LWIh/yTCCdjfgpss32'; //'password' en bcrypt 12
+
     //joli array avec tt les CP de Belgique et les localitée correspondante, pris sur le site de la Poste et reformaté pour du PHP
     static $cpLocalite = array(
         1005 => array(0 => 'Assemblée Réunie de la Commission Communautaire',),
@@ -1335,7 +1337,7 @@ class Fixtures extends Fixture
     {
         $admin = new Admin();
         $admin->setEmail('admin@admin.com');
-        $admin->setMotDePasse('password');
+        $admin->setMotDePasse(self::$encryptedPassword);
         $admin->setInscription(new \DateTime());
         $admin->setNbEssaisInfructueux(0);
         $admin->setBanni(false);
@@ -1372,7 +1374,7 @@ class Fixtures extends Fixture
 
         $prestataire = new Prestataire();
         $prestataire->setEmail($this->uniqueEmail($i, 'p'));
-        $prestataire->setMotDePasse('password');
+        $prestataire->setMotDePasse(self::$encryptedPassword);
         $prestataire->setAdresseNum($this->faker->buildingNumber);
         $prestataire->setAdresseRue($this->faker->streetName);
         $prestataire->setInscription($this->faker->dateTimeThisDecade);
@@ -1420,7 +1422,7 @@ class Fixtures extends Fixture
     {
         $internaute = new Internaute();
         $internaute->setEmail($this->uniqueEmail($i, 'i'));
-        $internaute->setMotDePasse('password');
+        $internaute->setMotDePasse(self::$encryptedPassword);
         $internaute->setAdresseNum($this->faker->buildingNumber);
         $internaute->setAdresseRue($this->faker->streetName);
         $internaute->setInscription($this->faker->dateTimeThisDecade);

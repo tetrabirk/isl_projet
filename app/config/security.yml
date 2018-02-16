@@ -42,6 +42,10 @@ security:
         - { path: ^/profil, roles: ROLE_USER}
 
     encoders:
-        AppBundle\Entity\Utilisateur: plaintext
-        AppBundle\Entity\UtilisateurTemporaire: plaintext
+        AppBundle\Entity\Utilisateur:
+            algorithm: bcrypt
+            cost: 12
+        AppBundle\Entity\UtilisateurTemporaire:
+            algorithm: bcrypt
+            cost: 12
 
