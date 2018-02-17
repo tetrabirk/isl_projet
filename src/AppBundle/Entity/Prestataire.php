@@ -5,20 +5,30 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Prestataire
  *
  * @ORM\Table(name="prestataire")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PrestataireRepository")
- *
+
  */
 class Prestataire extends Utilisateur
 {
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(
+     *     message="Le nom ne peut pas être vide"
+     * )
+     * @Assert\Length(
+     *     min=2,
+     *     max=255,
+     *     minMessage="le nom doit comporter au moins {{limit}} caractères ",
+     *     maxMessage="le nom ne peut pas comprter plus de {{limit}} caractères "
+     * )
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
@@ -32,28 +42,34 @@ class Prestataire extends Utilisateur
 
     /**
      * @var string
-     *
+     * @Assert\Url(
+     *     message = "l'url '{{value}}' n'est pas une url valide"
+     * )
      * @ORM\Column(name="site_internet", type="string", length=255, nullable=true)
      */
     private $siteInternet;
 
     /**
      * @var string
-     *
+     * @Assert\Email(
+     *     message="l'email '{{value}} n'est pas un email valide"
+     * )
      * @ORM\Column(name="email_de_contact", type="string", length=255, nullable=true)
      */
     private $emailContact;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
-     *
+     * @Assert\Regex(
+     *     pattern="/^(BE)\d{9}$/",
+     *     message="le numéro de TVA doit suivre le format BE123456789"
+     * )
      * @ORM\Column(name="num_tva", type="string", length=255, nullable=true)
      */
     private $numTVA;
@@ -65,7 +81,7 @@ class Prestataire extends Utilisateur
      */
     private $categories;
 
-    //attention c'est bien une one to many unidirectionnelle malgré le ManyToMany dans la fonction. J'ai respecter la doc de doctrine
+    //attention c'est bien une one to many unidirectionnelle malgré le ManyToMany dans la fonction. J'ai respecté la doc de doctrine
 
     /**
      * 1 prestataires ont bcp de photos

@@ -89,3 +89,17 @@
 #categorie + span, [role='combobox'], ul[class ="select2-selection__rendered"]{
     height: 34px !important;
 }
+
+.form-photos{
+    float: left;
+    margin: 10px;
+    position: relative;
+}
+
+.form-photos > img{
+}
+.form-photos > .btn-xs{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}

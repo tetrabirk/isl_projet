@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,6 +35,7 @@ class PrestataireType extends AbstractType
             ->add('nom', TextType::class, array())
             ->add('siteInternet', UrlType::class, array(
                 'required' => false,
+
             ))
             ->add('emailContact', EmailType::class, array(
                 'label' => 'Email de contact',
@@ -67,6 +69,12 @@ class PrestataireType extends AbstractType
             ->add('logo',ImageType::class,array(
                 'label' => 'logo',
                 'required'=>false,
+            ))
+
+            ->add('photos', CollectionType::class,array(
+                'entry_type' => ImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
             ))
 
             ->add('enregistrer', SubmitType::class);

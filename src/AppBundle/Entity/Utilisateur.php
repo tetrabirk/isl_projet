@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,7 +29,9 @@ class Utilisateur implements UserInterface, \Serializable
 
     /**
      * @var string
-     *
+     * @Assert\Email(
+     *     message="l'email '{{value}} n'est pas un email valide"
+     * )
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\NotBlank()
      */

@@ -19,10 +19,6 @@ class ImageType extends AbstractType
             ->add('file',FileType::class,array(
                 'label' => false,
             ))
-//            ->add('nom')
-//            ->add('active', CheckboxType::class,array(
-//                'label' => 'active?',
-//            ))
         ;
     }
 

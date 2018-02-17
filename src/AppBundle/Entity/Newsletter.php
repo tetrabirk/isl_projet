@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Newsletter
@@ -23,8 +24,16 @@ class Newsletter
 
     /**
      * @var string
-     *
      * @ORM\Column(name="titre", type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="Le titre ne peut pas être vide"
+     * )
+     * @Assert\Length(
+     *     min=2,
+     *     max=255,
+     *     minMessage="le titre doit comporter au moins {{limit}} caractères ",
+     *     maxMessage="le titre ne peut pas comprter plus de {{limit}} caractères "
+     * )
      */
     private $titre;
 

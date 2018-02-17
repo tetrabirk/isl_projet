@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -25,21 +26,27 @@ class UtilisateurTemporaire
 
     /**
      * @var string
-     *
+     * @var string
+     * @Assert\Email(
+     *     message="l'email '{{value}} n'est pas un email valide"
+     * )
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
 
     /**
-     * @var string
-     *
+     * @ORM\Column(name="email_de_contact", type="string", length=255, nullable=true)
      * @ORM\Column(name="motDePasse", type="string", length=255)
      */
     private $motDePasse;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @Assert\Length(
+     *     min=6,
+     *     max=4096,
+     *     minMessage="mot de passe trop court! (au moins {{limit}} caractères)"
+     * )
      */
 
     private $motDePasseNonCripte;
