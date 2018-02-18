@@ -1,41 +1,46 @@
 CONTROLLER
 -faire le tour de mes controller et les nettoyer / commenter
 
+
+
+
 ERREURS
--catch des erreurs  + affichage de msg d'erreur et succes
+!!!! -catch des erreurs  + affichage de msg d'erreur et succes
+
+
+
 
 INSCRIPTION
 
--inscription	-> suppression de l'user temporaire
-		-> "check confirmation"
+!!!!! -inscription	-> suppression de l'user temporaire
+			-> "check confirmation"
 
--confirmation->retour à l'acceuil ou ->inscription avant de passé à la suite
+!!!!!-confirmation->retour à l'acceuil ou ->inscription avant de passé à la suite
 
--vérifier à l'inscription si un email n'est pas déjà utiliser? (pas seuelemtn dans userTemp mais aussi dans user tt cours, Assert ?)
+!!!!!-vérifier à l'inscription si un email n'est pas déjà utiliser? (pas seuelemtn dans userTemp mais aussi dans user tt cours, Assert ?)
 
 ENTITY
 
-- j'ai du supprimer les uniqentity de prestataire/internaute et utilisateur
+!!!!!- j'ai du supprimer les uniqentity de prestataire/internaute et utilisateur
 
 FORM
 
--galerie d'image ajout/suppression
--ajouter fonction derrière bouton X pour supprimer une image
+!!! -galerie d'image ajout/suppression
+!!! -ajouter fonction derrière bouton X pour supprimer une image
 
 -checkbox de merde ne veux pas s'afficher (newsletter)
 
-!!!! -probleme avec mes codes postaux(développe?)
+!!!! -probleme avec mes codes postaux (voir slack)
 
 -proposition categorie -> "_0" au lieu de "0"
--lors de la proposition de categorie l'ajouter au prestataire
+-lors de la proposition de categorie l'ajouter au prestataire en 'inactive'
 
 
 
 UPLOAD FILES
 
--entité pdf(upload etc)(promotion et newsletter)
-
--constrains image/file ?
+!!! -constrains image/file ?
+!!! -supprimer des fichiers
 
 CONNEXION
 -empecher une personne bannie de se connecter
@@ -52,9 +57,11 @@ ADMIN
 -gestion des images?
 
 STAGE
--tout
+-suppression stage
 PROMOTIONS
--tout
+-suppression promotion
+
+
 COMMENTAIRES
 -tout
 -abus
@@ -63,16 +70,22 @@ COMMENTAIRES
 
 REPOSITORIES
 -modifier les queries pour que seul les categ validée soit afficher
+-idem pour user banis
+-idem pour image inactive
 
 PROFIL
 -favoris
 -moyenne des note
+-modifier le menu de gauche pour la confirmation
+
+-modifier le 'active' dans le menu de gauche
 
 
 SERVICE
 
 -faire fonctionner le service mail
 -gestion news (mail -> pdf etc)
+-service paginations ?
 
 DEV
 -virer mon bout de code pour l'affichage temporaire de logos etc
@@ -81,4 +94,6 @@ DEV
 SI ON A LE TEMPS
 -frontpage avec blocs
 -select2 css différent pour la searchbar et formulaire
+-image slider -> ne pas les étirers (ou remplacer par des images paysage)
+
 

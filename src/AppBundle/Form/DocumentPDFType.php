@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImageType extends AbstractType
+class DocumentPDFType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,19 +15,19 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file',FileType::class,array(
-                'label' => false,
+            ->add('file', FileType::class, array(
+                'label'=>false,
+
+
             ))
         ;
-    }
-
-    /**
+    }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Image'
+            'data_class' => 'AppBundle\Entity\DocumentPDF'
         ));
     }
 
@@ -36,7 +36,7 @@ class ImageType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_image';
+        return 'appbundle_documentpdf';
     }
 
 

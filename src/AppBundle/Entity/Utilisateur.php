@@ -47,7 +47,7 @@ class Utilisateur implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse_num", type="string", length=10, nullable=true)
+     * @ORM\Column(name="adresse_num", type="string", length=255, nullable=true)
      */
     private $adresseNum;
 

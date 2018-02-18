@@ -41,7 +41,7 @@ class Promotion
     /**
      * @var string
      *
-     * @ORM\Column(name="document_pdf", type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\DocumentPDF",cascade={"persist","remove"})
      */
     private $documentPDF;
 

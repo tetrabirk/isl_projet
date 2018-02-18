@@ -11,12 +11,10 @@
                 <p> s'affiche du {{ promo.affichageDe|date("d/m/Y") }} au {{ promo.affichageJusque|date("d/m/Y")}}</p>
             </div><!-- /.post-content -->
             <div class="post-more">
-                <a href={{ path('promo_mise_a_jour') }}>++++</a>
+                <a href={{ path('promotions',{'id':promo.id}) }}>modifier</a>
             </div><!-- /.post-date -->
         </div><!-- /.post -->
     {% endfor %}
 
 </div><!-- /.posts -->
 
-
-{% include 'lib/list/pager.html.twig' %}

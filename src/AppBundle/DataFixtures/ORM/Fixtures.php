@@ -8,6 +8,7 @@ use AppBundle\Entity\Bloc;
 use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\CodePostal;
 use AppBundle\Entity\Commentaire;
+use AppBundle\Entity\DocumentPDF;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Internaute;
 use AppBundle\Entity\Localite;
@@ -1466,6 +1467,13 @@ class Fixtures extends Fixture
 
     }
 
+    public function genPDF($type,$i)
+    {
+        $pdf = new DocumentPDF();
+        $pdf->setUrl($type."_".$i.".jpg");
+        $this->addReference($type.$i,$pdf);
+    }
+
     public function genCommentaires($i)
     {
         $commentaire = new Commentaire();
@@ -1497,7 +1505,9 @@ class Fixtures extends Fixture
         $newsletter = new Newsletter();
         $newsletter->setTitre($this->faker->sentence());
         $newsletter->setPublication($this->faker->dateTimeThisYear);
-        $newsletter->setDocumentPDF('newsletter' . $i . '.pdf');
+
+        $pdf = $this->genPDF('newsletter', $i);
+        $newsletter->setDocumentPDF($this->getReference('newsletter' . $i));
 
         return $newsletter;
     }
@@ -1536,7 +1546,10 @@ class Fixtures extends Fixture
         $promotion = new Promotion();
         $promotion->setNom($this->faker->words(5, true));
         $promotion->setDescription($this->faker->sentences(4, true));
-        $promotion->setDocumentPDF('promotion' . $i . $j . '.pdf');
+
+        $pdf = $this->genPDF('promo', $i.$j);
+        $promotion->setDocumentPDF($this->getReference('promo' . $i.$j));
+
         $promotion->setDebut($this->faker->dateTimeBetween('-1weeks', '3weeks'));
         $datedebut = $promotion->getDebut();
         $promotion->setFin($this->faker->dateTimeBetween($datedebut, '4weeks'));
