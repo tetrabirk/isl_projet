@@ -21,36 +21,37 @@
                                     <a href="#">
                                         <img src="{% block imgProfil %}{% endblock %}"
                                              alt="User Photo">
-                                        <span class="user-photo-action">{% block txtModifImg %}{% endblock %}</span>
                                     </a>
                                 </div><!-- /.user-photo -->
                             </div><!-- /.widget -->
 
+                            {% if utilisateur.id is not null %}
+                                <div class="widget">
 
-                            <div class="widget">
+                                    <div class="menu-advanced">
+                                        <div>Membre depuis le {{ utilisateur.Inscription|date('d-m-Y') }}</div>
+                                    </div>
+                                </div><!-- /.widget -->
+                                {% block widgets %}
 
-                                <div class="menu-advanced">
-                                    <div>Membre depuis le {{ utilisateur.Inscription|date('d-m-Y') }}</div>
-                                </div>
-                            </div><!-- /.widget -->
-                            {% block widgets %}
+                                {% endblock %}
+                                <div class="widget">
+                                    <ul class="menu-advanced">
+                                        {% block menuOptions %}
 
-                            {% endblock %}
-                            <div class="widget">
-                                <ul class="menu-advanced">
-                                    {% block menuOptions %}
+                                        {% endblock %}
+                                        <li class="active"><a href="{{ path('profil') }}"><i class="fa fa-user"></i>
+                                                Modifier Profil</a></li>
+                                        <li><a href="{{ path('mot_de_passe') }}"><i class="fa fa-key"></i> Mot de passe</a>
+                                        </li>
+                                        <li><a href="{{ path('deconnexion') }}"><i class="fa fa-sign-out"></i>
+                                                Déconnexion</a></li>
+                                        <li><a href="{{ path('profil_suppression') }}"><i class="fa fa-trash-o"></i>
+                                                Supprimer le profil</a></li>
+                                    </ul>
+                                </div><!-- /.widget -->
+                            {% endif %}
 
-                                    {% endblock %}
-                                    <li class="active"><a href="{{ path('profil') }}"><i class="fa fa-user"></i>
-                                            Modifier Profil</a></li>
-                                    <li><a href="{{ path('mot_de_passe') }}"><i class="fa fa-key"></i> Mot de passe</a>
-                                    </li>
-                                    <li><a href="{{ path('deconnexion') }}"><i class="fa fa-sign-out"></i>
-                                            Déconnexion</a></li>
-                                    <li><a href="{{ path('profil_suppression') }}"><i class="fa fa-trash-o"></i>
-                                            Supprimer le profil</a></li>
-                                </ul>
-                            </div><!-- /.widget -->
 
                         </div><!-- /.sidebar -->
                     </div><!-- /.col-* -->

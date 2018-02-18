@@ -76,10 +76,10 @@ REPOSITORIES
 PROFIL
 -favoris
 -moyenne des note
--modifier le menu de gauche pour la confirmation
 
 -modifier le 'active' dans le menu de gauche
-
+-modification mot de passe
+-suppression compte
 
 SERVICE
 

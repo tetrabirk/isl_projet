@@ -1,13 +1,12 @@
 {% extends "profil/profil_base.html.twig" %}
 
 {% block imgProfil %}{{ asset(utilisateur.logo|showImage)}}{% endblock %}
-{% block txtModifImg %}Modifier mon logo{% endblock %}
 
 {% block widgets %}
     <div class="widget">
 
         <div class="menu-advanced">
-            <div> galerie photo</div>
+            <a href="{{ path('prestataire',{'slug': utilisateur.slug}) }}" class="btn-primary"> Aller à ma page Prestataire</a>
         </div>
     </div><!-- /.widget -->
 {% endblock %}

@@ -1,21 +1,9 @@
 {% extends "profil/profil_base.html.twig" %}
 
 {% block imgProfil %}{{ asset(utilisateur.avatar|showImage)}}{% endblock %}
-{% block txtModifImg %}Modifier mon avatar{% endblock %}
 
 {% block widgets %}
 
-    <div class="widget">
-        <div class="menu-advanced">
-            <div>Newsletter
-                {% if utilisateur.newsletter != false %}
-                    <a class="btn-danger btn-xs pull-right mt-5" href="#"> Se Désabonner</a>
-                {% else %}
-                    <a class="btn-primary btn-xs pull-right mt-5" href="#">S'abonner</a>
-                {% endif %}
-            </div>
-        </div>
-    </div><!-- /.widget -->
 {% endblock %}
 
 {% block menuOptions %}
