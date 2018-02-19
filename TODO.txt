@@ -36,7 +36,7 @@ FORM
 
 - proposition de categ ne marche pas
 - lors de la proposition de categorie l'ajouter au prestataire en 'inactive'
--ajouter les categorie non validee a la sélection (mais changer la css pour les marqué non validee)
+- ajouter les categorie non validee a la sélection (mais changer la css pour les marqué non validee)
 
 CONNEXION
 
