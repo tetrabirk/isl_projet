@@ -126,6 +126,33 @@ easy_admin:
       time: 'H:i'
       datetime: 'd/m/Y H:i:s'
     design:
+        menu:
+          - { label: 'Home', route: 'homepage' }
+          - { label: 'Actions' }
+          - { label: 'Envoyer une Newsletter', route: 'homepage' }
+          - { label: '' }
+          - Utilisateur
+          - Internaute
+          - Prestataire
+          - UtilisateurTemporaire
+          - Admin
+          - { label: '' }
+          - Commentaire
+          - Abus
+          - { label: ''}
+          - CategorieDeServices
+          - Newsletter
+          - { label: ''}
+          - Localite
+          - CodePostal
+          - { label: ''}
+
+          - Stage
+          - Promotion
+          - { label: '' }
+          - Image
+          - DocumentPDF
+
         brand_color: '#009f8b'
         color_scheme: 'light'
         assets:
@@ -168,6 +195,7 @@ easy_admin:
                     - { property: 'nom', label: 'nom'}
                     - { property: 'slug', label: 'slug'}
                     - { property: 'email', label: 'E-mail', type: 'email'}
+                    - { property: 'logo', label: 'logo', type: 'image', base_path: "uploads/img"}
                     - { property: 'motDePasse', label: 'mot de passe'}
                     - { property: 'siteInternet', label: 'site', type: 'url'}
                     - { property: 'emailContact', label: 'E-mail Contact', type: 'email'}
@@ -195,12 +223,14 @@ easy_admin:
 
         CategorieDeServices:
             class: AppBundle\Entity\CategorieDeServices
+            label: 'Categories'
         Image:
             class: AppBundle\Entity\Image
             list:
                 fields:
                     - id
-                    - {property: 'nom', label: 'image', type: 'image', base_path: 'img/' }
+                    - {property: 'alt', label: 'alt' }
+                    - {property: 'getName', label: 'img', type: 'image', base_path: "uploads/img" }
                     - active
         Newsletter:
             class: AppBundle\Entity\Newsletter
@@ -211,13 +241,25 @@ easy_admin:
                     - { property: 'publication', label: "Date de publication", type: 'datetime'}
                     - { property: 'documentPDF', label: 'pdf', type: 'file', base_path: 'pdf/'}
 
-#        - AppBundle\Entity\Commentaire
-#        - AppBundle\Entity\Promotion
-#        - AppBundle\Entity\Stage
-#        - AppBundle\Entity\Abus
-#        - AppBundle\Entity\Bloc
-#        - AppBundle\Entity\CodePostal
-#        - AppBundle\Entity\Localite
-#        - AppBundle\Entity\Image
-#        - AppBundle\Entity\Newsletter
+        Commentaire:
+            class: AppBundle\Entity\Commentaire
+        Promotion:
+            class: AppBundle\Entity\Promotion
+        Stage:
+            class: AppBundle\Entity\Stage
+        Abus:
+            class: AppBundle\Entity\Abus
+        CodePostal:
+            class: AppBundle\Entity\CodePostal
+        Localite:
+            class: AppBundle\Entity\Localite
+        Admin:
+            class: AppBundle\Entity\Admin
+        DocumentPDF:
+            class: AppBundle\Entity\DocumentPDF
+        UtilisateurTemporaire:
+            class: AppBundle\Entity\UtilisateurTemporaire
+
+
+
 

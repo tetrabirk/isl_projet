@@ -1470,7 +1470,7 @@ class Fixtures extends Fixture
     public function genPDF($type,$i)
     {
         $pdf = new DocumentPDF();
-        $pdf->setUrl($type."_".$i.".jpg");
+        $pdf->setUrl($type."_".$i.".pdf");
         $this->addReference($type.$i,$pdf);
     }
 

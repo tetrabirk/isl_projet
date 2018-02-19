@@ -89,6 +89,8 @@ class CategorieDeServices
     {
         $this->prestataires = new ArrayCollection();
         $this->promotions = new ArrayCollection();
+        $this->setEnAvant(false);
+        $this->setValide(false);
     }
 
     public function addPrestataires(Prestataire $prestataire)

@@ -144,7 +144,7 @@ class Image
 
     public function __toString()
     {
-        return $this->getAlt();
+        return $this->getName();
     }
 
 
@@ -212,7 +212,11 @@ class Image
 
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+        return $this->getUploadDir().'/'.$this->getName();
     }
 
+    public function getName()
+    {
+        return $this->getId().'.'.$this->getUrl();
+    }
 }

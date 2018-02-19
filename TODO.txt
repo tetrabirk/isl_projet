@@ -25,6 +25,8 @@ ENTITY
 
 FORM
 
+-use Repository existant pour le qb dans le formtype ?? (orderby)
+
 !!! -galerie d'image ajout/suppression
 !!! -ajouter fonction derrière bouton X pour supprimer une image
 
@@ -32,18 +34,18 @@ FORM
 
 !!!! -probleme avec mes codes postaux (voir slack)
 
--proposition categorie -> "_0" au lieu de "0"
--lors de la proposition de categorie l'ajouter au prestataire en 'inactive'
+- proposition de categ ne marche pas
+- lors de la proposition de categorie l'ajouter au prestataire en 'inactive'
+-ajouter les categorie non validee a la sélection (mais changer la css pour les marqué non validee)
 
+CONNEXION
 
+-compteur d'essaie infructueux( + remise à zéro du compteur ? )
 
 UPLOAD FILES
 
 !!! -constrains image/file ?
 !!! -supprimer des fichiers
-
-CONNEXION
--empecher une personne bannie de se connecter
 
 
 ADMIN
@@ -69,7 +71,6 @@ COMMENTAIRES
 -footer à modifier
 
 REPOSITORIES
--modifier les queries pour que seul les categ validée soit afficher
 -idem pour user banis
 -idem pour image inactive
 

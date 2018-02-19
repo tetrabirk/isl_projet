@@ -27,6 +27,10 @@ class CategorieDeServicesRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function isValide($qb)
+    {
+        $qb->where('c.valide = 1');
+    }
     public function findEnAvant()
     {
         $qb = $this->createWithJoin();
@@ -40,6 +44,7 @@ class CategorieDeServicesRepository extends \Doctrine\ORM\EntityRepository
     {
         $qb = $this->createQueryBuilder('c');
         $this->addJoins($qb);
+        $this->isValide($qb);
         return $qb;
     }
 
@@ -50,6 +55,7 @@ class CategorieDeServicesRepository extends \Doctrine\ORM\EntityRepository
 
     protected function returnResult($qb)
     {
+        $qb->orderBy('c.nom','ASC');
         $query= $qb->getQuery();
         $result=$query->getResult();
         return $result;
