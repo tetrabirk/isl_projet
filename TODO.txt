@@ -121,3 +121,7 @@ $builder->add('photos', CollectionType::class,array(
 
 https://symfony.com/doc/3.4/form/form_collections.html
 
+
+================================
+
+test pour savoir si user existe deja -> assert callback
