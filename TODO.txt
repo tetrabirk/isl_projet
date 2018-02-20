@@ -98,3 +98,26 @@ SI ON A LE TEMPS
 -image slider -> ne pas les étirers (ou remplacer par des images paysage)
 
 
+====================================================================================
+
+remplace au lieu d'ajout
+------------------------
+
+EntitéA 0.* ------------------> 0.1 Image
+
+$image: ArrayCollection
+        -add(Image:i)
+	-remove(Image:i)
+	-contains(Image:i)
+
+
+----------------------------------
+$builder->add('photos', CollectionType::class,array(
+                'entry_type' => ImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+		'by_reference' => false //empèche l'app d'aller chercher le setter
+            ))
+
+https://symfony.com/doc/3.4/form/form_collections.html
+

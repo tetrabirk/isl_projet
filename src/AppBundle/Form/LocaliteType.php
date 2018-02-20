@@ -33,7 +33,7 @@ class LocaliteType extends AbstractType
 //                'attr' => ['data-select' => 'true'],
 //                'label' => 'Code postal et Localité'
 //
-//            ))
+////            ))
 
             ->add('localite', EntityType::class,array(
                 'class' => 'AppBundle:Localite',

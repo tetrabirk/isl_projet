@@ -89,7 +89,7 @@ class Localite
 
     public function getNomAffichage()
     {
-        $string = ($this->getCodePostal()->getCodePostal()).' - '.($this->getLocalite());
+        $string = ($this->getCodePostal()).' - '.($this->getLocalite());
         return $string;
 
     }

@@ -64,6 +64,7 @@ class ProfilController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $this->flushUtilisateur($user);
         }
+        dump($user);
 
         return $this->render('profil/prestataire.html.twig', array(
             'form' => $form->createView(),
@@ -93,7 +94,6 @@ class ProfilController extends Controller
 
     private function flushUtilisateur(Utilisateur $utilisateur){
         $em = $this->getDoctrine()->getManager();
-
         if (is_null($utilisateur->getId())){
 
             $utilisateur->setInscription(new \DateTime());
