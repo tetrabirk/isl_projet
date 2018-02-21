@@ -64,6 +64,13 @@
                                 {% block subTitle %}
                                 {% endblock %}
                             </div><!-- /.page-title -->
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    <div class="flash-{{ label }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
                             {% block content_profil %}
                                 <div class="background-white p20 mb30">
                                     {% block form %}

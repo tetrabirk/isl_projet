@@ -41,14 +41,11 @@
         {{ form_label(form.adresseNum) }}
         {{ form_widget(form.adresseNum) }}
     </div>
-    {#<div class="form-group col-sm-3">#}
-    {#{{ form_label(form.localite.codePostal) }}#}
-    {#{{ form_widget(form.localite.codePostal) }}#}
-    {#</div>#}
-    {#<div class="form-group col-sm-12">#}
-    {#{{ form_label(form.localite.localite) }}#}
-    {#{{ form_widget(form.localite.localite, {'attr':{'class':'col-sm-9'}}) }}#}
-    {#</div>#}
+
+    <div class="form-group col-sm-12">
+    {{ form_label(form.localite) }}
+    {{ form_widget(form.localite, {'attr':{'class':'col-sm-9'}}) }}
+    </div>
     <div class="form-group col-sm-12">
         {{ form_label(form.logo) }}
         {{ form_widget(form.logo) }}

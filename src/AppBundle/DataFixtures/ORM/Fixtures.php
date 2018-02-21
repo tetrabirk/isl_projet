@@ -1570,39 +1570,31 @@ class Fixtures extends Fixture
 
     public function genCPandLocalite($manager)
     {
-        $i = 0;
         $j = 0;
         foreach(self::$cpLocalite as $codep => $local){
 
-            $cp = new CodePostal();
-            $cp->setCodePostal($codep);
+            $cp = ($codep);
             foreach($local as $l){
                 $localite = new Localite();
                 $localite->setCodePostal($cp);
                 $localite->setLocalite($l);
-                $this->addReference('localite' .$i.$j, $localite);
+                $this->addReference('localite' .$j, $localite);
                 $manager->persist($localite);
                 $j++;
             }
-            $this->addReference('cp' .$i, $cp);
-            $manager->persist($cp);
 
-            $j=0;
-            $i++;
+
         }
 
     }
 //ce code est un peu caca parce que j'ai modifier mon entité très tard dans le projet, mais ça marche et il ne fait que 5 lignes donc ça peut pas être siiii terrible ;)
     public function addCPandLocalite(Utilisateur $user)
     {
-        $randCP = rand(0, (count(self::$cpLocalite))-1);
-        $codepostal = $this->getReference('cp'.$randCP);
-        /**
-         * @var CodePostal $codepostal
-         */
-        $codepostalvalue = $codepostal->getCodePostal();
-        $randLocal = rand(0,(count(self::$cpLocalite[$codepostalvalue]))-1);
-        $user->setLocalite($this->getReference('localite'.$randCP.$randLocal));
+        $totalCP = count(self::$cpLocalite);
+        $totalCPplusLocalite = count(self::$cpLocalite,COUNT_RECURSIVE);
+        $totalLocalite = $totalCPplusLocalite - $totalCP;
+        $randLocal = rand(0,$totalLocalite-1);
+        $user->setLocalite($this->getReference('localite'.$randLocal));
 
 
     }

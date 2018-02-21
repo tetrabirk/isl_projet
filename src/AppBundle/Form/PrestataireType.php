@@ -28,10 +28,15 @@ class PrestataireType extends AbstractType
                 'label' => 'Numéro',
                 'required' => false,
             ))
-//            ->add('localite',LocaliteType::class, array(
-//                'label' => false,
-//                'required'=>false,
-//            ))
+            ->add('localite', EntityType::class,array(
+                'class' => 'AppBundle:Localite',
+                'choice_label' => 'nomAffichage',
+                'placeholder' => 'Localité',
+                'label' => 'Code Postal - Localité',
+                'required'=>false,
+                'attr' => ['data-select' => 'true'],
+
+            ))
             ->add('nom', TextType::class, array())
             ->add('siteInternet', UrlType::class, array(
                 'required' => false,
@@ -59,13 +64,14 @@ class PrestataireType extends AbstractType
                 'attr' => ['data-select' => 'true'],
 
             ))
-//            ->add('categories', CollectionType::class, array(
-//                'entry_type' => CategorieDeServicesType::class,
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'label' => 'Categories'
-//
-//            ))
+            ->add('NewCategories', CollectionType::class, array(
+                'entry_type' => CategorieDeServicesType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'label' => 'Categories',
+                'mapped'=> false
+
+            ))
             ->add('logo',ImageType::class,array(
                 'label' => 'logo',
                 'required'=>false,

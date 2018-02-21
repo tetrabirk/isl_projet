@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -28,7 +27,6 @@ class CategorieDeServices
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="nom", type="string", length=255, unique=true)
      */
     private $nom;

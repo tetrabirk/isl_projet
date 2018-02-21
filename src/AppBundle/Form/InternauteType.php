@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -27,9 +28,17 @@ class InternauteType extends AbstractType
                 'label' => 'Numéro',
                 'required' => false,
             ))
-//            ->add('localite',LocaliteType::class, array(
-//                'label' => false,
-//            ))
+            ->add('localite', EntityType::class,array(
+                'class' => 'AppBundle:Localite',
+                'choice_label' => 'nomAffichage',
+                'placeholder' => 'Localité',
+                'label' => 'Code Postal - Localité',
+                'required'=>false,
+
+
+                'attr' => ['data-select' => 'true'],
+
+            ))
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class, array(
                 'required' => false,

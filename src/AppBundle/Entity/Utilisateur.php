@@ -65,7 +65,7 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $localite;
 
-     /**
+    /**
      * @return mixed
      */
     public function getLocalite()
@@ -375,4 +375,6 @@ class Utilisateur implements UserInterface, \Serializable
     {
         return $this->getEmail();
     }
+
+
 }

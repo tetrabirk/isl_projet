@@ -60,11 +60,10 @@ class ProfilController extends Controller
          * @var Prestataire $user
          */
         $form = $this->get('form.factory')->create(PrestataireType::class, $user);
-
+        dump($request);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $this->flushUtilisateur($user);
         }
-        dump($user);
 
         return $this->render('profil/prestataire.html.twig', array(
             'form' => $form->createView(),
@@ -98,8 +97,12 @@ class ProfilController extends Controller
 
             $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
+
         }
         $em->flush();
+        //TODO  if new user && if success -> sucess message and delete tempUser && redirect to login
+
+        //TODO if failure -> error message and "try again later"
 
     }
 

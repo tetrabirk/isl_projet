@@ -30,9 +30,9 @@ class Localite
 
 
     /**
-     * Bcp de localite on un cp
-     * @ORM\ManyToOne(targetEntity="CodePostal", inversedBy="localite")
-     * @ORM\JoinColumn(name="cp_localite",referencedColumnName="id")
+     * @var string
+     *
+     * @ORM\Column(name="code_postal", type="string", length=255)
      */
     private $codePostal;
 

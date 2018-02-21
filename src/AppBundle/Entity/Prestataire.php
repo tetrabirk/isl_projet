@@ -299,7 +299,7 @@ class Prestataire extends Utilisateur
         $this->photos = new ArrayCollection();
         $this->setNbEssaisInfructueux(0);
         $this->setBanni(false);
-        $this->setConfInscription(false);
+        $this->setConfInscription(true);
 
     }
 

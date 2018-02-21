@@ -15,17 +15,10 @@ INSCRIPTION
 !!!!! -inscription	-> suppression de l'user temporaire
 			-> "check confirmation"
 
-!!!!!-confirmation->retour à l'acceuil ou ->inscription avant de passé à la suite
+!!!!!-confirmation->retour a l'ecran de connexion
 
-!!!!!-vérifier à l'inscription si un email n'est pas déjà utiliser? (pas seuelemtn dans userTemp mais aussi dans user tt cours, Assert ?)
-
-ENTITY
-
-!!!!!- j'ai du supprimer les uniqentity de prestataire/internaute et utilisateur
 
 FORM
-
--use Repository existant pour le qb dans le formtype ?? (orderby)
 
 !!! -galerie d'image ajout/suppression
 !!! -ajouter fonction derrière bouton X pour supprimer une image
@@ -82,6 +75,8 @@ PROFIL
 -modification mot de passe
 -suppression compte
 
+-faire fonctionner la map
+
 SERVICE
 
 -faire fonctionner le service mail
@@ -96,6 +91,8 @@ SI ON A LE TEMPS
 -frontpage avec blocs
 -select2 css différent pour la searchbar et formulaire
 -image slider -> ne pas les étirers (ou remplacer par des images paysage)
+-auto selection du numero de rue dans les forms au lieux du nom de la rue+ num
+-théoriquement si l'user change de mail il devrai re-recevoir un mail de conf...
 
 
 ====================================================================================
@@ -124,4 +121,6 @@ https://symfony.com/doc/3.4/form/form_collections.html
 
 ================================
 
-test pour savoir si user existe deja -> assert callback
+-Unique email Temporaire avec message différent, est ce que je le met dans Unique VAlidator ? 
+
+-comment checker après le flush si un user est un nouvel utilisateur? 

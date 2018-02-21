@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use AppBundle\Service\MailHandler;
 
 class SecurityController extends Controller
 {
@@ -48,7 +49,7 @@ class SecurityController extends Controller
     /**
      * @Route("/inscription", name="inscription")
      */
-    public function inscriptionAction(Request $request, EncoderFactoryInterface $encoderFactory, \Swift_Mailer $mailer)
+    public function inscriptionAction(Request $request, EncoderFactoryInterface $encoderFactory, MailHandler $mailHandler)
     {
         $utilisateurT = new UtilisateurTemporaire();
         $form = $this->createForm(UtilisateurTemporaireType::class, $utilisateurT,
@@ -63,11 +64,10 @@ class SecurityController extends Controller
             $email = $utilisateurT->getEmail();
             $token = $utilisateurT->getToken();
 
-            $this->sendEmail($email,$token,$mailer);
+            $mailHandler->mailConfirmation($email,$token);
 
             //TODO error handler :  si le mail ne s'envoie pas -> supprimer l'user temporaire et dire qu'il y a eu une erreur et de recommencer
-            //TODO                  si l'utisateur existe déjà -> message d'erreur  ->si c'est un tempuser -> demander si il veut renvoyer le mail
-            //TODO                                                                  ->sinon -> proposer de réessayer avec une autre adresse
+            //TODO                  si le tempuser existe déjà -> demander si il veut renvoyer le mail
 
             $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
 
@@ -117,18 +117,10 @@ class SecurityController extends Controller
         return $this->render('security/mot_de_passe.html.twig', array());
     }
 
-    public function sendEmail($email, $token, $mailer)
-    {
-        $message = (new \Swift_Message('hello Email'))
-            ->setFrom('send@example')
-            ->setTo($email)
-            ->setBody(
-                $this->renderView('email/confirmation.html.twig', array(
-                    'token' => $token
-                )), 'text/html'
-            );
-        $mailer->send($message);
 
+    public function sendEmail($email, $token, $mailer,MailHandler $mailHandler)
+    {
+        $mailHandler->mailConfirmation($email,$token,$mailer);
     }
 
     public function persistUserTemp(UtilisateurTemporaire $utilisateurT, $encoderFactory)

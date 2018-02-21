@@ -38,6 +38,10 @@
 
 }
 
+/*#localite.ttrbrkselect span:first-of-type{*/
+    /*max-width: 200px  !important;*/
+/*}*/
+
 .ttrbrkselect .form-control {
     height: 34px !important;
 }
