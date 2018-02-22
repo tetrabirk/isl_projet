@@ -44,7 +44,7 @@ class MailHandler
         $message = (new \Swift_Message($subject))
             ->setFrom(self::SENDER_EMAIL)
             ->setTo($email)
-            ->setBody($this->templating->render($view, $param, 'text/html'));
+            ->setBody($this->templating->render($view, $param), 'text/html');
 
         $this->mailer->send($message);
 

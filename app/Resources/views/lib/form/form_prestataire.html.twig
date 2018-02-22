@@ -88,15 +88,17 @@
         <div>
             {{ form_label(form.photos) }}
         </div>
-        <div>
-            {% for photo in utilisateur.photos %}
-            <div class="form-photos">
-                <img  src="{{ asset(photo|showImage) }}" width="200px" alt="test">
-                <a href="#" class="btn-xs btn-danger">X</a>
-            </div>
-        </div>
+        {#<div>#}
+            {#{% for photo in utilisateur.photos %}#}
+                {#<div class="form-photos">#}
+                    {#<img  src="{{ asset(photo|showImage) }}" width="200px" alt="test">#}
+                    {#<a href="#" class="btn-xs btn-danger">X</a>#}
+                {#</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+
         <div class="form-group col-sm-12">
-            {% endfor %}
+
             {{ form_widget(form.photos) }}
             <div class ='clearfix'></div>
         <a href="#" id="add_photos" class="btn btn-primary btn-xs pull-right">Ajouter une Photos à la gallerie</a>

@@ -144,7 +144,6 @@ easy_admin:
           - Newsletter
           - { label: ''}
           - Localite
-          - CodePostal
           - { label: ''}
 
           - Stage
@@ -172,7 +171,6 @@ easy_admin:
                     - { property: 'type', label: 'type'}
                     - { property: 'adresseNum', label: '# Rue'}
                     - { property: 'adresseRue', label: 'Rue'}
-                    - { property: 'codePostal', label: 'CP', type: 'association'}
                     - { property: 'localite', label: 'Localite', type: 'association'}
                     - { property: 'inscription', label: "Date d'inscription", type: 'datetime'}
                     - { property: 'nbEssaisInfructueux', label: "nbre d'essais infructueux"}
@@ -203,7 +201,6 @@ easy_admin:
                     - { property: 'numTVA', label: '# TVA'}
                     - { property: 'adresseNum', label: '# Rue'}
                     - { property: 'adresseRue', label: 'Rue'}
-                    - { property: 'codePostal', label: 'CP', type: 'association'}
                     - { property: 'localite', label: 'Localite', type: 'association'}
                     - { property: 'inscription', label: "Date d'inscription", type: 'datetime'}
                     - { property: 'nbEssaisInfructueux', label: "nbre d'essais infructueux"}
@@ -249,8 +246,6 @@ easy_admin:
             class: AppBundle\Entity\Stage
         Abus:
             class: AppBundle\Entity\Abus
-        CodePostal:
-            class: AppBundle\Entity\CodePostal
         Localite:
             class: AppBundle\Entity\Localite
         Admin:

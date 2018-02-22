@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
     var $container = $('div#appbundle_prestataire_photos');
-    $('div#appbundle_prestataire_photos > .form-group').remove();
+    // $('div#appbundle_prestataire_photos > .form-group').remove();
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
     var index = $container.find('.index-photos').length;

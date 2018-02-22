@@ -42,18 +42,13 @@ class SearchType extends AbstractType
 //                'attr' => ['data-select' => 'true'],
 //            ))
 
-            ->add('localite',EntityType::class,array(
-                'class'=> 'AppBundle:Localite',
-                'query_builder' => function (LocaliteRepository $qb){
-                    return $qb->createQueryBuilder('l');
 
-                },
-                'choice_label'=> function(Localite $localite){
-                    return $localite->getNomAffichage();
-                },
+            ->add('localite', EntityType::class,array(
+                'class' => 'AppBundle:Localite',
+                'choice_label' => 'nomAffichage',
                 'placeholder' => 'Localité',
+                'label' => 'Code Postal - Localité',
                 'required'=>false,
-                'empty_data' => null,
                 'attr' => ['data-select' => 'true'],
 
             ))

@@ -8,12 +8,9 @@ ERREURS
 !!!! -catch des erreurs  + affichage de msg d'erreur et succes
 
 
-
-
 INSCRIPTION
 
 !!!!! -inscription	-> suppression de l'user temporaire
-			-> "check confirmation"
 
 !!!!!-confirmation->retour a l'ecran de connexion
 
@@ -29,6 +26,14 @@ FORM
 - lors de la proposition de categorie l'ajouter au prestataire en 'inactive'
 - ajouter les categorie non validee a la sélection (mais changer la css pour les marqué non validee)
 
+-plus coulant pour les num tva
+
+-catch et affiche erreur (ex: num tva)
+
+FIXTURES
+-fixture site internet ajouter http:// etc
+
+
 CONNEXION
 
 -compteur d'essaie infructueux( + remise à zéro du compteur ? )
@@ -36,6 +41,7 @@ CONNEXION
 UPLOAD FILES
 
 !!! -constrains image/file ?
+!!! UPLOAD ARRAY NE FONCTIONNE PLUS -> fait un service ca sera plus propre
 !!! -supprimer des fichiers
 
 
@@ -117,8 +123,3 @@ $builder->add('photos', CollectionType::class,array(
 https://symfony.com/doc/3.4/form/form_collections.html
 
 
-================================
-
--Unique email Temporaire avec message différent, est ce que je le met dans Unique VAlidator ?
-
--comment checker après le flush si un user est un nouvel utilisateur? 

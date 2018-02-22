@@ -25,14 +25,28 @@ class UniqueEmailValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         $email = $object->getEmail();
-        $conflicts = $this->em
-            ->getRepository('AppBundle:Utilisateur')
-            ->findOneBy(array('email'=>$email))
-            ;
+        $qb = $this->em->createQueryBuilder();
+        $qb->from("AppBundle:Utilisateur",'u');
+        $qb->from("AppBundle:UtilisateurTemporaire",'ut');
+        $qb->select(array("u.email as user","ut.email as usertemp"));
+        $qb->where("u.email = :email OR ut.email = :email");
+        $qb->setParameter("email", $email);
+        $qb->groupBy("user");
+        $qb->groupBy("usertemp");
+
+        $conflicts=$qb->getQuery()->getResult();
+        dump($conflicts);
+
 
         if($conflicts != null){
-            $this->context->buildViolation('Cet Email est déjà utilisé par un autre Utilisateur')
-                ->addViolation();
+            if($conflicts[0]['user']==$email){
+                $this->context->buildViolation('Cet Email est déjà utilisé par un autre Utilisateur')
+                    ->addViolation();
+            }elseif($conflicts[0]['usertemp']==$email){
+                $this->context->buildViolation('Cet Email est en attente de validation, merci de vérifier vos mails')
+                    ->addViolation();
+            }
+
         }
     }
 
