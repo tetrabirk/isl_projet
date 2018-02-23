@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 
         // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('div#appbundle_prestataire_categories_container');
+    var $container = $('div#appbundle_prestataire_newCategories');
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
     var index = ($container.find('.index-categ').length);
@@ -30,9 +30,9 @@ $(document).ready(function () {
     //
     // } else {
     //     // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-    //     $container.children('div').each(function () {
-    //         addDeleteLink($(this));
-    //     });
+        $container.children('div').each(function () {
+            addDeleteLink($(this));
+        });
     // }
 
     // La fonction qui ajoute un formulaire CategoryType
@@ -42,7 +42,7 @@ $(document).ready(function () {
         // - le texte "__name__label__" qu'il contient par le label du champ
         // - le texte "__name__" qu'il contient par le numéro du champ
         var template = $container.attr('data-prototype')
-            .replace(/__name__label__/g,(index+1))
+            .replace(/__name__label__/g,(('Nouvelle Categorie ')+(index+1)))
             .replace(/__name__/g,index)
         ;
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
     // La fonction qui ajoute un lien de suppression d'une catégorie
     function addDeleteLink($prototype) {
         // Création du lien
-        var $deleteLink = $('<a href="#" class="btn btn-danger btn-xs mb50 mt-50">Supprimer</a>');
+        var $deleteLink = $('<a href="#" class="btn btn-danger btn-xs">Supprimer</a>');
 
         // Ajout du lien
         $prototype.append($deleteLink);

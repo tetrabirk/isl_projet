@@ -20,7 +20,9 @@ class InternauteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class,array(
+                'disabled' => true,
+            ))
             ->add('adresseRue', TextType::class, array(
                 'required' => false,
             ))

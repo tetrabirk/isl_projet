@@ -43,66 +43,31 @@
     </div>
 
     <div class="form-group col-sm-12">
-    {{ form_label(form.localite) }}
-    {{ form_widget(form.localite, {'attr':{'class':'col-sm-9'}}) }}
+        {{ form_label(form.localite) }}
+        {{ form_widget(form.localite, {'attr':{'class':'col-sm-9'}}) }}
     </div>
     <div class="form-group col-sm-12">
         {{ form_label(form.logo) }}
         {{ form_widget(form.logo) }}
     </div>
 
+
     <div class="form-group col-sm-12">
         {{ form_label(form.categories) }}
         {{ form_widget(form.categories) }}
-
+        <a href="#" id="add_category" class="btn btn-primary btn-xs pull-right mt30">Proposer et ajouter une catégorie</a>
     </div>
-
-
-</div>
-<div class="row ttrbrkprest">
-    <a href="#" id="add_category" class="btn btn-primary btn-xs pull-right">Proposer et ajouter une catégorie</a>
-</div>
-<div class="row">
-    <div id="appbundle_prestataire_categories_container"
-         data-prototype="   <div class=&quot;formcategorie&quot;>
-                                <div class=&quot;index-categ&quot;>
-                                    <label class=&quot;index-categ control-label&quot;>Categorie __name__label__</label>
-                                </div>
-                                <div class=&quot;form-group col-sm-4&quot;>
-                                    <label class=&quot;control-label required&quot; for=&quot;appbundle_prestataire_categories____name__label&quot;>Nom</label>
-                                    <input type=&quot;text&quot; id=&quot;appbundle_prestataire_categories___name___nom&quot; name=&quot;appbundle_prestataire[categories][__name__][nom]&quot;required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control&quot;/>
-                                </div>
-                                <div class=&quot;form-group col-sm-8&quot;>
-                                    <label class=&quot;control-label&quot; for=&quot;appbundle_prestataire_categories____name___description&quot;>Description</label>
-                                    <textarea id=&quot;appbundle_prestataire_categories____name___description&quot;name=&quot;appbundle_prestataire[categories][__name__][description]&quot; rows=&quot;4&quot;class=&quot;form-control&quot;></textarea>
-                                </div>
-                            </div>"
-    >
-
-
-    </div>
-</div>
-
-<div class="row">
     <div class="form-group col-sm-12">
-        <div>
-            {{ form_label(form.photos) }}
-        </div>
-        {#<div>#}
-            {#{% for photo in utilisateur.photos %}#}
-                {#<div class="form-photos">#}
-                    {#<img  src="{{ asset(photo|showImage) }}" width="200px" alt="test">#}
-                    {#<a href="#" class="btn-xs btn-danger">X</a>#}
-                {#</div>#}
-            {#{% endfor %}#}
-        {#</div>#}
+        {{ form_label(form.newCategories) }}
+        {{ form_widget(form.newCategories) }}
+    </div>
 
-        <div class="form-group col-sm-12">
 
-            {{ form_widget(form.photos) }}
-            <div class ='clearfix'></div>
+    <div class="form-group col-sm-12">
+        {{ form_label(form.photos) }}
+        {{ form_widget(form.photos) }}
+        <div class='clearfix'></div>
         <a href="#" id="add_photos" class="btn btn-primary btn-xs pull-right">Ajouter une Photos à la gallerie</a>
-        </div>
     </div>
 </div>
 

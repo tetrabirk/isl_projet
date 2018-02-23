@@ -20,7 +20,9 @@ class PrestataireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, array(
+                'disabled' => true,
+            ))
             ->add('adresseRue', TextType::class, array(
                 'required' => false,
             ))
@@ -64,11 +66,11 @@ class PrestataireType extends AbstractType
                 'attr' => ['data-select' => 'true'],
 
             ))
-            ->add('NewCategories', CollectionType::class, array(
+            ->add('newCategories', CollectionType::class, array(
                 'entry_type' => CategorieDeServicesType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'label' => 'Categories',
+                'label' => false,
                 'mapped'=> false
 
             ))
