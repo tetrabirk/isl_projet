@@ -13,9 +13,12 @@ use AppBundle\Entity\Image;
 use AppBundle\Entity\Internaute;
 use AppBundle\Entity\Prestataire;
 use AppBundle\Entity\Utilisateur;
+use AppBundle\Entity\UtilisateurTemporaire;
+use AppBundle\Form\CategorieDeServicesType;
 use AppBundle\Form\InternauteType;
 use AppBundle\Form\PrestataireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,19 +31,23 @@ class ProfilController extends Controller
     /**
      * @Route("/profil", name="profil")
      */
-    public function profilAction($newUser = null, Request $request)
+    public function profilAction($newUser = null,$userTemp = null, Request $request)
     {
-        if(isset($newUser)){
+
+        if (isset($newUser)) {
             $user = $newUser;
-        }else{
+        } else {
             $user = $this->getUser();
         }
         $userType = $user->getType();
 
+
+
         if ($userType == "Prestataire") {
-            return $this->loadProfilPrestataire($request, $user);
+            return $this->loadProfilPrestataire($request, $user, $userTemp);
         } else {
-            return $this->loadProfilInternaute($request,$user);
+
+            return $this->loadProfilInternaute($request, $user, $userTemp);
         }
 
     }
@@ -54,15 +61,22 @@ class ProfilController extends Controller
     }
 
 
-    public function loadProfilPrestataire($request, $user)
+    public function loadProfilPrestataire(Request $request, $user, $userTemp)
     {
         /**
          * @var Prestataire $user
          */
         $form = $this->get('form.factory')->create(PrestataireType::class, $user);
-        dump($request, $user, $form);
+
+        $action = null;
+
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->flushUtilisateur($user);
+            $this->newCategManagement($form,$user);
+            $action = $this->flushUtilisateur($user, $userTemp);
+        }
+
+        if ($action == "newUser") {
+            return $this->redirectToRoute('connexion');
         }
 
         return $this->render('profil/prestataire.html.twig', array(
@@ -71,16 +85,22 @@ class ProfilController extends Controller
         ));
     }
 
-    public function loadProfilInternaute($request, $user)
+    public function loadProfilInternaute($request, $user, $userTemp)
     {
         /**
          * @var Internaute $user
          */
         $form = $this->get('form.factory')->create(InternauteType::class, $user);
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->flushUtilisateur($user);
+        $action = null;
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $action = $this->flushUtilisateur($user, $userTemp);
+
+        }
+
+        if ($action == "newUser") {
+            return $this->redirectToRoute('connexion');
         }
 
         return $this->render('profil/internaute.html.twig', array(
@@ -90,24 +110,46 @@ class ProfilController extends Controller
     }
 
 
-
-    private function flushUtilisateur(Utilisateur $utilisateur){
+    private function flushUtilisateur(Utilisateur $utilisateur, UtilisateurTemporaire $userTemp)
+    {
         $em = $this->getDoctrine()->getManager();
-        if (is_null($utilisateur->getId())){
+
+        if (is_null($utilisateur->getId())) {
+
 
             $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
             $em->flush();
             //TODO if success -> sucess message and delete tempUser
-            return $this->redirectToRoute('connexion');
-
-        }else{
+            $em->remove($userTemp);
             $em->flush();
-            return 'sucess!';
+            return 'newUser';
+
+        } else {
+            $em->flush();
+            return 'profil';
         }
 
 
         //TODO if failure -> error message and "try again later"
+    }
+
+    private function newCategManagement($form, $user)
+    {
+        /**
+         * @var Form $form
+         * @var CategorieDeServices $newCateg
+         * @var Prestataire $user
+         */
+        $newCategArray = ($form->get('newCategories')->getData());
+
+        foreach ($newCategArray as $newCateg) {
+
+            $newCateg->setValide(false);
+            $newCateg->addPrestataires($user);
+
+            $user->addCategorie($newCateg);
+        }
     }
 
 

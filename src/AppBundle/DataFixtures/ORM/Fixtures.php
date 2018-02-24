@@ -1384,7 +1384,7 @@ class Fixtures extends Fixture
         $prestataire->setConfInscription(true);
 
         $prestataire->setNom($this->faker->words(2, true));
-        $prestataire->setSiteInternet($this->faker->domainName);
+        $prestataire->setSiteInternet('http://www.'.$this->faker->domainName);
         $prestataire->setEmailContact($this->faker->email);
         $prestataire->setTelephone($this->faker->phoneNumber);
         $prestataire->setNumTVA($this->faker->vat);

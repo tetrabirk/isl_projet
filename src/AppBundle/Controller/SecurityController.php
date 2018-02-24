@@ -102,7 +102,7 @@ class SecurityController extends Controller
         $utilisateur->setEmail($utilisateurT->getEmail());
         $utilisateur->setMotDePasse($utilisateurT->getMotDePasse());
 
-        return $this->traitementNewUser($utilisateur);
+        return $this->traitementNewUser($utilisateur, $utilisateurT);
 
         //TODO if success -> sucess message and delete tempUser
         //TODO if failure -> error message and "try again later"
@@ -120,7 +120,7 @@ class SecurityController extends Controller
 
     public function sendEmail($email, $token, $mailer,MailHandler $mailHandler)
     {
-        $mailHandler->mailConfirmation($email,$token,$mailer);
+        $mailHandler->mailConfirmation($email,$token);
     }
 
     public function persistUserTemp(UtilisateurTemporaire $utilisateurT, $encoderFactory)
@@ -140,7 +140,7 @@ class SecurityController extends Controller
     }
 
 
-    public function traitementNewUser($utilisateur)
+    public function traitementNewUser($utilisateur,$utilisateurT)
     {
         $user = $utilisateur;
         $image = new Image();
@@ -164,6 +164,7 @@ class SecurityController extends Controller
         //forward to profilController
         return $this->forward('AppBundle\Controller\ProfilController::ProfilAction', array(
             'newUser' => $user,
+            'userTemp' =>$utilisateurT
         ));
     }
 

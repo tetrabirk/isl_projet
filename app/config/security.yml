@@ -28,6 +28,8 @@ security:
             logout:
                 path: /deconnexion
                 target: /
+#            logout_on_user_change: true
+            # activate different ways to authenticate
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

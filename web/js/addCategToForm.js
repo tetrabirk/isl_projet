@@ -10,8 +10,7 @@ $(document).ready(function () {
     var $container = $('div#appbundle_prestataire_newCategories');
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = ($container.find('.index-categ').length);
-
+    var index = ($container.children().length);
 
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.

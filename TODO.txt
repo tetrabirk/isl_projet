@@ -8,42 +8,23 @@ ERREURS
 !!!! -catch des erreurs  + affichage de msg d'erreur et succes
 
 
-INSCRIPTION
-
-!!!!! -inscription	-> suppression de l'user temporaire
-
-!!!!!-confirmation->retour a l'ecran de connexion
-
-
 FORM
 
-!!! -galerie d'image ajout/suppression
-!!! -ajouter fonction derrière bouton X pour supprimer une image
-
--checkbox de merde ne veux pas s'afficher (newsletter)
-
-- proposition de categ ne marche pas
-- lors de la proposition de categorie l'ajouter au prestataire en 'inactive'
-- ajouter les categorie non validee a la sélection (mais changer la css pour les marqué non validee)
-
--plus coulant pour les num tva
-
 -catch et affiche erreur (ex: num tva)
-
-FIXTURES
--fixture site internet ajouter http:// etc
-
 
 CONNEXION
 
 -compteur d'essaie infructueux( + remise à zéro du compteur ? )
+-message d'erreur spécifique si utilsateur existant mais non confirmé
 
 UPLOAD FILES
 
-!!! -constrains image/file ?
-!!! UPLOAD ARRAY NE FONCTIONNE PLUS -> fait un service ca sera plus propre
-!!! -supprimer des fichiers
+!!! -suppressions des fichiers (pdf)
 
+SECURITY
+
+regarder après la déprecation
+http://symfony.com/doc/3.4/security/custom_provider.html
 
 ADMIN
 
@@ -83,9 +64,10 @@ PROFIL
 
 SERVICE
 
--faire fonctionner le service mail
+-etoffer le service mail
 -gestion news (mail -> pdf etc)
 -service paginations ?
+-validator (date de stage etc)
 
 DEV
 -virer mon bout de code pour l'affichage temporaire de logos etc
@@ -97,29 +79,7 @@ SI ON A LE TEMPS
 -image slider -> ne pas les étirers (ou remplacer par des images paysage)
 -auto selection du numero de rue dans les forms au lieux du nom de la rue+ num
 -théoriquement si l'user change de mail il devrai re-recevoir un mail de conf...
+-checkbox de merde ne veux pas s'afficher (newsletter)
 
 
 ====================================================================================
-
-remplace au lieu d'ajout
-------------------------
-
-EntitéA 0.* ------------------> 0.1 Image
-
-$image: ArrayCollection
-        -add(Image:i)
-	-remove(Image:i)
-	-contains(Image:i)
-
-
-----------------------------------
-$builder->add('photos', CollectionType::class,array(
-                'entry_type' => ImageType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-		'by_reference' => false //empèche l'app d'aller chercher le setter
-            ))
-
-https://symfony.com/doc/3.4/form/form_collections.html
-
-

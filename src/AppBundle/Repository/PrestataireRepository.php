@@ -3,8 +3,9 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\CategorieDeServices;
-use AppBundle\Entity\Prestataire;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -39,7 +40,7 @@ class PrestataireRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         $this->addBasicJoins($qb);
-        $qb->leftJoin('p.localite', 'localite')->addSelect('localite');
+        $qb->leftJoin('p.localite', 'l')->addSelect('l');
 
         $qb->join('p.categories', 'c', 'WITH', $qb->expr()->eq('c.id', $categ->getId()));
         $qb->orderBy('p.nom', 'ASC');
@@ -55,7 +56,7 @@ class PrestataireRepository extends EntityRepository
         $this->addAllJoins($qb);
 
         $qb->orderBy('p.inscription', 'DESC');
-        $qb->setMaxResults(4);
+        $qb->setMaxResults($n);
         $pag = new Paginator($qb);
         return $pag;
 
@@ -68,15 +69,15 @@ class PrestataireRepository extends EntityRepository
 
 
         if (!is_null($categorie)){
-            $qb->join('p.categories','c','WITH',$qb->expr()->in('c.id',$categorie));
+            $qb->join('p.categories','c','WITH',$qb->expr()->in('c.id',$categorie))->andWhere('c.valide = 1');
         }else{
-            $qb->leftJoin('p.categories','categories')->addSelect('categories');
+            $qb->leftJoin('p.categories','c')->addSelect('c')->andWhere('c.valide = 1');
         }
 
         if (!empty($localite)){
             $qb->join('p.localite','l','WITH', $qb->expr()->eq('l.id',$localite));
         }else{
-            $qb->leftJoin('p.localite','localite')->addSelect('localite');
+            $qb->leftJoin('p.localite','l')->addSelect('l');
         }
 
         if(!empty($motcle)){
@@ -94,39 +95,39 @@ class PrestataireRepository extends EntityRepository
 
     //fonction pas très utile mais qui existe pour des raisons de lisibilité
 
-    protected function returnQuery($qb)
+    protected function returnQuery(QueryBuilder $qb)
     {
         $query = $qb->getQuery();
         return $query;
     }
 
-    protected function returnResult($query)
+    protected function returnResult(Query $query)
     {
         $result = $query->getResult();
         return $result;
     }
 
-    protected function returnSingleResult($query)
+    protected function returnSingleResult(Query $query)
     {
         $result = $query->getSingleResult();
         return $result;
     }
 
 
-    protected function addAllJoins($qb)
+    protected function addAllJoins(QueryBuilder $qb)
     {
         $this->addBasicJoins($qb);
 
-        $qb->leftJoin('p.categories', 'categories')->addSelect('categories');
-        $qb->leftJoin('p.localite', 'localite')->addSelect('localite');
+        $qb->leftJoin('p.categories', 'c')->addSelect('c')->andWhere('c.valide = 1');
+        $qb->leftJoin('p.localite', 'l')->addSelect('l');
     }
 
     //ajoute les joins moins ceux concerner par les recherche etc
-    protected function addBasicJoins($qb)
+    protected function addBasicJoins(QueryBuilder $qb)
     {
-        $qb->leftJoin('p.stages', 'stages')->addSelect('stages');
-        $qb->leftJoin('p.promotions', 'promotions')->addSelect('promotions');
-        $qb->leftJoin('p.photos', 'photos')->addSelect('photos');
+        $qb->leftJoin('p.stages', 's')->addSelect('s');
+        $qb->leftJoin('p.promotions', 'pr')->addSelect('pr');
+        $qb->leftJoin('p.photos', 'ph')->addSelect('ph');
         $qb->leftJoin('p.logo', 'logo')->addSelect('logo');
         $qb->leftJoin('p.internautesFavoris', 'fav')->addSelect('fav');
     }

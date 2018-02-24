@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Localite;
+use AppBundle\Repository\CategorieDeServicesRepository;
 use AppBundle\Repository\LocaliteRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -55,6 +56,9 @@ class SearchType extends AbstractType
 
             ->add('categorie',EntityType::class,array(
                 'class'=> 'AppBundle:CategorieDeServices',
+                'query_builder'=> function(CategorieDeServicesRepository $repo){
+                    return $repo->getQBCategValide();
+                },
                 'choice_label'=> 'nom',
                 'multiple' => 'true',
                 'placeholder' => 'Categorie',

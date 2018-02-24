@@ -5,7 +5,7 @@ $(document).ready(function () {
     // $('div#appbundle_prestataire_photos > .form-group').remove();
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = $container.find('.index-photos').length;
+    var index = ($container.children().length);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_photos').click(function (e) {
@@ -15,6 +15,18 @@ $(document).ready(function () {
         return false;
     });
 
+
+    //on ajoute un preview de la photo
+
+    $container.children('div').each(function () {
+        addPreviewImage($(this));
+    });
+
+
+    // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+    $container.children('div').each(function () {
+        addDeleteLink($(this));
+    });
 
     // La fonction qui ajoute un formulaire PhotoType
     function addPhoto($container) {
@@ -44,7 +56,6 @@ $(document).ready(function () {
     function addDeleteLink($prototype) {
         // Création du lien
         var $deleteLink = $('<a href="#" class="btn btn-danger btn-xs">Supprimer</a>');
-
         // Ajout du lien
         $prototype.append($deleteLink);
 
@@ -55,5 +66,26 @@ $(document).ready(function () {
             e.preventDefault(); // évite qu'un # apparaisse dans l'URL
             return false;
         });
+    }
+
+    function addPreviewImage($prototype){
+        //creation du liens vers l'image
+        var $imglink = $($prototype).find('input').attr('img-path');
+        $($prototype).find('label').replaceWith("<img class ='photos-profil' src='"+getBaseUrl()+$imglink+"'>");
+        $($prototype).find('input').hide();
+
+    }
+
+    function getBaseUrl(){
+        //recupere l'adresse
+        var re_url = new RegExp(/^.*\//);
+        //recupere app_dev.php
+        var re_appdev = new RegExp(/\/(app_dev\.php\/)$/);
+        $adresse1= re_url.exec(window.location.href);
+
+        if(re_appdev.exec($adresse1)){
+            $adresse1[0] = $adresse1[0].substring(0,$adresse1[0].length-12);
+        }
+        return $adresse1;
     }
 });

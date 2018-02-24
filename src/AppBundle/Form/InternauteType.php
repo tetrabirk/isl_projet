@@ -54,9 +54,8 @@ class InternauteType extends AbstractType
                     'oui' => true,
                     'non' => false,
                 ),
-                'empty_data' => 'true',
                 'label' => "Inscription à la Newsletter",
-                'required' => false
+                'required' => true,
             ))
             ->add('enregistrer', SubmitType::class);
     }

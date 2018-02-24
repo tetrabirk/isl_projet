@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\CategorieDeServices;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -30,12 +31,12 @@ class PrestataireType extends AbstractType
                 'label' => 'Numéro',
                 'required' => false,
             ))
-            ->add('localite', EntityType::class,array(
+            ->add('localite', EntityType::class, array(
                 'class' => 'AppBundle:Localite',
                 'choice_label' => 'nomAffichage',
                 'placeholder' => 'Localité',
                 'label' => 'Code Postal - Localité',
-                'required'=>false,
+                'required' => false,
                 'attr' => ['data-select' => 'true'],
 
             ))
@@ -57,34 +58,46 @@ class PrestataireType extends AbstractType
             ))
             ->add('categories', EntityType::class, array(
                 'class' => 'AppBundle:CategorieDeServices',
-                'choice_label' => 'nom',
+                'choice_label' => function ($categories) {
+                    /**
+                     * @var CategorieDeServices $categories
+                     */
+                    $string =$categories->getNom();
+                    if (!$categories->getValide()){
+                        $string .= " (En attente de validation)";
+                    }
+                    return $string;
+                },
                 'multiple' => 'true',
                 'placeholder' => 'Categorie',
                 'required' => false,
                 'empty_data' => null,
                 'label' => 'Categories',
                 'attr' => ['data-select' => 'true'],
+                'by_reference' => false,
 
             ))
             ->add('newCategories', CollectionType::class, array(
                 'entry_type' => CategorieDeServicesType::class,
+                'attr' => ['class' => 'ttrbrk_newCategorie'],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'label' => false,
-                'mapped'=> false
+                'mapped' => false
 
             ))
-            ->add('logo',ImageType::class,array(
+            ->add('logo', ImageType::class, array(
                 'label' => 'logo',
-                'required'=>false,
+                'required' => false,
             ))
-
-            ->add('photos', CollectionType::class,array(
+            ->add('photos', CollectionType::class, array(
                 'entry_type' => ImageType::class,
+
+                'required' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'by_reference' => false,
             ))
-
             ->add('enregistrer', SubmitType::class);
     }
 

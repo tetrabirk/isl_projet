@@ -37,19 +37,21 @@
                                     <div class="detail-contact">
                                         <div class="detail-contact-email">
                                             <i class="fa fa-envelope-o"></i> <a
-                                                    href="mailto:{{ prestataire.emailContact|default('') }}">{{ prestataire.emailContact|default('') }}</a>
+                                                    href="mailto:{{ prestataire.emailContact|default('#') }}">{{ prestataire.emailContact|default("Non disponible") }}</a>
                                         </div>
                                         <div class="detail-contact-phone">
                                             <i class="fa fa-mobile-phone"></i> <a
-                                                    href="tel:{{ prestataire.telephone|default('') }}">{{ prestataire.telephone|default('') }}</a>
+                                                    href="tel:{{ prestataire.telephone|default('#') }}">{{ prestataire.telephone|default('Non disponible') }}</a>
                                         </div>
                                         <div class="detail-contact-website">
-                                            <i class="fa fa-globe"></i> <a href="{{ prestataire.siteInternet|default('') }}">{{ prestataire.siteInternet|default('') }}</a>
+                                            <i class="fa fa-globe"></i> <a
+                                                    href="{{ prestataire.siteInternet|default('#') }}">{{ prestataire.siteInternet|default("Non disponible") }}</a>
                                         </div>
                                         <div class="detail-contact-address">
                                             <i class="fa fa-map-o"></i>
-                                            {{ prestataire.adresseRue|default('')~', '~prestataire.adresseNum|default('') }}<br>
-                                            {{ prestataire.localite.codePostal|default('')~' '~prestataire.localite.localite|default('') }}
+                                            {{ prestataire.adresseRue|default("Non disponible")~', '~prestataire.adresseNum|default("") }}
+                                            <br>
+                                            {{ prestataire.localite.codePostal|default('')~' '~prestataire.localite.localite|default("") }}
                                         </div>
                                     </div><!-- /.detail-contact -->
                                 </div><!-- /.detail-vcard -->
@@ -126,41 +128,59 @@
                     <div class="row detail-content mt30">
                         <div class="col-sm-6">
                             <h2>Stages</h2>
+                            {% if prestataire.stages is not empty %}
                                 {% for stage in prestataire.stages %}
                                     {% if stage.affichageDe < date() and stage.affichageJusque > date() %}
-                                        <div >
+                                        <div>
                                             <div class="background-white p20 mb30">
                                                 <h4>{{ stage.nom }} <strong>{{ stage.tarif~" €" }}</strong></h4>
-                                                <h5> du {{ stage.debut|date('d/m/Y')}} au {{ stage.fin|date('d/m/Y')}}</h5>
+                                                <h5> du {{ stage.debut|date('d/m/Y') }}
+                                                    au {{ stage.fin|date('d/m/Y') }}</h5>
                                                 <p>{{ stage.description }}</p>
                                                 <br>
                                                 {% if stage.infoComplementaire is defined %}
-                                                <h6> Informations Complémentaires</h6>
-                                                <p>{{ stage.infoComplementaire }}</p>
+                                                    <h6> Informations Complémentaires</h6>
+                                                    <p>{{ stage.infoComplementaire }}</p>
                                                 {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <div>
+                                    <div class="background-white p20 mb30">
+                                        <h4>Ce prestataire ne propose pas de stages pour le moment</h4>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="col-sm-6">
+                            <h2>Promotions</h2>
+                            {% if prestataire.promotions is not empty %}
+                                {% for promo in prestataire.promotions %}
+                                    {% if promo.affichageDe < date() and promo.affichageJusque > date() %}
+                                        <div>
+                                            <div class="background-white p20 mb30">
+                                                <h4>{{ promo.nom }}</h4>
+                                                <h5> du {{ promo.debut|date('d/m/Y') }}
+                                                    au {{ promo.fin|date('d/m/Y') }}</h5>
+                                                <p>{{ promo.description }}</p>
+                                                <br>
+                                                <a href="{{ asset('pdf/') }}{{ promo.documentPDF }}">Télécharger le
+                                                    PDF</a>
                                             </div>
                                         </div>
                                     {% endif %}
 
                                 {% endfor %}
-
-                        </div>
-                        <div class="col-sm-6">
-                            <h2>Promotions</h2>
-                            {% for promo in prestataire.promotions %}
-                                {% if promo.affichageDe < date() and promo.affichageJusque > date() %}
-                                    <div >
-                                        <div class="background-white p20 mb30">
-                                            <h4>{{ promo.nom }}</h4>
-                                            <h5> du {{ promo.debut|date('d/m/Y')}} au {{ promo.fin|date('d/m/Y')}}</h5>
-                                            <p>{{ promo.description }}</p>
-                                            <br>
-                                            <a href="{{ asset('pdf/') }}{{ promo.documentPDF }}">Télécharger le PDF</a>
-                                        </div>
+                            {% else %}
+                                <div>
+                                    <div class="background-white p20 mb30">
+                                        <h4>Ce prestataire ne propose pas de promotions pour le moment</h4>
                                     </div>
-                                {% endif %}
-
-                            {% endfor %}
+                                </div>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -183,7 +203,8 @@
 
                                             <span class="report">
                                                 <span class="separator">&#8226;</span>
-                                                <i class="fa fa-flag" title="Report" data-toggle="tooltip"data-placement="top"></i>
+                                                <i class="fa fa-flag" title="Report" data-toggle="tooltip"
+                                                   data-placement="top"></i>
                                              </span>
 
                                             <div class="review-overall-rating">

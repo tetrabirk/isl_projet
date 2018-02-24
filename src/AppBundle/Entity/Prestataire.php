@@ -2,10 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Form\CategorieDeServicesType;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -67,7 +67,7 @@ class Prestataire extends Utilisateur
     /**
      * @var string
      * @Assert\Regex(
-     *     pattern="/^(BE)\d{9}$/",
+     *     pattern="/^(BE)\s?\d{9}$/",
      *     message="le numéro de TVA doit suivre le format BE123456789"
      * )
      * @ORM\Column(name="num_tva", type="string", length=255, nullable=true)
@@ -76,10 +76,12 @@ class Prestataire extends Utilisateur
 
     /**
      * bcp de prestataires ont bcp de categories
-     * @ORM\ManyToMany(targetEntity="CategorieDeServices", inversedBy="prestataires")
+     * @ORM\ManyToMany(targetEntity="CategorieDeServices", inversedBy="prestataires", cascade={"persist"})
      * @ORM\JoinTable(name="categories_des_prestataires")
      */
     private $categories;
+
+
 
     //attention c'est bien une one to many unidirectionnelle malgré le ManyToMany dans la fonction. J'ai respecté la doc de doctrine
 
@@ -123,7 +125,15 @@ class Prestataire extends Utilisateur
     public function addCategorie(CategorieDeServices $categ)
     {
         $categ->addPrestataires($this);
-        $this->categories[] = $categ;
+        $this->categories->add($categ);
+    }
+
+    /**
+     * @param CategorieDeServicesType $categ
+     */
+    public function removeCategorie(CategorieDeServicesType $categ)
+    {
+        $this->categories->removeElement($categ);
     }
 
     /**
@@ -310,7 +320,7 @@ class Prestataire extends Utilisateur
      *
      * @return Prestataire
      */
-    public function addStage(\AppBundle\Entity\Stage $stage)
+    public function addStage(Stage $stage)
     {
         $this->stages[] = $stage;
 
@@ -322,7 +332,7 @@ class Prestataire extends Utilisateur
      *
      * @param \AppBundle\Entity\Stage $stage
      */
-    public function removeStage(\AppBundle\Entity\Stage $stage)
+    public function removeStage(Stage $stage)
     {
         $this->stages->removeElement($stage);
     }
@@ -344,7 +354,7 @@ class Prestataire extends Utilisateur
      *
      * @return Prestataire
      */
-    public function addPromotion(\AppBundle\Entity\Promotion $promotion)
+    public function addPromotion(Promotion $promotion)
     {
         $this->promotions[] = $promotion;
 
@@ -356,7 +366,7 @@ class Prestataire extends Utilisateur
      *
      * @param \AppBundle\Entity\Promotion $promotion
      */
-    public function removePromotion(\AppBundle\Entity\Promotion $promotion)
+    public function removePromotion(Promotion $promotion)
     {
         $this->promotions->removeElement($promotion);
     }
@@ -386,7 +396,7 @@ class Prestataire extends Utilisateur
      *
      * @return Prestataire
      */
-    public function addPhoto(\AppBundle\Entity\Image $image)
+    public function addPhoto(Image $image)
     {
         $this->photos[] = $image;
 
@@ -398,7 +408,7 @@ class Prestataire extends Utilisateur
      *
      * @param \AppBundle\Entity\Image $image
      */
-    public function removePhoto(\AppBundle\Entity\Image $image)
+    public function removePhoto(Image $image)
     {
         $this->photos->removeElement($image);
     }
@@ -423,4 +433,25 @@ class Prestataire extends Utilisateur
     {
         return $this->getNom();
     }
+
+    /**
+     * @param mixed $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    }
+
+    /**
+     * @param mixed $photos
+     */
+    public function setPhotos($photos)
+    {
+        $this->photos = $photos;
+    }
+
+
+
+
+
 }
