@@ -1481,7 +1481,7 @@ class Fixtures extends Fixture
         $commentaire->setAuteurCommentaire($this->getReference('internaute' . $randInternauteId));
         $randPrestataireId = rand(0, self::$nbrePrestataire - 1);
         $commentaire->setCibleCommentaire($this->getReference('prestataire' . $randPrestataireId));
-        $commentaire->setCote($this->faker->numberBetween(1, 5));
+        $commentaire->setCote($this->faker->numberBetween(0, 10));
         $commentaire->setTitre($this->faker->sentence());
         $commentaire->setContenu($this->faker->sentences(5, true));
         $commentaire->setEncodage($this->faker->dateTimeThisMonth);

@@ -7,14 +7,19 @@ use AppBundle\Entity\Internaute;
 use AppBundle\Entity\Prestataire;
 use AppBundle\Entity\Utilisateur;
 use AppBundle\Entity\UtilisateurTemporaire;
+use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\InternauteType;
+use AppBundle\Form\Model\ChangePassword;
 use AppBundle\Form\PrestataireType;
+use AppBundle\Form\SuppressionCompteType;
 use AppBundle\Form\UtilisateurTemporaireType;
 use AppBundle\Form\UtilisateurType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use AppBundle\Service\MailHandler;
 
@@ -56,15 +61,13 @@ class SecurityController extends Controller
             array('method' => 'POST', 'action' => ($this->generateUrl('inscription'))));
 
         $form->handleRequest($request);
-//        dump('test');
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->persistUserTemp($utilisateurT,$encoderFactory);
+            $this->persistUserTemp($utilisateurT, $encoderFactory);
 
             $email = $utilisateurT->getEmail();
             $token = $utilisateurT->getToken();
 
-            $mailHandler->mailConfirmation($email,$token);
+            $mailHandler->mailConfirmation($email, $token);
 
             //TODO error handler :  si le mail ne s'envoie pas -> supprimer l'user temporaire et dire qu'il y a eu une erreur et de recommencer
             //TODO                  si le tempuser existe déjà -> demander si il veut renvoyer le mail
@@ -112,16 +115,58 @@ class SecurityController extends Controller
     /**
      * @Route("/mot_de_passe", name="mot_de_passe")
      */
-    public function motDePasseAction()
+    public function motDePasseAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
-        return $this->render('security/mot_de_passe.html.twig', array());
-    }
+        $changePasswordModel = new ChangePassword();
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(ChangePasswordType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newPassword = $changePasswordModel->getNewPassword();
+            $encoded = $encoder->encodePassword($user,$newPassword);
+            $user->setMotDePasse($encoded);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
 
-    public function sendEmail($email, $token, $mailer,MailHandler $mailHandler)
-    {
-        $mailHandler->mailConfirmation($email,$token);
+            //TODO try catch
+            $this->addFlash('notifications', "le mot de passe à bien été modifier");
+        }
+        return $this->render('security/mot_de_passe.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
+
+    /**
+     * @Route("/suppression", name="suppression")
+     */
+    public function suppressionUtilisateur(Request $request)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(SuppressionCompteType::class,$user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid() && $form->get("question")->getData() ){
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('security/suppressionCompte.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
 
     public function persistUserTemp(UtilisateurTemporaire $utilisateurT, $encoderFactory)
     {
@@ -139,8 +184,7 @@ class SecurityController extends Controller
         $em->flush();
     }
 
-
-    public function traitementNewUser($utilisateur,$utilisateurT)
+    public function traitementNewUser($utilisateur, $utilisateurT)
     {
         $user = $utilisateur;
         $image = new Image();
@@ -164,7 +208,7 @@ class SecurityController extends Controller
         //forward to profilController
         return $this->forward('AppBundle\Controller\ProfilController::ProfilAction', array(
             'newUser' => $user,
-            'userTemp' =>$utilisateurT
+            'userTemp' => $utilisateurT
         ));
     }
 

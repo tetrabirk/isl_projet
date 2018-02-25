@@ -1,0 +1,28 @@
+{{ form_start(form,{'attr':{'class':"background-white p20 add-review"}}) }}
+<div class="row">
+    <div class="form-group col-sm-8">
+        {{ form_label(form.titre) }}
+        {{ form_widget(form.titre) }}
+    </div><!-- /.col-sm-6 -->
+    {% if (app.user.getType()) == 'Internaute' %}
+        <div class="form-group col-sm-4">
+            {{ form_label(form.cote) }}
+            {{ form_widget(form.cote) }}
+        </div><!-- /.col-sm-3 -->
+    {% else %}
+        <div hidden="hidden" class="form-group col-sm-4">
+            {{ form_label(form.cote) }}
+            {{ form_widget(form.cote) }}
+        </div><!-- /.col-sm-3 -->
+    {% endif %}
+</div><!-- /.row -->
+<div class="row">
+    <div class="form-group col-sm-12">
+        {{ form_widget(form.contenu) }}
+    </div><!-- /.col-sm-12 -->
+
+    <div class="col-sm-4">
+        {{ form_widget(form.Envoyer,{'attr':{'class':'btn btn-primary btn-block'}}) }}
+    </div><!-- /.col-sm-4 -->
+</div><!-- /.row -->
+{{ form_end(form) }}

@@ -1,0 +1,30 @@
+{% if prestataire.promotions is not empty %}
+    {% for promo in prestataire.promotions %}
+        {% if promo.affichageDe < date() and promo.affichageJusque > date() %}
+            <div>
+                <div class="background-white p20 mb30">
+                    <h4>{{ promo.nom }}</h4>
+                    <p>
+                        {% for categorie in promo.categories %}
+                            <a href="{{ path('services',{'slug': categorie.slug}) }}">{{ categorie.nom|capitalize }}</a> ,
+                        {% endfor %}
+                    </p>
+                    <h5> du {{ promo.debut|date('d/m/Y') }}
+                        au {{ promo.fin|date('d/m/Y') }}</h5>
+                    <p>{{ promo.description }}</p>
+                    <br>
+                    <a href="{{ asset('pdf/') }}{{ promo.documentPDF }}">Télécharger le
+                        PDF</a>
+
+                </div>
+            </div>
+        {% endif %}
+
+    {% endfor %}
+{% else %}
+    <div>
+        <div class="background-white p20 mb30">
+            <h4>Ce prestataire ne propose pas de promotions pour le moment</h4>
+        </div>
+    </div>
+{% endif %}

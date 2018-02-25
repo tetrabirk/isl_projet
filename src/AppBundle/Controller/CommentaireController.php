@@ -8,29 +8,46 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\CategorieDeServices;
 use AppBundle\Entity\Commentaire;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Repository\CommentaireRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Prestataire;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class CommentaireController extends Controller
 {
-    public function getCommentaires($idPrestataire = null)
-    {
-        $repository = $this->getDoctrine()->getRepository(Commentaire::class);
 
-        if($idPrestataire != null){
-            $data = $repository->findOneBy(
-                array('cibleCommentaire'=> $idPrestataire)
-            );
-        }else {
-            $data = $repository->findAll();
-        }
-        return $data;
+
+    public function listCommentairesAction(Prestataire $prestataire = null)
+    {
+
+        $idPrestataire = $prestataire->getId();
+        $commentaires = $this->getCommentaires($idPrestataire);
+
+        return $this->render(':lib/list:commentaires.html.twig', array(
+            'commentaires' => $commentaires,
+        ));
 
     }
+
+    /**
+     * @Route("/profil/commentaires" , name="commentaires")
+     */
+    public function profilCommentaires()
+    {
+        return $this->render(':profil:commentaires.html.twig');
+    }
+
+
+    public function getCommentaires($idPrestataire)
+    {
+        /** @var CommentaireRepository $cr*/
+        $cr = $this->getDoctrine()->getRepository(Commentaire::class);
+
+        $commentaires = $cr->findCommentairesByIdPrestataire($idPrestataire);
+
+        return $commentaires;
+    }
+
 }

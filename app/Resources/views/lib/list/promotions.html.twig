@@ -12,6 +12,8 @@
             </div><!-- /.post-content -->
             <div class="post-more">
                 <a href={{ path('promotions',{'id':promo.id}) }}>modifier</a>
+                <a href={{ path('deletePromotion',{'id':promo.id}) }}>Supprimer</a>
+
             </div><!-- /.post-date -->
         </div><!-- /.post -->
     {% endfor %}

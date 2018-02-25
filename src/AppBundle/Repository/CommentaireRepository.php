@@ -12,15 +12,26 @@ use AppBundle\Entity\Prestataire;
  */
 class CommentaireRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findCommentaires( Prestataire $prestataire=null)
+    public function findCommentairesByIdPrestataire( $prestataireId)
     {
-        if ($prestataire != null) {
-            $data = $this->findOneBy(array('cibleCommentaire' => $prestataire));
-        } else {
-            $data = $this->findAll();
-        }
-        return $data;
+        $qb = $this->createQueryBuilder('c');
+        $this->addAllJoins($qb);
+        $qb->where('c.cibleCommentaire = :cible');
+        $qb->setParameter('cible', $prestataireId);
+
+        $qb->orderBy('c.encodage','DESC');
+
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+
+        return $result;
     }
+
+    public function addAllJoins($qb)
+    {
+        $qb->leftJoin('c.auteurCommentaire','a')->addSelect('a');
+    }
+
 
 
 }

@@ -1,0 +1,25 @@
+{% if prestataire.stages is not empty %}
+    {% for stage in prestataire.stages %}
+        {% if stage.affichageDe < date() and stage.affichageJusque > date() %}
+            <div>
+                <div class="background-white p20 mb30">
+                    <h4>{{ stage.nom }} <strong>{{ stage.tarif~" €" }}</strong></h4>
+                    <h5> du {{ stage.debut|date('d/m/Y') }}
+                        au {{ stage.fin|date('d/m/Y') }}</h5>
+                    <p>{{ stage.description }}</p>
+                    <br>
+                    {% if stage.infoComplementaire is defined %}
+                        <h6> Informations Complémentaires</h6>
+                        <p>{{ stage.infoComplementaire }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <div>
+        <div class="background-white p20 mb30">
+            <h4>Ce prestataire ne propose pas de stages pour le moment</h4>
+        </div>
+    </div>
+{% endif %}

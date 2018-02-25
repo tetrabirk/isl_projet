@@ -115,3 +115,15 @@
 .photos-profil{
     max-width: 150px ;
 }
+
+.review-image{
+    height: 80px;
+}
+
+.review-image img{
+    min-height: 80px;
+    min-width: 80px;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+}

@@ -1,25 +1,28 @@
 CONTROLLER
 -faire le tour de mes controller et les nettoyer / commenter
 
-
-
-
 ERREURS
-!!!! -catch des erreurs  + affichage de msg d'erreur et succes
+(Erreurs)-catch des erreurs  + affichage de msg d'erreur et succes
 
+404, 500 etc
 
 FORM
 
--catch et affiche erreur (ex: num tva)
+(Erreurs)-catch et affiche erreur (ex: num tva)
 
 CONNEXION
 
--compteur d'essaie infructueux( + remise à zéro du compteur ? )
--message d'erreur spécifique si utilsateur existant mais non confirmé
+(Erreurs)-compteur d'essaie infructueux( + remise à zéro du compteur ? )
+(Erreurs)-message d'erreur spécifique si utilsateur existant mais non confirmé
+
+FIXTURES
+
+-modifier les images temporaires
 
 UPLOAD FILES
 
 !!! -suppressions des fichiers (pdf)
+(resize photos)
 
 SECURITY
 
@@ -36,31 +39,32 @@ ADMIN
 -gestion des localite
 -gestion des images?
 
-STAGE
--suppression stage
-PROMOTIONS
--suppression promotion
-
-
 COMMENTAIRES
--tout
 -abus
 
+AUTRE
 -footer à modifier
 
 REPOSITORIES
--idem pour user banis
--idem pour image inactive
+
+-modif les query pour que suel les user non banis s'affiche 
+-modif les query pour que suel les image actif s'affiche
 
 PROFIL
--favoris
--moyenne des note
+-ajouter au favoris et afficher favoris
 
--modifier le 'active' dans le menu de gauche
--modification mot de passe
+
 -suppression compte
+-stage et promo delete (erreur a cause de la secu)
+
+
+-changer mes twig stages et promotions en stage_profil et pr_pr.. 
+
+PREST SINGLE
 
 -faire fonctionner la map
+-moyenne des note
+
 
 SERVICE
 
@@ -74,12 +78,13 @@ DEV
 
 
 SI ON A LE TEMPS
+-mot de passe oublié
 -frontpage avec blocs
 -select2 css différent pour la searchbar et formulaire
 -image slider -> ne pas les étirers (ou remplacer par des images paysage)
 -auto selection du numero de rue dans les forms au lieux du nom de la rue+ num
 -théoriquement si l'user change de mail il devrai re-recevoir un mail de conf...
 -checkbox de merde ne veux pas s'afficher (newsletter)
-
+-modifier le 'active' dans le menu de gauche
 
 ====================================================================================

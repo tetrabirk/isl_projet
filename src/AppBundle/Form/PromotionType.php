@@ -27,7 +27,8 @@ class PromotionType extends AbstractType
                 'label' => 'Description de la Promotion'
             ))
             ->add('documentPDF', DocumentPDFType::class,array(
-                'label' => 'Document PDF'
+                'label' => 'Document PDF',
+                'required'=>false
             ))
             ->add('debut', DateType::class, array(
                 'label' => 'Date de début de la Promotion',

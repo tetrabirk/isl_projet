@@ -1,0 +1,43 @@
+{% extends (app.user.getType()) == 'Internaute'
+    ? ":profil:internaute.html.twig"
+    : ":profil:prestataire.html.twig" %}
+
+
+{% block subTitle %}
+    <h2>Modification mot de passe</h2>
+{% endblock %}
+
+{% block content_profil%}
+
+    <div class="main">
+        <div class="main-inner">
+            <div class="container">
+                <div class="content">
+
+
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            {% for message in app.flashes('notifications') %}
+                                <div class="alert-success p30 col">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {{ form_label(form.oldPassword) }}
+                            {{ form_widget(form.oldPassword) }}
+                            {{ form_row(form.newPassword) }}
+                            {{ form_row(form.newPassword) }}
+
+                            {{ form_end(form) }}
+                        </div><!-- /.col-sm-4 -->
+                    </div><!-- /.row -->
+
+                </div><!-- /.content -->
+            </div><!-- /.container -->
+        </div><!-- /.main-inner -->
+    </div><!-- /.main -->
+
+
+{% endblock %}
+

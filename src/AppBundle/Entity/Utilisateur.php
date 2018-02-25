@@ -58,9 +58,9 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $adresseRue;
 
-
     /**
-     * @ORM\OneToOne(targetEntity="Localite", cascade={"persist"})
+     * bcp d'utilisateur ont un code postal
+     * @ORM\ManyToOne(targetEntity="Localite")
      * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
      */
     private $localite;

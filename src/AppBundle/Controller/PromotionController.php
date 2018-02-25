@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Promotion;
 use AppBundle\Form\PromotionType;
 use AppBundle\Repository\PromotionRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,6 +34,19 @@ class PromotionController extends Controller
 
     }
 
+    /**
+     * @Route("/profil/promotions/delete/{id}", name="deletePromotion")
+     * @Method("DELETE")
+     */
+    public function stageDelete($id)
+    {
+        $promotion = $this->getRepo()->findOneBy(array('id'=>$id));
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($promotion);
+        $em->flush();
+        return $this->redirectToRoute('promotions');
+
+    }
     public function loadPromotionForm($request,$promotion){
         $form = $this->get('form.factory')->create(PromotionType::class,$promotion);
 

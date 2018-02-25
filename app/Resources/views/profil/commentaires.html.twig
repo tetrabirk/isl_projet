@@ -1,0 +1,16 @@
+{% extends "profil/prestataire.html.twig" %}
+
+{% block subTitle %}
+    <h2>Commentaires</h2>
+{% endblock %}
+
+{% block content_profil%}
+
+    {{ render(controller(
+        'AppBundle:Commentaire:listCommentaires',
+        {'prestataire': utilisateur}
+    )) }}
+
+
+{% endblock %}
+

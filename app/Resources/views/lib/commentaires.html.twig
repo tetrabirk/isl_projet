@@ -1,0 +1,22 @@
+<div class="row detail-content mt30">
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-8 ">
+        <h2 id="reviews">All Reviews</h2>
+
+        {{ render(controller(
+            'AppBundle:Commentaire:listCommentaires',
+            {'prestataire': prestataire}
+        )) }}
+
+        {% if is_granted('ROLE_USER')  %}
+            <h2>Submit a Review</h2>
+
+            {% include ':lib/form:form_commentaire.html.twig' %}
+        {% endif %}
+    </div><!-- /.col-* -->
+    <div class="col-sm-2">
+
+    </div>
+</div>

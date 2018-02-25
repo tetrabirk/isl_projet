@@ -24,7 +24,7 @@ class Commentaire
     /**
      * @var int
      *
-     * @ORM\Column(name="cote", type="integer")
+     * @ORM\Column(name="cote", type="integer", nullable=true)
      */
     private $cote;
 
@@ -52,17 +52,22 @@ class Commentaire
 
     /**
      * bcp de commentaires ont un auteur
-     * @ORM\ManyToOne(targetEntity="Internaute")
-     * @ORM\JoinColumn(name="auteur_commentaire", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"remove"})
+     * @ORM\JoinColumn(name="auteur_commentaire", referencedColumnName="id", onDelete="CASCADE")
      */
     private $auteurCommentaire;
 
     /**
      * Bcp commentaire ont une cible
-     * @ORM\ManyToOne(targetEntity="Prestataire")
-     * @ORM\JoinColumn(name="cible_commentaire", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Prestataire", cascade={"remove"})
+     * @ORM\JoinColumn(name="cible_commentaire", referencedColumnName="id", onDelete="CASCADE")
      */
     private $cibleCommentaire;
+
+    public function __construct()
+    {
+        $this->encodage = new \DateTime();
+    }
 
     /**
      * @return mixed
@@ -205,4 +210,6 @@ class Commentaire
     {
         return $this->encodage;
     }
+
+
 }
