@@ -24,10 +24,7 @@ class ImageType extends AbstractType
                 FormEvents::POST_SET_DATA,
                 array($this,"getPath")
             )
-
         ;
-
-
     }
 
     public function getPath(FormEvent $event){

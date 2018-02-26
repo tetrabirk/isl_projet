@@ -127,9 +127,10 @@ class PrestataireRepository extends EntityRepository
     {
         $qb->leftJoin('p.stages', 's')->addSelect('s');
         $qb->leftJoin('p.promotions', 'pr')->addSelect('pr');
-        $qb->leftJoin('p.photos', 'ph')->addSelect('ph');
+        $qb->leftJoin('p.photos', 'ph')->addSelect('ph')->andWhere('ph.active = 1');
         $qb->leftJoin('p.logo', 'logo')->addSelect('logo');
         $qb->leftJoin('p.internautesFavoris', 'fav')->addSelect('fav');
+        $qb->andWhere('p.banni = 0');
     }
 
 

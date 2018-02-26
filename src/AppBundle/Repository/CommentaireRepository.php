@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Prestataire;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * CommentaireRepository
@@ -14,24 +15,53 @@ class CommentaireRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findCommentairesByIdPrestataire( $prestataireId)
     {
+        /**@var QueryBuilder $qb */
         $qb = $this->createQueryBuilder('c');
         $this->addAllJoins($qb);
-        $qb->where('c.cibleCommentaire = :cible');
-        $qb->setParameter('cible', $prestataireId);
+
+        $qb = $this->addWherePrestataire($qb,$prestataireId);
 
         $qb->orderBy('c.encodage','DESC');
 
-        $query = $qb->getQuery();
-        $result = $query->getResult();
-
-        return $result;
+        return $this->getResult($qb);
     }
 
     public function addAllJoins($qb)
     {
+        /**@var QueryBuilder $qb*/
         $qb->leftJoin('c.auteurCommentaire','a')->addSelect('a');
     }
 
+    public function getCoteFromPrest($prestataireId)
+    {
+        /**@var QueryBuilder $qb */
+        $qb = $this->createQueryBuilder('c');
 
+        $qb = $this->addWherePrestataire($qb,$prestataireId);
+
+        $qb->expr()->isNotNull('c.cote');
+
+        $qb->select('c.cote');
+
+        return $this->getResult($qb);
+
+    }
+
+    public function addWherePrestataire($qb, $prestataireId)
+    {
+        /**@var QueryBuilder $qb */
+
+        $qb->where('c.cibleCommentaire = :cible');
+        $qb->setParameter('cible', $prestataireId);
+        return $qb;
+    }
+
+    public function getResult($qb)
+    {
+        /**@var QueryBuilder $qb */
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 
 }

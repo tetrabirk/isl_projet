@@ -112,6 +112,13 @@
     margin-left: 20px;
 }
 
+.ml120{
+    margin-left: 120px;
+}
+
+.mb-20{
+    margin-bottom: -20px;
+}
 .photos-profil{
     max-width: 150px ;
 }

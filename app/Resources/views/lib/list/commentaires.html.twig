@@ -1,6 +1,7 @@
 <div class="reviews">
     {% for commentaire in commentaires %}
-        <div class="review">
+        <div class="abus-container"></div>
+        <div id="{{ 'comment_'~commentaire.id }}" class="review">
             <div class="review-image">
                 {% if (commentaire.auteurCommentaire.getType()) == 'Internaute' %}
                     {% set avatar = commentaire.auteurCommentaire.avatar %}
@@ -16,7 +17,7 @@
 
                     <span class="report">
                     <span class="separator">&#8226;</span>
-                    <i class="fa fa-flag" title="Signaler un abus" data-toggle="tooltip" data-placement="top"></i>
+                    <i class="signaler-abus fa fa-flag" title="Signaler un abus" data-toggle="tooltip" data-placement="top"></i>
                 </span>
 
                     <div class="review-overall-rating">

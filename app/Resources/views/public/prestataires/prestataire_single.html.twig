@@ -23,7 +23,7 @@
 
                                 <div class="detail-overview-rating">
                                     {#TODO cote prestataire (add colonne dans DB)#}
-                                    <i class="fa fa-star"></i> <strong>{{ 0.5*10 }} / 10</strong></a>
+                                    <i class="fa fa-star"></i> <strong>{{prestataire.moyenneCote|round(2,'ceil')*10 }} %</strong></a>
                                 </div>
 
                                 <div class="detail-overview-hearts">
@@ -93,7 +93,7 @@
 
                         </div>
                     </div>
-                    {% include ':lib:commentaires.html.twig' with {'prest': prestataire} %}
+                    {% include ':lib:commentaires.html.twig' with {'prest': prestataire, 'abus': abus} %}
 
                 </div><!-- /.container -->
 
@@ -106,11 +106,17 @@
 {% block script %}
 
     {{ parent() }}
-    <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false"
+    <script src="{{ asset('js/geocoding.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/abus.js') }}" type="text/javascript"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBSSiBIjO2oLHUPb7LL0FChkEYE1FC8ytE&libraries=weather,geometry,visualization,places,drawing&amp;"
             type="text/javascript"></script>
+
 
     <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/infobox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/markerclusterer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('libraries/jquery-google-map/jquery-google-map.js') }}"></script>
+
+
 
 {% endblock %}

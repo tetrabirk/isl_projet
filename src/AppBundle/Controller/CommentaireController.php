@@ -25,6 +25,7 @@ class CommentaireController extends Controller
         $idPrestataire = $prestataire->getId();
         $commentaires = $this->getCommentaires($idPrestataire);
 
+
         return $this->render(':lib/list:commentaires.html.twig', array(
             'commentaires' => $commentaires,
         ));

@@ -115,4 +115,9 @@ class Abus
     {
         return $this->encodage;
     }
+
+    public function __construct()
+    {
+        $this->setEncodage(new \DateTime());
+    }
 }

@@ -62,7 +62,7 @@ class Internaute extends Utilisateur
 
     /**
      * bcp internaute ont bcp de favoris
-     * @ORM\ManyToMany(targetEntity="Prestataire", inversedBy="internautesFavoris")
+     * @ORM\ManyToMany(targetEntity="Prestataire", inversedBy="internautesFavoris", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="favoris")
      */
     private $favoris;
@@ -81,6 +81,17 @@ class Internaute extends Utilisateur
         $this->favoris[]=$favoris;
 
     }
+
+    /**
+     * Remove favoris
+     *
+     * @param \AppBundle\Entity\Prestataire $favoris
+     */
+    public function removeFavoris(Prestataire $favoris)
+    {
+        $this->favoris->removeElement($favoris);
+    }
+
 
     /**
      * @return mixed

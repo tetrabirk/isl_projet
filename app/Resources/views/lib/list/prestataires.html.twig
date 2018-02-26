@@ -21,9 +21,8 @@
                             {% endfor %}
                         </p>
                         <div class="card-row-rating">
-                            {#TODO cote prestataire (add colonne dans DB)#}
 
-                            {% include 'lib/stars.html.twig' with {'cote': 0.5 } %}
+                            {% include 'lib/stars.html.twig' with {'cote': prestataire.moyenneCote/10 } %}
                         </div><!-- /.card-row-rating -->
                     </div><!-- /.card-row-content -->
                 </div><!-- /.card-row-body -->

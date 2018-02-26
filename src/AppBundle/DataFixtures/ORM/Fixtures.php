@@ -1311,6 +1311,7 @@ class Fixtures extends Fixture
         }
 
 
+
 //        generation des abus
 
         for ($i = 0; $i < self::$nbreAbus; $i++) {
@@ -1388,6 +1389,7 @@ class Fixtures extends Fixture
         $prestataire->setEmailContact($this->faker->email);
         $prestataire->setTelephone($this->faker->phoneNumber);
         $prestataire->setNumTVA($this->faker->vat);
+        $prestataire->setMoyenneCote($this->faker->numberBetween(0,10));
 
 //        ajout cp et localite
 

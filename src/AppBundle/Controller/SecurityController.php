@@ -17,7 +17,9 @@ use AppBundle\Form\UtilisateurType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -145,7 +147,7 @@ class SecurityController extends Controller
     /**
      * @Route("/suppression", name="suppression")
      */
-    public function suppressionUtilisateur(Request $request)
+    public function suppressionUtilisateur(Request $request, TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         $user = $this->getUser();
         $form = $this->createForm(SuppressionCompteType::class,$user);
@@ -158,6 +160,8 @@ class SecurityController extends Controller
             $em->remove($user);
             $em->flush();
 
+            $tokenStorage->setToken(null);
+            $session->invalidate();
 
             return $this->redirectToRoute('homepage');
         }

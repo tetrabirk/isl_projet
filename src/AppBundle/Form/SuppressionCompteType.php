@@ -28,7 +28,7 @@ class SuppressionCompteType extends AbstractType
             ->setMethod('DELETE')
             ->add('motDePasse', PasswordType::class, array(
                 'required' => true,
-                'label' => 'Ancien mot de passe'
+                'label' => 'Mot de passe'
             ))
             ->add('question', ChoiceType::class, array(
                 'label' => "Êtes-vous sûre de vouloir supprimer votre compte",

@@ -102,6 +102,30 @@ class Prestataire extends Utilisateur
      */
     private $logo;
 
+    /**
+     *
+     * @ORM\Column(name="moyenne_cote", type="decimal")
+     */
+
+    private $moyenneCote;
+
+    /**
+     * @return mixed
+     */
+    public function getMoyenneCote()
+    {
+        return $this->moyenneCote;
+    }
+
+    /**
+     * @param mixed $moyenneCote
+     */
+    public function setMoyenneCote($moyenneCote): void
+    {
+        $this->moyenneCote = $moyenneCote;
+    }
+
+
 
     /**
      * @return mixed
@@ -166,7 +190,7 @@ class Prestataire extends Utilisateur
 
     /**
      * Bcp de Prestataire ont bcp d'utilisateur qui les ont ajouté dans leurs favoris
-     * @ORM\ManyToMAny(targetEntity="Internaute", mappedBy="favoris")
+     * @ORM\ManyToMAny(targetEntity="Internaute", mappedBy="favoris", cascade={"persist", "remove"})
      */
 
     private $internautesFavoris;
@@ -310,6 +334,7 @@ class Prestataire extends Utilisateur
         $this->setNbEssaisInfructueux(0);
         $this->setBanni(false);
         $this->setConfInscription(true);
+        $this->setMoyenneCote(0);
 
     }
 
