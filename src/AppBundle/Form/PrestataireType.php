@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\CategorieDeServices;
+use AppBundle\Entity\Image;
+use AppBundle\Entity\Prestataire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -11,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PrestataireType extends AbstractType
@@ -21,6 +25,10 @@ class PrestataireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventListener(FormEvents::POST_SET_DATA,
+                array($this,"getLogo")
+            )
+
             ->add('email', EmailType::class, array(
                 'disabled' => true,
             ))
@@ -99,6 +107,26 @@ class PrestataireType extends AbstractType
                 'by_reference' => false,
             ))
             ->add('enregistrer', SubmitType::class);
+    }
+
+    public function getLogo(FormEvent $event){
+        /**@var Prestataire $prestataire*/
+        $prestataire = $event->getData();
+        $logo = $prestataire->getLogo();
+        $form = $event->getForm();
+        if($logo instanceof Image && ($logo->getId())!=null){
+            $form->add('logo', ImageType::class, array(
+                'label' => 'logo',
+                'required' => false,
+            ));
+
+        }else{
+            $form->add('logo', ImageType::class, array(
+                'label' => 'logo',
+                'required' => true,
+            ));
+
+        }
     }
 
     /**

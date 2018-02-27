@@ -4,6 +4,11 @@ CONTROLLER
 ERREURS
 (Erreurs)-catch des erreurs  + affichage de msg d'erreur et succes
 
+
+-catch si pas de service à afficher
+
+
+
 404, 500 etc
 
 FORM
@@ -27,6 +32,8 @@ SECURITY
 
 regarder après la déprecation
 http://symfony.com/doc/3.4/security/custom_provider.html
+
+form d'inscription -> form builder 
 
 ADMIN
 
@@ -56,7 +63,7 @@ PROFIL
 
 PREST SINGLE
 
--faire fonctionner la map
+-faire fonctionner la map (au moins terminer le code js et afficher les coordonnée)
 
 SERVICE
 

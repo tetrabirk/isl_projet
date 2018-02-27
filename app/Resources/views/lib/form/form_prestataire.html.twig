@@ -6,6 +6,16 @@
 </h3>
 <div class="row">
 
+    {#{% if form.numTVA.get('errors') %}#}
+        {#<div class="alert alert-error">#}
+            {#{{ form_errors(form) }}#}
+        {#</div>#}
+    {#{% endif %}#}
+
+    {% dump form %}
+
+
+
     <div class="form-group col-sm-6">
         {{ form_label(form.nom) }}
         {{ form_widget(form.nom) }}
@@ -69,6 +79,7 @@
         <div class='clearfix'></div>
         <a href="#" id="add_photos" class="btn btn-primary btn-xs pull-right">Ajouter une Photos à la gallerie</a>
     </div>
+
 </div>
 
 {{ form_end(form) }}

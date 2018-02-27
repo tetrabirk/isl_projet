@@ -31,7 +31,7 @@ class ProfilController extends Controller
     /**
      * @Route("/profil", name="profil")
      */
-    public function profilAction($newUser = null,$userTemp = null, Request $request)
+    public function profilAction($newUser = null, $userTemp = null, Request $request)
     {
 
         if (isset($newUser)) {
@@ -110,7 +110,7 @@ class ProfilController extends Controller
     }
 
 
-    private function flushUtilisateur(Utilisateur $utilisateur, UtilisateurTemporaire $userTemp)
+    private function flushUtilisateur(Utilisateur $utilisateur, $userTemp)
     {
         $em = $this->getDoctrine()->getManager();
 
