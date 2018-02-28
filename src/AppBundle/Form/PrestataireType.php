@@ -31,38 +31,54 @@ class PrestataireType extends AbstractType
 
             ->add('email', EmailType::class, array(
                 'disabled' => true,
+                'error_bubbling' =>true,
+
             ))
             ->add('adresseRue', TextType::class, array(
-                'required' => false,
+                'error_bubbling' =>true,
+
             ))
             ->add('adresseNum', TextType::class, array(
                 'label' => 'Numéro',
                 'required' => false,
+                'error_bubbling' =>true,
+
             ))
             ->add('localite', EntityType::class, array(
                 'class' => 'AppBundle:Localite',
                 'choice_label' => 'nomAffichage',
                 'placeholder' => 'Localité',
                 'label' => 'Code Postal - Localité',
-                'required' => false,
                 'attr' => ['data-select' => 'true'],
+                'error_bubbling' =>true,
+
 
             ))
-            ->add('nom', TextType::class, array())
+            ->add('nom', TextType::class, array(
+                'error_bubbling' =>true,
+
+            ))
             ->add('siteInternet', UrlType::class, array(
                 'required' => false,
+                'error_bubbling' =>true,
+
 
             ))
             ->add('emailContact', EmailType::class, array(
                 'label' => 'Email de contact',
                 'required' => false,
+                'error_bubbling' =>true,
+
             ))
             ->add('telephone', TextType::class, array(
                 'label' => 'Téléphone',
                 'required' => false,
+                'error_bubbling' =>true,
+
             ))
             ->add('numTVA', TextType::class, array(
                 'label' => 'Numéro de TVA',
+                'error_bubbling' =>true,
             ))
             ->add('categories', EntityType::class, array(
                 'class' => 'AppBundle:CategorieDeServices',
@@ -83,6 +99,8 @@ class PrestataireType extends AbstractType
                 'label' => 'Categories',
                 'attr' => ['data-select' => 'true'],
                 'by_reference' => false,
+                'error_bubbling' =>true,
+
 
             ))
             ->add('newCategories', CollectionType::class, array(
@@ -91,12 +109,16 @@ class PrestataireType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'label' => false,
-                'mapped' => false
+                'mapped' => false,
+                'error_bubbling' =>true,
+
 
             ))
             ->add('logo', ImageType::class, array(
                 'label' => 'logo',
                 'required' => false,
+                'error_bubbling' =>true,
+
             ))
             ->add('photos', CollectionType::class, array(
                 'entry_type' => ImageType::class,
@@ -105,6 +127,8 @@ class PrestataireType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'error_bubbling' =>true,
+
             ))
             ->add('enregistrer', SubmitType::class);
     }

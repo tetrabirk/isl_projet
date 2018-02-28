@@ -30,13 +30,18 @@ class InternauteType extends AbstractType
 
             ->add('email', EmailType::class,array(
                 'disabled' => true,
+                'error_bubbling'=>true,
             ))
             ->add('adresseRue', TextType::class, array(
                 'required' => false,
+                'error_bubbling'=>true,
+
             ))
             ->add('adresseNum', TextType::class, array(
                 'label' => 'Numéro',
                 'required' => false,
+                'error_bubbling'=>true,
+
             ))
             ->add('localite', EntityType::class,array(
                 'class' => 'AppBundle:Localite',
@@ -45,11 +50,16 @@ class InternauteType extends AbstractType
                 'label' => 'Code Postal - Localité',
                 'required'=>false,
                 'attr' => ['data-select' => 'true'],
+                'error_bubbling'=>true,
 
             ))
-            ->add('nom', TextType::class)
+            ->add('nom', TextType::class, array(
+                'error_bubbling'=>true,
+            ))
             ->add('prenom', TextType::class, array(
                 'required' => false,
+                'error_bubbling'=>true,
+
             ))
 
             ->add('newsletter', ChoiceType::class,array(
@@ -59,6 +69,8 @@ class InternauteType extends AbstractType
                 ),
                 'label' => "Inscription à la Newsletter",
                 'required' => true,
+                'error_bubbling'=>true,
+
             ))
             ->add('enregistrer', SubmitType::class);
     }

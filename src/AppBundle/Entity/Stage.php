@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Stage
@@ -60,6 +62,7 @@ class Stage
      * @var \DateTime
      *
      * @ORM\Column(name="fin", type="date")
+     * @Assert\Expression("value >= this.getDebut()", message="la date de fin doit être postérieure à la date de debut")
      */
     private $fin;
 
@@ -74,6 +77,7 @@ class Stage
      * @var \DateTime
      *
      * @ORM\Column(name="affichage_jusque", type="date")
+     * @Assert\Expression("value >= this.getAffichageDe()", message="la date d'affichage de fin doit être postérieure à la date d'affichage de debut")
      */
     private $affichageJusque;
 

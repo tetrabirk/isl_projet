@@ -36,7 +36,6 @@ class PromotionController extends Controller
 
     /**
      * @Route("/profil/promotions/delete/{id}", name="deletePromotion")
-     * @Method("DELETE")
      */
     public function stageDelete($id)
     {

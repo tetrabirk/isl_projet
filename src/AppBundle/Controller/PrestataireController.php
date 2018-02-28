@@ -196,4 +196,20 @@ class PrestataireController extends Controller
 
     }
 
+    /**
+     * @Route("/favoris", name="favoris")
+     */
+    public function addRemoveFavoris(Request $request){
+
+        if ($request->isMethod('POST')) {
+            $slugPrestataire = ($request->get('favoris'));
+            dump($slugPrestataire);
+            $user = $this->getUser();
+            //TODO update user -> if prest if favoris remove else add
+
+        }
+        return $this->redirectToRoute('prestataire',array('slug'=>$slugPrestataire));
+
+
+    }
 }

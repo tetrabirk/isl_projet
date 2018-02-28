@@ -70,21 +70,20 @@ class SecurityController extends Controller
             $email = $utilisateurT->getEmail();
             $token = $utilisateurT->getToken();
 
-            try{$mailHandler->mailConfirmation($email, $token);
-            }
-            catch(Exception $exception){
+            try {
+                $mailHandler->mailConfirmation($email, $token);
+            } catch (Exception $exception) {
+                $this->removeUserTemp($utilisateurT);
                 $this->addFlash('notifications', $exception->getMessage());
+
             }
 
             //TODO error handler :  si le mail ne s'envoie pas -> supprimer l'user temporaire et dire qu'il y a eu une erreur et de recommencer
             //TODO                  si le tempuser existe déjà -> demander si il veut renvoyer le mail
 
-            $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
+//            $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
 
             return $this->redirectToRoute('inscription');
-        } else {
-//            dump($form->getErrors());
-
         }
 
         return $this->render('security/inscription.html.twig', array(
@@ -134,7 +133,7 @@ class SecurityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newPassword = $changePasswordModel->getNewPassword();
-            $encoded = $encoder->encodePassword($user,$newPassword);
+            $encoded = $encoder->encodePassword($user, $newPassword);
             $user->setMotDePasse($encoded);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -155,11 +154,11 @@ class SecurityController extends Controller
     public function suppressionUtilisateur(Request $request, TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         $user = $this->getUser();
-        $form = $this->createForm(SuppressionCompteType::class,$user);
+        $form = $this->createForm(SuppressionCompteType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid() && $form->get("question")->getData() ){
+        if ($form->isSubmitted() && $form->isValid() && $form->get("question")->getData()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
@@ -191,6 +190,13 @@ class SecurityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($utilisateurT);
         $em->flush();
+    }
+
+    public function removeUserTemp($userTemp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($userTemp);
+
     }
 
     public function traitementNewUser($utilisateur, $utilisateurT)

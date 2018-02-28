@@ -24,19 +24,23 @@ class PromotionType extends AbstractType
                 'label' => 'Intitulé de la Promotion'
             ))
             ->add('description', TextareaType::class, array(
-                'label' => 'Description de la Promotion'
+                'label' => 'Description de la Promotion',
             ))
             ->add('documentPDF', DocumentPDFType::class,array(
                 'label' => 'Document PDF',
-                'required'=>false
+                'required'=>false,
+                'error_bubbling'=>true,
+
             ))
             ->add('debut', DateType::class, array(
                 'label' => 'Date de début de la Promotion',
-                'widget' => 'choice'
+                'widget' => 'choice',
             ))
             ->add('fin', DateType::class, array(
                 'label' => 'Date de fin de la Promotion',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'error_bubbling'=>true,
+
             ))
             ->add('affichageDe', DateType::class, array(
                 'label' => 'Affichage à partir de:',
@@ -44,7 +48,9 @@ class PromotionType extends AbstractType
             ))
             ->add('affichageJusque', DateType::class, array(
                 'label' => 'Affichage jusque',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'error_bubbling'=>true,
+
             ))
             ->add('categories', EntityType::class, array(
                 'class' => 'AppBundle:CategorieDeServices',

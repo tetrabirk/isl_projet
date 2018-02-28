@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * DocumentPDF
@@ -34,6 +35,8 @@ class DocumentPDF
 
     /**
      * @var UploadedFile $file
+     * @Assert\File(mimeTypes={"application/pdf"},
+     *     mimeTypesMessage="Merci de choisir un fichier .pdf valide")
      */
     private $file;
 

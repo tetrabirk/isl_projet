@@ -27,8 +27,13 @@
                                 </div>
 
                                 <div class="detail-overview-hearts">
-                                    <i class="fa fa-heart"></i> <strong>??? </strong>personnes l'ont ajouté comme
-                                    favoris
+                                    <i class="fa fa-heart"></i> <strong>{{ prestataire.internautesFavoris|length }}</strong>
+                                    {% if (app.user.getType()) == 'Internaute' %}
+                                    <form action="{{ path('favoris') }}" method="post">
+                                        <input type="submit" name='favoris' value="{{ prestataire.slug }}">
+                                    </form>
+                                    {% endif %}
+
                                 </div>
 
 

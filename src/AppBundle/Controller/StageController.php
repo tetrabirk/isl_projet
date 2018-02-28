@@ -34,7 +34,6 @@ class StageController extends Controller
 
     /**
      * @Route("/profil/stages/delete/{id}", name="deleteStage")
-     * @Method("DELETE")
      */
     public function stageDelete($id)
     {

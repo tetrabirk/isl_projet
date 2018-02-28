@@ -21,13 +21,17 @@ class StageType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, array(
-                'label' => 'Intitulé du Stage'
+                'label' => 'Intitulé du Stage',
+                'error_bubbling'=>true,
+
             ))
             ->add('description', TextareaType::class, array(
                 'label' => 'Description du Stage'
             ))
             ->add('tarif', MoneyType::class, array(
-                'label' => 'Tarif'
+                'label' => 'Tarif',
+                'error_bubbling'=>true,
+
             ))
             ->add('infoComplementaire', TextareaType::class, array(
                 'label' => 'Informations Complémentaires',
@@ -35,19 +39,27 @@ class StageType extends AbstractType
             ))
             ->add('debut', DateType::class, array(
                 'label' => 'Date de début du Stage',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'error_bubbling'=>true,
+
             ))
             ->add('fin', DateType::class, array(
                 'label' => 'Date de fin du Stage',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'error_bubbling'=>true,
+
             ))
             ->add('affichageDe', DateType::class, array(
                 'label' => 'Affichage à partir de:',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'error_bubbling'=>true,
+
             ))
             ->add('affichageJusque', DateType::class, array(
                 'label' => 'Affichage jusque',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'error_bubbling'=>true,
+
             ))
             ->add('enregistrer', SubmitType::class)
         ;

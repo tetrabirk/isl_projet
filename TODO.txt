@@ -8,12 +8,9 @@ ERREURS
 
 FORM
 
-(Erreurs)-catch et affiche erreur (ex: num tva)
-
 CONNEXION
 
 (Erreurs)-compteur d'essaie infructueux( + remise à zéro du compteur ? )
-(Erreurs)-message d'erreur spécifique si utilsateur existant mais non confirmé
 
 FIXTURES
 
@@ -24,6 +21,9 @@ UPLOAD FILES
 !!! -suppressions des fichiers (pdf)
 
 SECURITY
+
+-!!! mot de passe ne fonctionne pas après changement!!!
+
 
 regarder après la déprecation
 http://symfony.com/doc/3.4/security/custom_provider.html
@@ -40,7 +40,6 @@ ADMIN
 
 AUTRE
 -footer à modifier
--virer le "trier par" dans mes résultat de recherche
 
 
 REPOSITORIES
@@ -56,14 +55,14 @@ PROFIL
 
 PREST SINGLE
 
--faire fonctionner la map
+-faire fonctionner la map (au moins afficher les coordonée)
 
 SERVICE
 
 -etoffer le service mail
 -gestion news (mail -> pdf etc)
 -service paginations ?
--validator (date de stage etc)
+
 
 DEV
 -virer mon bout de code pour l'affichage temporaire de logos etc

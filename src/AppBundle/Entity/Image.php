@@ -45,7 +45,8 @@ class Image
 
     /**
      * @var UploadedFile $file
-     * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png", "image/gif" })
+     * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png", "image/gif" },
+     *     mimeTypesMessage="Merci de choisir un fichier image valide(jpeg, jpg, png, gif"))
      */
     private $file;
 

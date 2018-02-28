@@ -6,15 +6,9 @@
 </h3>
 <div class="row">
 
-    {#{% if errors|length > 0%}#}
-        {#<div class="alert alert-error">#}
-            {#BLA#}
-            {#{% dump errors %}#}
-        {#</div>#}
-    {#{% endif %}#}
-
-    {% dump form %}
-
+    <div class="form-group col-sm-12">
+        {{ form_errors(form) }}
+    </div>
 
 
     <div class="form-group col-sm-6">
