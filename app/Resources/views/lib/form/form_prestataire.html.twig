@@ -6,9 +6,10 @@
 </h3>
 <div class="row">
 
-    {#{% if form.numTVA.get('errors') %}#}
+    {#{% if errors|length > 0%}#}
         {#<div class="alert alert-error">#}
-            {#{{ form_errors(form) }}#}
+            {#BLA#}
+            {#{% dump errors %}#}
         {#</div>#}
     {#{% endif %}#}
 

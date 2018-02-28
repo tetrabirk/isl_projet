@@ -16,6 +16,7 @@ use AppBundle\Form\UtilisateurTemporaireType;
 use AppBundle\Form\UtilisateurType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,7 +70,11 @@ class SecurityController extends Controller
             $email = $utilisateurT->getEmail();
             $token = $utilisateurT->getToken();
 
-            $mailHandler->mailConfirmation($email, $token);
+            try{$mailHandler->mailConfirmation($email, $token);
+            }
+            catch(Exception $exception){
+                $this->addFlash('notifications', $exception->getMessage());
+            }
 
             //TODO error handler :  si le mail ne s'envoie pas -> supprimer l'user temporaire et dire qu'il y a eu une erreur et de recommencer
             //TODO                  si le tempuser existe déjà -> demander si il veut renvoyer le mail

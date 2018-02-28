@@ -4,11 +4,6 @@ CONTROLLER
 ERREURS
 (Erreurs)-catch des erreurs  + affichage de msg d'erreur et succes
 
-
--catch si pas de service à afficher
-
-
-
 404, 500 etc
 
 FORM
@@ -32,8 +27,6 @@ SECURITY
 
 regarder après la déprecation
 http://symfony.com/doc/3.4/security/custom_provider.html
-
-form d'inscription -> form builder 
 
 ADMIN
 
@@ -63,7 +56,7 @@ PROFIL
 
 PREST SINGLE
 
--faire fonctionner la map (au moins terminer le code js et afficher les coordonnée)
+-faire fonctionner la map
 
 SERVICE
 
@@ -88,3 +81,98 @@ SI ON A LE TEMPS
 -modifier le 'active' dans le menu de gauche
 
 ====================================================================================
+
+Consulter la description d'un Service    
+
+Rechercher des Prestataires    
+
+Consulter la fiche signalétique d'un Prestataire    
+
+Consulter les catégories de Services     
+
+
+Priorité 1.21    Etat    Remarques
+
+S'inscrire    
+
+Confirmer l'inscription    
+
+S'authentifier    
+
+
+Priorité 1.11    Etat    Remarques
+
+
+Gérer fiche Internaute    
+
+Gérer fiche Prestataire    
+Tenir à jour sa liste de catégories de Services    
+
+Ajouter un Stage    
+
+
+Priorité 21    Etat    Remarques
+
+
+Réécriture des URL    
+
+Visualiser la localisation sur une carte    
+
+Partager sur un site de socialisation    
+
+Gestion des catégories de Services       
+Easy Admin Bundle
+Gestion du Service du mois        
+Easy Admin Bundle
+Gérer fiche Prestataire    
+
+Ajouter une Promotion    
+
+
+Priorité 3    Etat    Remarques
+
+Administration via Easy Admin Bundle    
+
+Easy Admin Bundle adpatation    
+
+Changer de mot de passe    
+
+Afficher Prestataires similaires    
+
+Ajouter à ses favoris    
+
+Contacter un Prestataire    
+
+Envoyer ue recommandation à un ami    
+
+Coter et laisser un commentaire    
+
+Signaler des commentaires abusifs    
+
+Gestion des Prestataires        
+Easy Admin Bundle
+Gestion des membres        
+Easy Admin Bundle
+Bannir un compte        
+Easy Admin Bundle
+Débloquer un compte        
+Easy Admin Bundle
+Gestion des commentaires et des abus    
+Easy Admin Bundle
+Gestion des images    
+
+Organiser sa page d'accueil    
+
+S'inscrire à la newsletter        
+Via prpfil edit
+Consulter les newsletters précédentes    
+
+Consulter la page "A propos"    
+
+Contacter Bien-Être    
+
+Choisir sa langue        
+Fichier de traduction fait
+
+
+
