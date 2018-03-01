@@ -29,11 +29,13 @@ use AppBundle\Service\MailHandler;
 class SecurityController extends Controller
 {
 
-    //TODO déconnecter tout utilsateur avant inscription, (connexion), confirmation
     /**
      * @Route("/connexion", name="connexion")
+     *
+     * @param AuthenticationUtils $authUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function connexion(Request $request, AuthenticationUtils $authUtils)
+    public function connexion(AuthenticationUtils $authUtils)
     {
         //get login error if there is one
         $error = $authUtils->getLastAuthenticationError();
@@ -46,16 +48,25 @@ class SecurityController extends Controller
         ));
     }
 
+
     /**
      * @Route("/deconnexion", name="deconnexion")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function deconnexionAction()
     {
         return $this->render('index.html.twig', array());
     }
 
+
     /**
      * @Route("/inscription", name="inscription")
+     *
+     * @param Request $request
+     * @param EncoderFactoryInterface $encoderFactory
+     * @param MailHandler $mailHandler
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function inscriptionAction(Request $request, EncoderFactoryInterface $encoderFactory, MailHandler $mailHandler)
     {
@@ -78,10 +89,7 @@ class SecurityController extends Controller
 
             }
 
-            //TODO error handler :  si le mail ne s'envoie pas -> supprimer l'user temporaire et dire qu'il y a eu une erreur et de recommencer
-            //TODO                  si le tempuser existe déjà -> demander si il veut renvoyer le mail
-
-//            $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
+            $this->addFlash('notifications', "Un Email de confirmation à bien été envoyé");
 
             return $this->redirectToRoute('inscription');
         }
@@ -91,8 +99,12 @@ class SecurityController extends Controller
         ));
     }
 
+
     /**
      * @Route("/confirmation/{token}", name="confirmation")
+     *
+     * @param $token
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function confirmation($token)
     {
@@ -113,13 +125,14 @@ class SecurityController extends Controller
 
         return $this->traitementNewUser($utilisateur, $utilisateurT);
 
-        //TODO if success -> sucess message and delete tempUser
-        //TODO if failure -> error message and "try again later"
-
     }
 
     /**
      * @Route("/mot_de_passe", name="mot_de_passe")
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function motDePasseAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
@@ -128,7 +141,6 @@ class SecurityController extends Controller
         $user = $this->getUser();
 
         $form = $this->createForm(ChangePasswordType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -139,8 +151,6 @@ class SecurityController extends Controller
             $em->persist($user);
             $em->flush();
 
-
-            //TODO try catch
             $this->addFlash('notifications', "le mot de passe à bien été modifier");
         }
         return $this->render('security/mot_de_passe.html.twig', array(
@@ -150,6 +160,11 @@ class SecurityController extends Controller
 
     /**
      * @Route("/suppression", name="suppression")
+     *
+     * @param Request $request
+     * @param TokenStorageInterface $tokenStorage
+     * @param SessionInterface $session
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function suppressionUtilisateur(Request $request, TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
@@ -175,7 +190,10 @@ class SecurityController extends Controller
         ));
     }
 
-
+    /**
+     * @param UtilisateurTemporaire $utilisateurT
+     * @param EncoderFactoryInterface $encoderFactory
+     */
     public function persistUserTemp(UtilisateurTemporaire $utilisateurT, $encoderFactory)
     {
         $passwordEncoder = $encoderFactory->getEncoder($utilisateurT);
@@ -192,6 +210,9 @@ class SecurityController extends Controller
         $em->flush();
     }
 
+    /**
+     * @param $userTemp
+     */
     public function removeUserTemp($userTemp)
     {
         $em = $this->getDoctrine()->getManager();
@@ -199,30 +220,27 @@ class SecurityController extends Controller
 
     }
 
+    /**
+     * @param Utilisateur $utilisateur
+     * @param Utilisateur $utilisateurT
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function traitementNewUser($utilisateur, $utilisateurT)
     {
-        $user = $utilisateur;
         $image = new Image();
         $image->setActive(true);
 
-        /**
-         * @var Utilisateur $user
-         */
-        if ($user->getType() == "Prestataire") {
-            /**
-             * @var Prestataire $user
-             */
-            $user->setLogo($image);
+        if ($utilisateur->getType() == "Prestataire") {
+            /** @var Prestataire $utilisateur */
+            $utilisateur->setLogo($image);
         } else {
-            /**
-             * @var Internaute $user
-             */
-            $user->setAvatar($image);
+            /** @var Internaute $utilisateur */
+            $utilisateur->setAvatar($image);
         }
 
         //forward to profilController
         return $this->forward('AppBundle\Controller\ProfilController::ProfilAction', array(
-            'newUser' => $user,
+            'newUser' => $utilisateur,
             'userTemp' => $utilisateurT
         ));
     }

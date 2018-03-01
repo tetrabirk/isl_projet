@@ -23,15 +23,17 @@
 
                                 <div class="detail-overview-rating">
                                     {#TODO cote prestataire (add colonne dans DB)#}
-                                    <i class="fa fa-star"></i> <strong>{{prestataire.moyenneCote|round(2,'ceil')*10 }} %</strong></a>
+                                    <i class="fa fa-star"></i> <strong>{{ prestataire.moyenneCote|round(2,'ceil')*10 }}
+                                        %</strong></a>
                                 </div>
 
                                 <div class="detail-overview-hearts">
-                                    <i class="fa fa-heart"></i> <strong>{{ prestataire.internautesFavoris|length }}</strong>
+                                    <i class="fa fa-heart"></i>
+                                    <strong>{{ prestataire.internautesFavoris|length }}</strong>
+                                    {% dump prestataire.internautesFavoris %}
                                     {% if (app.user.getType()) == 'Internaute' %}
-                                    <form action="{{ path('favoris') }}" method="post">
-                                        <input type="submit" name='favoris' value="{{ prestataire.slug }}">
-                                    </form>
+                                        {{ form_start(favoris) }}
+                                        {{ form_end(favoris) }}
                                     {% endif %}
 
                                 </div>

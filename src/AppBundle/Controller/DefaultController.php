@@ -49,7 +49,6 @@ class DefaultController extends Controller
     }
 
 
-
     public function getNewsletter()
     {
         $repository = $this->getDoctrine()->getRepository(Newsletter::class);

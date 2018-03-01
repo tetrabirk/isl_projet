@@ -176,6 +176,9 @@ class Prestataire extends Utilisateur
         return $this->internautesFavoris;
     }
 
+
+
+
     /**
      * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataire")
      */
@@ -190,7 +193,7 @@ class Prestataire extends Utilisateur
 
     /**
      * Bcp de Prestataire ont bcp d'utilisateur qui les ont ajouté dans leurs favoris
-     * @ORM\ManyToMAny(targetEntity="Internaute", mappedBy="favoris", cascade={"persist", "remove"})
+     * @ORM\ManyToMAny(targetEntity="Internaute", mappedBy="favoris", cascade={"all"})
      */
 
     private $internautesFavoris;
@@ -199,6 +202,17 @@ class Prestataire extends Utilisateur
     {
         $this->internautesFavoris[] = $IntFav;
     }
+
+    /**
+     * Remove internauteFavoris
+     *
+     * @param \AppBundle\Entity\Internaute $IntFav
+     */
+    public function removeInternauteFavoris(Internaute $IntFav)
+    {
+        $this->internautesFavoris->removeElement($IntFav);
+    }
+
 
     /**
      * Set nom

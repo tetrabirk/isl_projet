@@ -13,10 +13,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 
-
 class SearchController extends Controller
 {
-
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function renderSearchBarAction(Request $request)
     {
         $form = $this->get('form.factory')->create(SearchType::class);

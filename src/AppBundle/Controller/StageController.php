@@ -16,6 +16,10 @@ class StageController extends Controller
 
     /**
      * @Route("/profil/stages/{id}", defaults={"id"=-1}, name="stages")
+     *
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function stagesAction($id, Request $request)
     {
@@ -34,6 +38,9 @@ class StageController extends Controller
 
     /**
      * @Route("/profil/stages/delete/{id}", name="deleteStage")
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function stageDelete($id)
     {
@@ -45,7 +52,11 @@ class StageController extends Controller
 
     }
 
-
+    /**
+     * @param Request $request
+     * @param Stage $stage
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loadStageForm($request, $stage)
     {
         $form = $this->get('form.factory')->create(StageType::class, $stage);
@@ -60,14 +71,16 @@ class StageController extends Controller
         ));
     }
 
+    /**
+     * @param Stage $stage
+     */
     public function flushStage(Stage $stage)
     {
-        $em = $this->getDoctrine()->getManager();
         $stage->setPrestataire($this->getUser());
 
+        $em = $this->getDoctrine()->getManager();
         if (is_null($stage->getId())) {
             $em->persist($stage);
-
         }
         $em->flush();
     }

@@ -30,30 +30,31 @@ class ProfilController extends Controller
 
     /**
      * @Route("/profil", name="profil")
+     *
+     * @param null $newUser
+     * @param null $userTemp
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function profilAction($newUser = null, $userTemp = null, Request $request)
     {
 
-        if (isset($newUser)) {
-            $user = $newUser;
-        } else {
-            $user = $this->getUser();
-        }
+        $user = $newUser ?? $this->getUser();
         $userType = $user->getType();
-
-
 
         if ($userType == "Prestataire") {
             return $this->loadProfilPrestataire($request, $user, $userTemp);
         } else {
-
             return $this->loadProfilInternaute($request, $user, $userTemp);
         }
 
     }
 
+
     /**
      * @Route("/profil/suppression", name="profil_suppression")
+     *
+     * @return Response
      */
     public function profilSuppressionAction()
     {
@@ -61,66 +62,75 @@ class ProfilController extends Controller
     }
 
 
-    public function loadProfilPrestataire(Request $request, $user, $userTemp)
+    /**
+     * @param Request $request
+     * @param Prestataire $user
+     * @param $userTemp
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function loadProfilPrestataire($request, $user, $userTemp)
     {
-        /**
-         * @var Prestataire $user
-         */
         $form = $this->get('form.factory')->create(PrestataireType::class, $user);
 
         $action = null;
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->newCategManagement($form,$user);
+            $this->newCategManagement($form, $user);
             $action = $this->flushUtilisateur($user, $userTemp);
         }
 
         if ($action == "newUser") {
             return $this->redirectToRoute('connexion');
+        } else {
+            return $this->render('profil/prestataire.html.twig', array(
+                'form' => $form->createView(),
+                'newUser' => $user,
+            ));
         }
-
-        return $this->render('profil/prestataire.html.twig', array(
-            'form' => $form->createView(),
-            'newUser' => $user,
-        ));
     }
 
+
+    /**
+     * @param Request $request
+     * @param Internaute $user
+     * @param $userTemp
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function loadProfilInternaute($request, $user, $userTemp)
     {
-        /**
-         * @var Internaute $user
-         */
         $form = $this->get('form.factory')->create(InternauteType::class, $user);
 
         $action = null;
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $action = $this->flushUtilisateur($user, $userTemp);
-
         }
 
         if ($action == "newUser") {
             return $this->redirectToRoute('connexion');
+        } else {
+            return $this->render('profil/internaute.html.twig', array(
+                'form' => $form->createView(),
+                'newUser' => $user,
+            ));
         }
-
-        return $this->render('profil/internaute.html.twig', array(
-            'form' => $form->createView(),
-            'newUser' => $user,
-        ));
     }
 
 
+    /**
+     * @param Utilisateur $utilisateur
+     * @param $userTemp
+     * @return string
+     */
     private function flushUtilisateur(Utilisateur $utilisateur, $userTemp)
     {
         $em = $this->getDoctrine()->getManager();
 
         if (is_null($utilisateur->getId())) {
 
-
             $utilisateur->setInscription(new \DateTime());
             $em->persist($utilisateur);
             $em->flush();
-            //TODO if success -> sucess message and delete tempUser
             $em->remove($userTemp);
             $em->flush();
             return 'newUser';
@@ -129,17 +139,17 @@ class ProfilController extends Controller
             $em->flush();
             return 'profil';
         }
-
-
-        //TODO if failure -> error message and "try again later"
     }
 
+
+    /**
+     * @param Form $form
+     * @param Prestataire $user
+     */
     private function newCategManagement($form, $user)
     {
         /**
-         * @var Form $form
          * @var CategorieDeServices $newCateg
-         * @var Prestataire $user
          */
         $newCategArray = ($form->get('newCategories')->getData());
 
@@ -151,6 +161,5 @@ class ProfilController extends Controller
             $user->addCategorie($newCateg);
         }
     }
-
 
 }

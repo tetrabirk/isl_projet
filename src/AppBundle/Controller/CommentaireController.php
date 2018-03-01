@@ -43,7 +43,7 @@ class CommentaireController extends Controller
 
     public function getCommentaires($idPrestataire)
     {
-        /** @var CommentaireRepository $cr*/
+        /** @var CommentaireRepository $cr */
         $cr = $this->getDoctrine()->getRepository(Commentaire::class);
 
         $commentaires = $cr->findCommentairesByIdPrestataire($idPrestataire);

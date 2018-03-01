@@ -47,7 +47,7 @@ REPOSITORIES
 -modif les query pour que suel les image actif s'affiche
 
 PROFIL
--ajouter au favoris et afficher favoris
+-favoris (bug d'affichage directement après changemnet)
 
 -stage et promo delete (erreur a cause de la secu)
 

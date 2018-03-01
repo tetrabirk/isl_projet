@@ -65,7 +65,7 @@ class Internaute extends Utilisateur
 
     /**
      * bcp internaute ont bcp de favoris
-     * @ORM\ManyToMany(targetEntity="Prestataire", inversedBy="internautesFavoris", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Prestataire", inversedBy="internautesFavoris", cascade={"all"})
      * @ORM\JoinTable(name="favoris")
      */
     private $favoris;

@@ -8,14 +8,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\CategorieDeServices;
-use AppBundle\Entity\Commentaire;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Controller\DefaultController as DC;
-
-use AppBundle\Entity\Prestataire;
 
 
 class MenuController extends Controller
@@ -25,13 +18,13 @@ class MenuController extends Controller
         if ($type != null) {
             $menu = 'menuAdmin';
 
-        }else{
+        } else {
             $menu = [
-                ['nom' => 'Prestataires', 'href' => 'prestataire'],
-                ['nom' => 'Services', 'href' => 'services'],
-                ['nom' => 'News', 'href' => 'news'],
-                ['nom' => 'Contact', 'href' => 'contact'],
-                ['nom' => 'A propos de nous', 'href' => 'about']
+                ['nom' => 'Prestataires',       'href' => 'prestataire'],
+                ['nom' => 'Services',           'href' => 'services'],
+                ['nom' => 'News',               'href' => 'news'],
+                ['nom' => 'Contact',            'href' => 'contact'],
+                ['nom' => 'A propos de nous',   'href' => 'about']
             ];
 
         }
@@ -39,10 +32,10 @@ class MenuController extends Controller
 
     }
 
-    public function renderMenuAction($type=null)
+    public function renderMenuAction($type = null)
     {
         $menu = $this->getMenu();
-        return $this->render('lib/menu.html.twig',array(
+        return $this->render('lib/menu.html.twig', array(
             'menu' => $menu,
         ));
     }

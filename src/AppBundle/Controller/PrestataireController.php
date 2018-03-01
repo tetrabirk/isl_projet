@@ -10,9 +10,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Abus;
 use AppBundle\Entity\Commentaire;
+use AppBundle\Entity\Internaute;
 use AppBundle\Entity\Utilisateur;
 use AppBundle\Form\AbusType;
 use AppBundle\Form\CommentaireType;
+use AppBundle\Form\FavorisType;
 use AppBundle\Repository\CommentaireRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,27 +26,32 @@ use Symfony\Component\HttpFoundation\Request;
 class PrestataireController extends Controller
 {
 
-
-//TODO : get : categories des prestataires, notes moyennes, promotions, stages
-
+    /** @var Prestataire $prestataire */
+    public $prestataire;
 
     /**
      * @Route("/prestataire/{slug}", defaults ={"slug"=null}, name="prestataire")
+     *
+     * @param $slug
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function prestatairesAction($slug, Request $request)
     {
         if ($slug != null) {
-            $prestataire = $this->getRepo()->findOneWithEverythingBySlug($slug);
-            $form = $this->addCommentaire($request, $prestataire);
-            $formAbus = $this->addFormAbus($request,$slug);
+            $this->prestataire = $this->getRepo()->findOneWithEverythingBySlug($slug);
+            $form = $this->addCommentaire($request);
+            $formAbus = $this->addFormAbus($request);
+            $formFavoris = $this->addFormFavoris($request);
 
             return $this->render('public/prestataires/prestataire_single.html.twig', array(
-                'prestataire' => $prestataire,
+                'prestataire' => $this->prestataire,
                 'form' => $form->createView(),
                 'abus' => $formAbus->createView(),
+                'favoris' => $formFavoris->createView(),
             ));
-        } else {
 
+        } else {
             $query = $this->getRepo()->findAllWithEverything();
             $prestataires = $this->getPrestatairesWithPagination($query, $request);
 
@@ -56,6 +63,9 @@ class PrestataireController extends Controller
 
     /**
      * @Route("/s/", name="search")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function rechercheAction(Request $request)
     {
@@ -75,6 +85,11 @@ class PrestataireController extends Controller
 
     }
 
+    /**
+     * @param $categ
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function prestatairesByCategAction($categ, Request $request)
     {
         $query = $this->getRepo()->findAllWithEverythingByCateg($categ);
@@ -85,6 +100,10 @@ class PrestataireController extends Controller
         ));
     }
 
+    /**
+     * @param $n
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function nLastPrestatairesAction($n)
     {
         $prestataires = $this->getRepo()->findNMostRecentBasic($n);
@@ -93,12 +112,15 @@ class PrestataireController extends Controller
         ));
     }
 
+    /**
+     * @param $query
+     * @param $request
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     */
     public function getPrestatairesWithPagination($query, $request)
     {
 
-        /**
-         * @var $paginator \Knp\Component\Pager\Paginator
-         */
+        /** @var $paginator \Knp\Component\Pager\Paginator */
 
         $paginator = $this->get('knp_paginator');
         $prestataires = $paginator->paginate(
@@ -111,6 +133,9 @@ class PrestataireController extends Controller
         return $prestataires;
     }
 
+    /**
+     * @return PrestataireRepository
+     */
     public function getRepo()
     {
         /** @var PrestataireRepository $pr */
@@ -118,12 +143,14 @@ class PrestataireController extends Controller
         return $pr;
     }
 
-    public function addFormAbus(Request $request,$slug)
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addFormAbus($request)
     {
         $abus = new Abus;
         $formAbus = $this->get('form.factory')->create(AbusType::class, $abus);
-
-        /** @var Request $request */
 
         if ($request->isMethod('POST') && $formAbus->handleRequest($request)->isValid()) {
             $id = ($formAbus->get('commentaire_id')->getData());
@@ -132,61 +159,89 @@ class PrestataireController extends Controller
         return $formAbus;
     }
 
-    public function flushAbus($abus, $id){
-        /**@var Abus $abus */
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addFormFavoris($request)
+    {
+        $formFavoris = $this->get('form.factory')->create(FavorisType::class);
 
-        /** @var CommentaireRepository $cr*/
+        if ($request->isMethod('POST') && $formFavoris->handleRequest($request)->isValid()) {
+            $this->addRemoveFavoris();
+        }
+        return $formFavoris;
+    }
+
+    /**
+     * @param Abus $abus
+     * @param $id
+     */
+    public function flushAbus($abus, $id)
+    {
+
+        /** @var CommentaireRepository $cr */
         $cr = $this->getDoctrine()->getRepository(Commentaire::class);
-        $commentaire = $cr->findOneBy(array('id'=>$id));
+        $commentaire = $cr->findOneBy(array('id' => $id));
+
         $abus->setCommentaire($commentaire);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($abus);
         $em->flush();
     }
 
-    public function addCommentaire($request, $prestataire)
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addCommentaire($request)
     {
         $newComment = new Commentaire();
         $form = $this->get('form.factory')->create(CommentaireType::class, $newComment);
 
-        /** @var Request $request */
-
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->flushCommentaire($newComment, $prestataire);
+            $this->flushCommentaire($newComment);
         }
         return $form;
 
     }
 
-    public function flushCommentaire($newComment, $prestataire)
+    /**
+     * @param Commentaire $newComment
+     */
+    public function flushCommentaire($newComment)
     {
-        /**@var Commentaire $newComment */
-        $newComment->setCibleCommentaire($prestataire);
+        $newComment->setCibleCommentaire($this->prestataire);
         /**@var Utilisateur $user */
         $user = $this->getUser();
         $newComment->setAuteurCommentaire($user);
         if ($user->getType() != 'Internaute') {
             $newComment->setCote(null);
         }
-        /**@var Prestataire $prestataire */
-        $prestataire->setMoyenneCote($this->getMoyenne($newComment, $prestataire));
+
+        $this->prestataire->setMoyenneCote($this->getMoyenne($newComment));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($newComment);
-        $em->persist($prestataire);
+        $em->persist($this->prestataire);
         $em->flush();
 
     }
 
-    public function getMoyenne($newComment, $prestataire)
+
+    /**
+     * @param Commentaire $newComment
+     * @return float|int
+     */
+    public function getMoyenne($newComment)
     {
         $cr = $this->getDoctrine()->getRepository(Commentaire::class);
-        $cotesExistantes = ($cr->getCoteFromPrest($prestataire->getId()));
+        $cotesExistantes = ($cr->getCoteFromPrest($this->prestataire->getId()));
         $cotes = [];
         foreach ($cotesExistantes as $array) {
             array_push($cotes, $array['cote']);
         }
-        /**@var Commentaire $newComment */
         $newCote = $newComment->getCote();
         array_push($cotes, $newCote);
 
@@ -196,20 +251,26 @@ class PrestataireController extends Controller
 
     }
 
-    /**
-     * @Route("/favoris", name="favoris")
+    /*
+     *J'ai un prblm avec cette fonction, elle ajoute et retire correctement les favoris de ma DB mais elle modifie
+     * tj l'affichage de 1 après un submit, je n'ai pas eu le temps de trouver une solution
      */
-    public function addRemoveFavoris(Request $request){
+    public function addRemoveFavoris()
+    {
 
-        if ($request->isMethod('POST')) {
-            $slugPrestataire = ($request->get('favoris'));
-            dump($slugPrestataire);
-            $user = $this->getUser();
-            //TODO update user -> if prest if favoris remove else add
-
+        $internaute = $this->getUser();
+        if ($internaute instanceof Internaute) {
+            $internauteFavoris = $this->prestataire->getInternautesFavoris();
+            if ($internauteFavoris->contains($internaute)) {
+                $internaute->removeFavoris($this->prestataire);
+//                dump('remove');
+            } else {
+                $internaute->addFavoris($this->prestataire);
+//                dump('add');
+            };
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($internaute);
+            $em->flush();
         }
-        return $this->redirectToRoute('prestataire',array('slug'=>$slugPrestataire));
-
-
     }
 }

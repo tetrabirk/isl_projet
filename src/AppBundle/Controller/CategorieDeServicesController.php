@@ -10,21 +10,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\CategorieDeServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Repository\CategorieDeServicesRepository;
 
 
 class CategorieDeServicesController extends Controller
 {
-
-
-    public function getRepo()
-    {
-        /** @var CategorieDeServicesRepository $cr */
-        $cr = $this->getDoctrine()->getRepository(CategorieDeServices::class);
-        return $cr;
-    }
 
     /**
      * @Route("/services/{slug}", defaults ={"slug"=null}, name="services")
@@ -62,4 +53,12 @@ class CategorieDeServicesController extends Controller
             'categories' => $categories
         ));
     }
+
+    public function getRepo()
+    {
+        /** @var CategorieDeServicesRepository $cr */
+        $cr = $this->getDoctrine()->getRepository(CategorieDeServices::class);
+        return $cr;
+    }
+
 }
