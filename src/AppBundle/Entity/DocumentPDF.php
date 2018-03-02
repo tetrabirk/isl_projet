@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * DocumentPDF
  *
  * @ORM\Table(name="document_p_d_f")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\DocumentPDFRepository")
+ * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
 

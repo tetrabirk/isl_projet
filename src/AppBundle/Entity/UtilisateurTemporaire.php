@@ -12,7 +12,7 @@ use AppBundle\Validator\UniqueEmail;
  * UtilisateurTemporaire
  *
  * @ORM\Table(name="utilisateur_temporaire")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurTemporaireRepository")
+ * @ORM\Entity
  * @UniqueEmail()
  */
 class UtilisateurTemporaire

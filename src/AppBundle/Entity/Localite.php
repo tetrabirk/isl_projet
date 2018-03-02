@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Localite
  *
  * @ORM\Table(name="localite")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\LocaliteRepository")
+ * @ORM\Entity
  */
 class Localite
 {

@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Admin
  *
  * @ORM\Table(name="admin")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AdminRepository")
+ * @ORM\Entity
  */
 class Admin  extends Utilisateur
 {

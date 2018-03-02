@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Bloc
  *
  * @ORM\Table(name="bloc")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BlocRepository")
+ * @ORM\Entity
  */
 class Bloc
 {
