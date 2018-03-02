@@ -169,7 +169,15 @@ class DocumentPDF
 
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+        //TODO retirer après la phase dev
+        $patternFixturesFiles = '/(newsletter\.pdf)/';
+
+        if(preg_match($patternFixturesFiles,$this->getUrl())){
+            return $this->getUploadDir().'/'.'newsletter.pdf';
+        }else{
+            return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+
+        }
     }
 
 }

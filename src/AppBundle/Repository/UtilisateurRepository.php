@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Utilisateur;
 
 /**
  * UtilisateurRepository
@@ -24,5 +25,16 @@ class UtilisateurRepository extends EntityRepository implements UserLoaderInterf
 
         return $query->getOneOrNullResult();
 
+    }
+
+    public function incrementeEssaisInfructueux($username){
+
+        $qb = $this->createQueryBuilder('u');
+        $qb->update('AppBundle:Utilisateur','u');
+        $qb->set('u.nbEssaisInfructueux','u.nbEssaisInfructueux+1');
+        $qb->where('u.email = :email');
+        $qb->setParameter('email', $username);
+        $query = $qb->getQuery();
+        return $query->execute();
     }
 }

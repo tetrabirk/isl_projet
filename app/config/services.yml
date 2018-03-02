@@ -43,3 +43,6 @@ services:
             -
                 name: validator.constraint_validator
                 alias: unique_email
+
+    appBundle.security.failure:
+        class: AppBundle\Security\LoginFailureHandler

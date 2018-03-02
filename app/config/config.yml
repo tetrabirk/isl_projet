@@ -129,7 +129,7 @@ easy_admin:
         menu:
           - { label: 'Home', route: 'homepage' }
           - { label: 'Actions' }
-          - { label: 'Envoyer une Newsletter', route: 'homepage' }
+          - { label: 'Envoyer une Newsletter', route: 'admin_send_news' }
           - { label: '' }
           - Utilisateur
           - Internaute

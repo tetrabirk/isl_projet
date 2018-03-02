@@ -19,4 +19,16 @@ class InternauteRepository extends \Doctrine\ORM\EntityRepository
         }
         return $data;
     }
+
+    public function findAllAbonner()
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb->where('i.newsletter = 1' );
+
+        $qb->select('i.email');
+        $query = $qb->getQuery();
+        $result = $query->getScalarResult();
+        $emails = array_column($result,"email");
+        return $emails;
+    }
 }
