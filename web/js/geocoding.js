@@ -4,9 +4,9 @@
 
 var urlType = "https://maps.googleapis.com/maps/api/geocode/json?address=__adresse__&key=__API__";
 var API = 'AIzaSyBSSiBIjO2oLHUPb7LL0FChkEYE1FC8ytE';
-var localite = '4970 Stavelot';
-var rue = "sol'camp";
-var numero = '14';
+
+var rue = "";
+var numero = '';
 
 var adresse= localite+' '+rue+' '+numero;
 var adresseEncode = encodeURIComponent(adresse.replace(' ','+'));
@@ -25,5 +25,6 @@ $(document).ready(function () {
 
 
         console.log(lat+' '+lng);
+        $("#coordonnees-geocoding").text("lat : "+lat+" , lng : "+lng);
     })
 });
